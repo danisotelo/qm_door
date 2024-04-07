@@ -6,13 +6,12 @@ Panels:
       Expanded:
         - /TF1/Frames1
         - /Optimized State Trajectory1
-        - /Optimized State Trajectory1/Status1
         - /Optimized State Trajectory1/Namespaces1
         - /Target Trajectories1
         - /Target Trajectories1/Target Feet Trajectories1
         - /Target Trajectories1/Target Base Trajectory1
       Splitter Ratio: 0.5
-    Tree Height: 303
+    Tree Height: 727
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -63,7 +62,7 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: world
       Value: true
-    - Alpha: 0.4000000059604645
+    - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
       Enabled: true
@@ -213,68 +212,12 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
+      Filter (blacklist): ""
+      Filter (whitelist): ""
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        LF_FOOT:
-          Value: true
-        LF_calf:
-          Value: true
-        LF_hip:
-          Value: true
-        LF_thigh:
-          Value: true
-        LH_FOOT:
-          Value: true
-        LH_calf:
-          Value: true
-        LH_hip:
-          Value: true
-        LH_thigh:
-          Value: true
-        RF_FOOT:
-          Value: true
-        RF_calf:
-          Value: true
-        RF_hip:
-          Value: true
-        RF_thigh:
-          Value: true
-        RH_FOOT:
-          Value: true
-        RH_calf:
-          Value: true
-        RH_hip:
-          Value: true
-        RH_thigh:
-          Value: true
-        arm_base_link:
-          Value: true
-        base:
-          Value: false
-        command:
-          Value: true
-        j2n6s300_end_effector:
-          Value: true
-        j2n6s300_link_1:
-          Value: true
-        j2n6s300_link_2:
-          Value: true
-        j2n6s300_link_3:
-          Value: true
-        j2n6s300_link_4:
-          Value: true
-        j2n6s300_link_5:
-          Value: true
-        j2n6s300_link_6:
-          Value: true
-        j2n6s300_link_base:
-          Value: true
-        unitree_imu:
-          Value: true
-        world:
-          Value: true
       Marker Alpha: 1
       Marker Scale: 1
       Name: TF
@@ -282,44 +225,9 @@ Visualization Manager:
       Show Axes: false
       Show Names: false
       Tree:
-        world:
-          base:
-            LF_hip:
-              LF_thigh:
-                LF_calf:
-                  LF_FOOT:
-                    {}
-            LH_hip:
-              LH_thigh:
-                LH_calf:
-                  LH_FOOT:
-                    {}
-            RF_hip:
-              RF_thigh:
-                RF_calf:
-                  RF_FOOT:
-                    {}
-            RH_hip:
-              RH_thigh:
-                RH_calf:
-                  RH_FOOT:
-                    {}
-            arm_base_link:
-              j2n6s300_link_base:
-                j2n6s300_link_1:
-                  j2n6s300_link_2:
-                    j2n6s300_link_3:
-                      j2n6s300_link_4:
-                        j2n6s300_link_5:
-                          j2n6s300_link_6:
-                            j2n6s300_end_effector:
-                              {}
-            unitree_imu:
-              {}
-          command:
-            {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Class: rviz/MarkerArray
       Enabled: true
       Marker Topic: /qm/optimizedStateTrajectory
@@ -328,6 +236,7 @@ Visualization Manager:
         CoM Trajectory: true
         EE Trajectory: true
         Feet Trajectories: true
+        Future footholds: true
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -350,7 +259,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/LF
               Name: Marker
               Namespaces:
-                {}
+                "": true
               Queue Size: 100
               Value: true
             - Class: rviz/Marker
@@ -358,7 +267,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/LH
               Name: Marker
               Namespaces:
-                {}
+                "": true
               Queue Size: 100
               Value: true
             - Class: rviz/Marker
@@ -366,7 +275,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/RF
               Name: Marker
               Namespaces:
-                {}
+                "": true
               Queue Size: 100
               Value: true
             - Class: rviz/Marker
@@ -374,7 +283,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/RH
               Name: Marker
               Namespaces:
-                {}
+                "": true
               Queue Size: 100
               Value: true
           Enabled: true
@@ -384,7 +293,7 @@ Visualization Manager:
           Marker Topic: /qm/desiredBaseTrajectory
           Name: Target Base Trajectory
           Namespaces:
-            {}
+            "": true
           Queue Size: 100
           Value: true
       Enabled: true
@@ -398,6 +307,91 @@ Visualization Manager:
       Show Visual Aids: false
       Update Topic: /simple_marker/update
       Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        door:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lever:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        world:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+      Name: RobotModel
+      Robot Description: door_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        wall_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        world:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+      Name: RobotModel
+      Robot Description: wall_1_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        wall_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        world:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+      Name: RobotModel
+      Robot Description: wall_2_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
   Enabled: true
   Global Options:
     Background Color: 238; 238; 238
@@ -424,7 +418,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 4.857444763183594
+      Distance: 8.390131950378418
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -432,25 +426,25 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.19763794541358948
-        Y: 0.5138558745384216
-        Z: 0.5093013048171997
+        X: 0.33260518312454224
+        Y: -0.2507552206516266
+        Z: -0.09463365375995636
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5103983283042908
+      Pitch: 0.2803983688354492
       Target Frame: <Fixed Frame>
-      Yaw: 5.1817851066589355
+      Yaw: 3.59678316116333
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1883
-  Hide Left Dock: true
+  Height: 1016
+  Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000001b300000701fc020000000afb0000001200530065006c0065006300740069006f006e000000006e000000b00000005c00fffffffb0000001e0054006f006f006c002000500072006f0070006500720074006900650073000000006e000004770000005c00fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073000000003d00000701000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d00650072006101000001be000001900000000000000000fb000000100044006900730070006c006100790073000000006e00000247000000c900ffffff000000010000010f000002e2fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000028000002e2000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000006400000003efc0100000002fb0000000800540069006d0065000000000000000640000003bc00fffffffb0000000800540069006d00650100000000000004500000000000000000000004380000070100000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001b30000039efc020000000afb0000001200530065006c0065006300740069006f006e000000006e000000b00000005c00fffffffb0000001e0054006f006f006c002000500072006f0070006500720074006900650073000000006e000004770000005c00fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d0000039e000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d00650072006101000001be000001900000000000000000fb000000100044006900730070006c006100790073000000006e00000247000000c900ffffff000000010000010f0000039efc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003d0000039e000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000006400000003efc0100000002fb0000000800540069006d00650000000000000006400000041800fffffffb0000000800540069006d006501000000000000045000000000000000000000046a0000039e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -459,6 +453,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 1080
-  X: 0
-  Y: 0
+  Width: 1848
+  X: 72
+  Y: 27

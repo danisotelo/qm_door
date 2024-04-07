@@ -166,7 +166,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://qm_description/meshes/qudraputed/aliengo/trunk.dae" scale="1 1 1"/>
+        <mesh filename="package://qm_description/meshes/quadruped/aliengo/trunk.dae" scale="1 1 1"/>
       </geometry>
     </visual>
     <collision>
@@ -200,7 +200,7 @@
         <box size="0.015 0.015 0.004"/>
       </geometry>
     </visual>
-    <material name="orange">
+    <material name="black">
       <color rgba="255 108 10 255"/>
     </material>
   </link>
@@ -222,9 +222,9 @@
     <visual>
       <origin rpy="3.141592653589793 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://qm_description/meshes/qudraputed/aliengo/hip.dae" scale="1 1 1"/>
+        <mesh filename="package://qm_description/meshes/quadruped/aliengo/hip.dae" scale="1 1 1"/>
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>
@@ -250,9 +250,9 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://qm_description/meshes/qudraputed/aliengo/thigh_mirror.dae" scale="1 1 1"/>
+        <mesh filename="package://qm_description/meshes/quadruped/aliengo/thigh_mirror.dae" scale="1 1 1"/>
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 1.6707963267948966 0" xyz="0.0 0 -0.125"/>
@@ -284,9 +284,9 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://qm_description/meshes/qudraputed/aliengo/calf.dae" scale="1 1 1"/>
+        <mesh filename="package://qm_description/meshes/quadruped/aliengo/calf_corrected.stl" scale="1 1 1"/> <!-- calf.dae is not visualized in Rviz -->
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 1.5707963267948966 0" xyz="0 0 -0.125"/>
@@ -311,7 +311,7 @@
       <geometry>
         <sphere radius="0.0165"/>
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -369,9 +369,9 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://qm_description/meshes/qudraputed/aliengo/hip.dae" scale="1 1 1"/>
+        <mesh filename="package://qm_description/meshes/quadruped/aliengo/hip.dae" scale="1 1 1"/>
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>
@@ -397,9 +397,9 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://qm_description/meshes/qudraputed/aliengo/thigh.dae" scale="1 1 1"/>
+        <mesh filename="package://qm_description/meshes/quadruped/aliengo/thigh.dae" scale="1 1 1"/>
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 1.6707963267948966 0" xyz="0.0 0 -0.125"/>
@@ -431,9 +431,9 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://qm_description/meshes/qudraputed/aliengo/calf.dae" scale="1 1 1"/>
+        <mesh filename="package://qm_description/meshes/quadruped/aliengo/calf_corrected.stl" scale="1 1 1"/> <!-- calf.dae is not visualized in Rviz -->
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 1.5707963267948966 0" xyz="0 0 -0.125"/>
@@ -458,7 +458,7 @@
       <geometry>
         <sphere radius="0.0165"/>
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -516,9 +516,9 @@
     <visual>
       <origin rpy="3.141592653589793 3.141592653589793 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://qm_description/meshes/qudraputed/aliengo/hip.dae" scale="1 1 1"/>
+        <mesh filename="package://qm_description/meshes/quadruped/aliengo/hip.dae" scale="1 1 1"/>
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>
@@ -544,9 +544,9 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://qm_description/meshes/qudraputed/aliengo/thigh_mirror.dae" scale="1 1 1"/>
+        <mesh filename="package://qm_description/meshes/quadruped/aliengo/thigh_mirror.dae" scale="1 1 1"/>
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 1.6707963267948966 0" xyz="0.0 0 -0.125"/>
@@ -578,9 +578,9 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://qm_description/meshes/qudraputed/aliengo/calf.dae" scale="1 1 1"/>
+        <mesh filename="package://qm_description/meshes/quadruped/aliengo/calf_corrected.stl" scale="1 1 1"/> <!-- calf.dae is not visualized in Rviz -->
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 1.5707963267948966 0" xyz="0 0 -0.125"/>
@@ -605,7 +605,7 @@
       <geometry>
         <sphere radius="0.0165"/>
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -663,9 +663,9 @@
     <visual>
       <origin rpy="0 3.141592653589793 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://qm_description/meshes/qudraputed/aliengo/hip.dae" scale="1 1 1"/>
+        <mesh filename="package://qm_description/meshes/quadruped/aliengo/hip.dae" scale="1 1 1"/>
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>
@@ -691,9 +691,9 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://qm_description/meshes/qudraputed/aliengo/thigh.dae" scale="1 1 1"/>
+        <mesh filename="package://qm_description/meshes/quadruped/aliengo/thigh.dae" scale="1 1 1"/>
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 1.6707963267948966 0" xyz="0.0 0 -0.125"/>
@@ -725,9 +725,9 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://qm_description/meshes/qudraputed/aliengo/calf.dae" scale="1 1 1"/>
+        <mesh filename="package://qm_description/meshes/quadruped/aliengo/calf_corrected.stl" scale="1 1 1"/> <!-- calf.dae is not visualized in Rviz -->
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 1.5707963267948966 0" xyz="0 0 -0.125"/>
@@ -752,7 +752,7 @@
       <geometry>
         <sphere radius="0.0165"/>
       </geometry>
-      <material name="orange"/>
+      <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>

@@ -50,7 +50,7 @@ public:
         observationSub_ = nh.subscribe<ocs2_msgs::mpc_observation>(topicPrefix + "_mpc_observation", 1, observationCallback);
 
         lastEeTarget_ = vector_t::Zero(7);
-        lastEeTarget_.head(3) << 0.52, 0.09, 0.44;
+        lastEeTarget_.head(3) << -1.48, 0.09, 0.44;
         lastEeTarget_.tail(4) << Eigen::Quaternion<scalar_t>(-0.5, 0.5, -0.5, 0.5).coeffs();
 
         // current ee pose
