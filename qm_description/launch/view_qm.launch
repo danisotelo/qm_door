@@ -1,5 +1,11 @@
 <launch>
-    <param name="robot_description" command="$(find xacro)/xacro $(find qm_description)/urdf/quadruped_manipulator/robot.xacro"/>
+
+    <arg name="user_debug" default="true"/>
+    <arg name="UnitreeGripperYN" default="true"/>
+
+
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+            DEBUG:=$(arg user_debug) UnitreeGripper:=$(arg UnitreeGripperYN)"/>
 
     <!-- send fake joint values -->
     <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui">
@@ -11,6 +17,7 @@
     </node>
 
     <!-- view -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qm_description)/config/manipulator_view.rviz" required="true"/>
+    <node name="rviz" pkg="rviz" type="rviz" respawn="false" output="screen"
+        args="-d $(find qm_description)/config/qm_view.rviz" required="true"/>
 
 </launch>

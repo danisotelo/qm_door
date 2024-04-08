@@ -18,7 +18,7 @@
     </material>
 
     <material name="silver">
-        <color rgba="${233/255} ${233/255} ${216/255} 1.0"/>
+        <color rgba="${199/255} ${204/255} ${214/255} 1.0"/>
     </material>
 
     <material name="orange">

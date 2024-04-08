@@ -1,20 +1,13 @@
 <?xml version="1.0"?>
 
-<robot name="z1" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
 
-    <xacro:include filename="$(find qm_description)/urdf/manipulator/const.xacro"/>
+    <xacro:include filename="$(find qm_description)/urdf/manipulator/materials.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/manipulator/gazebo.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/manipulator/transmission.xacro"/>
+    <xacro:include filename="$(find qm_description)/urdf/manipulator/const.xacro"/>
 
-    <xacro:arg name="UnitreeGripper" default="true"/>
-
-    <material name="black">
-        <color rgba="0.0 0.0 0.0 1.0"/>
-    </material>
-
-    <material name="silver">
-        <color rgba="0.9137254901960784 0.9137254901960784 0.8470588235294118 1.0"/>
-    </material>
+    <xacro:arg name="UnitreeGripper" default="false"/>
 
     <link name="world"/>
 
@@ -28,7 +21,7 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <mesh filename="package://qm_description/meshes/manipulator/z1_Link00.dae" scale="1 1 1"/>
+                <mesh filename="package://qm_description/meshes/manipulator/z1_Link00.stl" scale="1 1 1"/>
             </geometry>
             <material name="silver"/>
         </visual>
@@ -61,7 +54,7 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <mesh filename="package://qm_description/meshes/manipulator/z1_Link01.dae" scale="1 1 1"/>
+                <mesh filename="package://qm_description/meshes/manipulator/z1_Link01.stl" scale="1 1 1"/>
             </geometry>
             <material name="silver"/>
         </visual>
@@ -88,7 +81,7 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <mesh filename="package://qm_description/meshes/manipulator/z1_Link02.dae" scale="1 1 1"/>
+                <mesh filename="package://qm_description/meshes/manipulator/z1_Link02.stl" scale="1 1 1"/>
             </geometry>
             <material name="silver"/>
         </visual>
@@ -133,7 +126,7 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <mesh filename="package://qm_description/meshes/manipulator/z1_Link03.dae" scale="1 1 1"/>
+                <mesh filename="package://qm_description/meshes/manipulator/z1_Link03.stl" scale="1 1 1"/>
             </geometry>
             <material name="silver"/>
         </visual>
@@ -172,7 +165,7 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <mesh filename="package://qm_description/meshes/manipulator/z1_Link04.dae" scale="1 1 1"/>
+                <mesh filename="package://qm_description/meshes/manipulator/z1_Link04.stl" scale="1 1 1"/>
             </geometry>
             <material name="silver"/>
         </visual>
@@ -205,7 +198,7 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <mesh filename="package://qm_description/meshes/manipulator/z1_Link05.dae" scale="1 1 1"/>
+                <mesh filename="package://qm_description/meshes/manipulator/z1_Link05.stl" scale="1 1 1"/>
             </geometry>
             <material name="silver"/>
         </visual>
@@ -232,7 +225,7 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <mesh filename="package://qm_description/meshes/manipulator/z1_Link06.dae" scale="1 1 1"/>
+                <mesh filename="package://qm_description/meshes/manipulator/z1_Link06.stl" scale="1 1 1"/>
             </geometry>
             <material name="silver"/>
         </visual>
@@ -262,9 +255,9 @@
         <link name="gripperStator">
             <visual>
                 <geometry>
-                    <mesh filename="package://qm_description/meshes/manipulator/z1_GripperStator.dae" scale="1 1 1"/>
+                    <mesh filename="package://qm_description/meshes/manipulator/z1_GripperStator.stl" scale="1 1 1"/>
                 </geometry>
-                <material name="black"/>
+                <material name="grey"/>
             </visual>
             <collision>
                 <geometry>
@@ -293,9 +286,9 @@
         <link name="gripperMover">
             <visual>
                 <geometry>
-                    <mesh filename="package://qm_description/meshes/manipulator/z1_GripperMover.dae" scale="1 1 1"/>
+                    <mesh filename="package://qm_description/meshes/manipulator/z1_GripperMover.stl" scale="1 1 1"/>
                 </geometry>
-                <material name="black"/>
+                <material name="grey"/>
             </visual>
             <collision>
                 <geometry>

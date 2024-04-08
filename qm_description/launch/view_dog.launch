@@ -11,6 +11,6 @@
     </node>
 
     <!-- view -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qm_description)/config/manipulator_view.rviz" required="true"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qm_description)/config/quadruped_view.rviz" required="true"/>
 
 </launch>
