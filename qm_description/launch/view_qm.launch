@@ -1,11 +1,9 @@
 <launch>
 
     <arg name="user_debug" default="true"/>
-    <arg name="UnitreeGripperYN" default="true"/>
-
 
     <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
-            DEBUG:=$(arg user_debug) UnitreeGripper:=$(arg UnitreeGripperYN)"/>
+            DEBUG:=$(arg user_debug)"/>
 
     <!-- send fake joint values -->
     <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui">

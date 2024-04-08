@@ -5,9 +5,9 @@ joint_state_controller:
 
 # Z1 Controllers ---------------------------------------
 Joint01_controller:
-        type: unitree_legged_control/UnitreeJointController
-        joint: joint1
-        pid: {p: 300.0, i: 0.0, d: 5.0}
+    type: unitree_legged_control/UnitreeJointController
+    joint: joint1
+    pid: {p: 300.0, i: 0.0, d: 5.0}
 
 Joint02_controller:
     type: unitree_legged_control/UnitreeJointController

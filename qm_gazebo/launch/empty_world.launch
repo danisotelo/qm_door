@@ -1,28 +1,30 @@
 <launch>
-    <arg name="kinova_robotType" default="j2n6s300"/>
+
+    <arg name="user_debug" default="false"/>
+
     <rosparam file="$(find qm_gazebo)/config/default.yaml" command="load"/>
 
-    <param name="qm_description" command="$(find xacro)/xacro $(find qm_description)/urdf/quadruped_manipulator/robot.xacro"/>
-    <param name="robot_description" command="$(find xacro)/xacro $(find qm_description)/urdf/quadruped_manipulator/robot.xacro"/>
-    <param name="legged_robot_description" command="$(find xacro)/xacro $(find qm_description)/urdf/quadruped_manipulator/robot.xacro"/>
-
-    <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+    <!-- Load descriptions -->
+    <param name="qm_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                DEBUG:=$(arg user_debug)"/>
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                DEBUG:=$(arg user_debug)"/>
+    <param name="legged_robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                DEBUG:=$(arg user_debug)"/>
+                
+    <!-- Include empty Gazebo world -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="paused" value="true"/>
+        <arg name="gui" value="true"/>
     </include>
 
-    <!-- push robot_description to factory and spawn robot in gazebo -->
+      <!-- Spawn robot in Gazebo -->
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" clear_params="true"
           output="screen"
           args="-param qm_description -urdf -model qm
-    -z 0.55
-    -J $(arg kinova_robotType)_joint_1 3.14
-    -J $(arg kinova_robotType)_joint_2 3.61
-    -J $(arg kinova_robotType)_joint_3 0.86
-    -J $(arg kinova_robotType)_joint_4 2.7
-    -J $(arg kinova_robotType)_joint_5 1.37
-    -J $(arg kinova_robotType)_joint_6 -0.4
-    "
+                -z 0.55
+                -x -2
+                "
     />
 
 </launch>

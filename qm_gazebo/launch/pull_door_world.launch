@@ -1,16 +1,15 @@
 <launch>
       <arg name="user_debug" default="false"/>
-      <arg name="UnitreeGripperYN" default="true"/>
 
       <rosparam file="$(find qm_gazebo)/config/default.yaml" command="load"/>
 
       <!-- Load descriptions -->
       <param name="qm_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
-                  DEBUG:=$(arg user_debug) UnitreeGripper:=$(arg UnitreeGripperYN)"/>
+                  DEBUG:=$(arg user_debug)"/>
       <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
-                  DEBUG:=$(arg user_debug) UnitreeGripper:=$(arg UnitreeGripperYN)"/>
+                  DEBUG:=$(arg user_debug)"/>
      <param name="legged_robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
-                  DEBUG:=$(arg user_debug) UnitreeGripper:=$(arg UnitreeGripperYN)"/>
+                  DEBUG:=$(arg user_debug)"/>
       <param name="door_description" command="$(find xacro)/xacro $(find qm_description)/urdf/doors/door_push.xacro"/>
       <param name="wall_1_description" command="$(find xacro)/xacro $(find qm_description)/urdf/walls/wall_1.xacro"/>
       <param name="wall_2_description" command="$(find xacro)/xacro $(find qm_description)/urdf/walls/wall_2.xacro"/>
