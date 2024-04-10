@@ -24,6 +24,13 @@
           args="-param qm_description -urdf -model qm
                 -z 0.55
                 -x -2
+                -J joint1 0.0
+                -J joint2 0.0
+                -J joint3 0.0
+                -J joint4 0.0
+                -J joint5 0.0
+                -J joint6 0.0
+                -J jointGripper 0.0
                 "
     />
 
