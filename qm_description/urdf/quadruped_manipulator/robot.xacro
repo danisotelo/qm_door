@@ -273,9 +273,9 @@
         </visual>
         <collision>
             <geometry>
-                <cylinder length="${motor_height}" radius="${motor_diameter}"/>
+                <cylinder length="${motor_height - 0.01}" radius="${motor_diameter}"/>
             </geometry>
-            <origin rpy="0 ${PI/2.0} 0" xyz="${motor_height/2.0} 0 0"/>
+            <origin rpy="0 ${PI/2.0} 0" xyz="${(motor_height - 0.01)/2.0} 0 0"/>
         </collision>
         <inertial>
             <origin rpy="0 0 0" xyz="${L06_ComX} ${L06_ComY} ${L06_ComZ}"/>

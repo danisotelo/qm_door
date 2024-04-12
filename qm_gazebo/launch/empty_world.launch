@@ -2,7 +2,7 @@
 
     <arg name="user_debug" default="false"/>
 
-    <rosparam file="$(find qm_gazebo)/config/default.yaml" command="load"/>
+    <rosparam file="$(find qm_gazebo)/config/position_control.yaml" command="load"/>
 
     <!-- Load descriptions -->
     <param name="qm_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
@@ -24,13 +24,13 @@
           args="-param qm_description -urdf -model qm
                 -z 0.55
                 -x -2
-                -J joint1 0.0
-                -J joint2 0.0
-                -J joint3 0.0
-                -J joint4 0.0
-                -J joint5 0.0
-                -J joint6 0.0
-                -J jointGripper 0.0
+                -J joint1 0.32
+                -J joint2 0.6
+                -J joint3 -0.61
+                -J joint4 -1.16
+                -J joint5 -0.17
+                -J joint6 -0.08
+                -J jointGripper -0.30
                 "
     />
 

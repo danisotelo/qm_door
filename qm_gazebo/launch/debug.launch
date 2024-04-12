@@ -1,0 +1,53 @@
+<launch>
+
+
+     <!-- Include empty Gazebo world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="gui" value="true"/>
+        <arg name="paused" value="true"/>
+    </include>   
+
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                DEBUG:=false"/>
+
+    <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+    <!-- Set trunk and joint positions at startup -->
+    <node pkg="gazebo_ros" type="spawn_model" name="urdf_spawner" respawn="false" output="screen"
+          args="-urdf -z 0.6 -model $aliengoZ1_gazebo -param robot_description -unpause"/>
+
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <rosparam file="$(find qm_gazebo)/config/position_control.yaml" command="load"/>
+
+    <!-- load the controllers -->
+    <group unless="true">
+        <node pkg="controller_manager" type="spawner" name="controller_spawner" respawn="false"
+            output="screen" ns="/aliengoZ1_gazebo" args="joint_state_controller 
+            Joint01_controller Joint02_controller Joint03_controller
+            Joint04_controller Joint05_controller Joint06_controller
+            FL_hip_controller FL_thigh_controller FL_calf_controller
+            FR_hip_controller FR_thigh_controller FR_calf_controller
+            RL_hip_controller RL_thigh_controller RL_calf_controller
+            RR_hip_controller RR_thigh_controller RR_calf_controller"/>
+    </group>
+
+    <group if="true">
+        <node pkg="controller_manager" type="spawner" name="controller_spawner" respawn="false"
+            output="screen" ns="/aliengoZ1_gazebo" args="joint_state_controller 
+            Joint01_controller Joint02_controller Joint03_controller 
+            Joint04_controller Joint05_controller Joint06_controller 
+            gripper_controller
+            FL_hip_controller FL_thigh_controller FL_calf_controller
+            FR_hip_controller FR_thigh_controller FR_calf_controller
+            RL_hip_controller RL_thigh_controller RL_calf_controller
+            RR_hip_controller RR_thigh_controller RR_calf_controller"/>
+    </group>
+
+    <!-- convert joint states to TF transforms for rviz, etc -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"
+          respawn="false" output="screen">
+        <remap from="/joint_states" to="/aliengoZ1_gazebo/joint_states"/>
+    </node>
+
+
+</launch>
