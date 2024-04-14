@@ -174,11 +174,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        imu_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         link00:
           Alpha: 1
           Show Axes: false
@@ -214,15 +209,16 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        trunk:
+        unitree_imu:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        world:
+        z1_end_effector:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -233,7 +229,7 @@ Visualization Manager:
   Global Options:
     Background Color: 255; 255; 255
     Default Light: true
-    Fixed Frame: world
+    Fixed Frame: base
     Frame Rate: 30
   Name: root
   Tools:
@@ -273,9 +269,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.30039843916893005
+      Pitch: 0.2853984236717224
       Target Frame: <Fixed Frame>
-      Yaw: 5.5085768699646
+      Yaw: 5.543576240539551
     Saved: ~
 Window Geometry:
   Displays:

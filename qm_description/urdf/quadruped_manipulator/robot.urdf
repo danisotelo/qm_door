@@ -4,289 +4,6 @@
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
 <robot name="qm">
-  <!-- ros_control plugin -->
-  <gazebo>
-    <plugin filename="libqm_hw_sim.so" name="gazebo_ros_control">
-      <robotNamespace>/</robotNamespace>
-      <robotParam>qm_description</robotParam>
-      <robotSimType>qm_gazebo/QMHWSim</robotSimType>
-    </plugin>
-  </gazebo>
-  <!-- Show the trajectory of trunk center. -->
-  <gazebo>
-    <plugin filename="libLinkPlot3DPlugin.so" name="3dplot">
-      <frequency>10</frequency>
-      <plot>
-        <link>base</link>
-        <pose>0 0 0 0 0 0</pose>
-        <material>Gazebo/Yellow</material>
-      </plot>
-    </plugin>
-  </gazebo>
-  <!-- Show the trajectory of foot. You can add another trajectory about another foot. -->
-  <!-- <gazebo>
-        <plugin name="3dplot" filename="libLinkPlot3DPlugin.so">
-            <frequency>100</frequency>
-            <plot>
-                <link>FL_foot</link>
-                <pose>0 0 0 0 0 0</pose>
-                <material>Gazebo/Green</material>
-            </plot>
-        </plugin>
-    </gazebo> -->
-  <gazebo>
-    <plugin filename="libgazebo_ros_force.so" name="gazebo_ros_force">
-      <bodyName>base</bodyName>
-      <topicName>/apply_force/trunk</topicName>
-    </plugin>
-  </gazebo>
-  <gazebo reference="imu_link">
-    <gravity>true</gravity>
-    <sensor name="imu_sensor" type="imu">
-      <always_on>true</always_on>
-      <update_rate>1000</update_rate>
-      <visualize>true</visualize>
-      <topic>__default_topic__</topic>
-      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
-        <topicName>trunk_imu</topicName>
-        <bodyName>imu_link</bodyName>
-        <updateRateHZ>1000.0</updateRateHZ>
-        <gaussianNoise>0.0</gaussianNoise>
-        <xyzOffset>0 0 0</xyzOffset>
-        <rpyOffset>0 0 0</rpyOffset>
-        <frameName>imu_link</frameName>
-      </plugin>
-      <pose>0 0 0 0 0 0</pose>
-    </sensor>
-  </gazebo>
-  <!-- Foot contacts. -->
-  <gazebo reference="RF_calf">
-    <sensor name="RF_foot_contact" type="contact">
-      <update_rate>100</update_rate>
-      <plugin filename="libunitreeFootContactPlugin.so" name="contactPlugin"/>
-      <contact>
-        <collision>RF_calf_fixed_joint_lump__RF_foot_collision_1</collision>
-      </contact>
-    </sensor>
-  </gazebo>
-  <gazebo reference="LF_calf">
-    <sensor name="LF_foot_contact" type="contact">
-      <update_rate>100</update_rate>
-      <plugin filename="libunitreeFootContactPlugin.so" name="contactPlugin"/>
-      <contact>
-        <collision>LF_calf_fixed_joint_lump__LF_foot_collision_1</collision>
-      </contact>
-    </sensor>
-  </gazebo>
-  <gazebo reference="RH_calf">
-    <sensor name="RH_foot_contact" type="contact">
-      <update_rate>100</update_rate>
-      <plugin filename="libunitreeFootContactPlugin.so" name="contactPlugin"/>
-      <contact>
-        <collision>RH_calf_fixed_joint_lump__RH_foot_collision_1</collision>
-      </contact>
-    </sensor>
-  </gazebo>
-  <gazebo reference="LH_calf">
-    <sensor name="LH_foot_contact" type="contact">
-      <update_rate>100</update_rate>
-      <plugin filename="libunitreeFootContactPlugin.so" name="contactPlugin"/>
-      <contact>
-        <collision>LH_calf_fixed_joint_lump__LH_foot_collision_1</collision>
-      </contact>
-    </sensor>
-  </gazebo>
-  <!-- Visualization of Foot contacts. -->
-  <gazebo reference="RF_foot">
-    <visual>
-      <plugin filename="libunitreeDrawForcePlugin.so" name="drawForcePlugin">
-        <topicName>RF_foot_contact</topicName>
-      </plugin>
-    </visual>
-  </gazebo>
-  <gazebo reference="LF_foot">
-    <visual>
-      <plugin filename="libunitreeDrawForcePlugin.so" name="drawForcePlugin">
-        <topicName>LF_foot_contact</topicName>
-      </plugin>
-    </visual>
-  </gazebo>
-  <gazebo reference="RH_foot">
-    <visual>
-      <plugin filename="libunitreeDrawForcePlugin.so" name="drawForcePlugin">
-        <topicName>RH_foot_contact</topicName>
-      </plugin>
-    </visual>
-  </gazebo>
-  <gazebo reference="LH_foot">
-    <visual>
-      <plugin filename="libunitreeDrawForcePlugin.so" name="drawForcePlugin">
-        <topicName>LH_foot_contact</topicName>
-      </plugin>
-    </visual>
-  </gazebo>
-  <gazebo reference="base">
-    <material>Gazebo/Black</material>
-    <turnGravityOff>false</turnGravityOff>
-  </gazebo>
-  <gazebo reference="trunk">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <kp value="1000000.0"/>
-    <kd value="1.0"/>
-  </gazebo>
-  <gazebo reference="stick_link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  <gazebo reference="imu_link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/Red</material>
-  </gazebo>
-  <!-- LF leg -->
-  <gazebo reference="LF_hip">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="LF_thigh">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>1</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="1.0"/>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="LF_calf">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>1</self_collide>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="LF_foot">
-    <mu1>0.6</mu1>
-    <mu2>0.6</mu2>
-    <self_collide>1</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="1.0"/>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <!-- RF leg -->
-  <gazebo reference="RF_hip">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="RF_thigh">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>1</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="1.0"/>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="RF_calf">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>1</self_collide>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="RF_foot">
-    <mu1>0.6</mu1>
-    <mu2>0.6</mu2>
-    <self_collide>1</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="1.0"/>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <!-- LH leg -->
-  <gazebo reference="LH_hip">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="LH_thigh">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>1</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="1.0"/>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="LH_calf">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>1</self_collide>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="LH_foot">
-    <mu1>0.6</mu1>
-    <mu2>0.6</mu2>
-    <self_collide>1</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="1.0"/>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <!-- RH leg -->
-  <gazebo reference="RH_hip">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="RH_thigh">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>1</self_collide>
-    <kp value="1000000.0"/>
-    <kd value="1.0"/>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="RH_calf">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>1</self_collide>
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="RH_foot">
-    <mu1>0.6</mu1>
-    <mu2>0.6</mu2>
-    <self_collide>1</self_collide>
-    <material>Gazebo/Black</material>
-    <kp value="1000000.0"/>
-    <kd value="1.0"/>
-  </gazebo>
-  <!-- ros_control plugin -->
-  <gazebo reference="link00">
-    <material>Gazebo/Grey</material>
-  </gazebo>
-  <gazebo reference="link01">
-    <material>Gazebo/Grey</material>
-  </gazebo>
-  <gazebo reference="link02">
-    <material>Gazebo/Grey</material>
-  </gazebo>
-  <gazebo reference="link03">
-    <material>Gazebo/Grey</material>
-  </gazebo>
-  <gazebo reference="link04">
-    <material>Gazebo/Grey</material>
-    <self_collide>true</self_collide>
-  </gazebo>
-  <gazebo reference="link05">
-    <material>Gazebo/Grey</material>
-    <self_collide>true</self_collide>
-  </gazebo>
-  <gazebo reference="link06">
-    <material>Gazebo/Grey</material>
-    <self_collide>true</self_collide>
-  </gazebo>
-  <gazebo reference="gripperStator">
-    <material>Gazebo/Black</material>
-  </gazebo>
-  <gazebo reference="gripperMover">
-    <material>Gazebo/Black</material>
-  </gazebo>
   <material name="black">
     <color rgba="0.0 0.0 0.0 1.0"/>
   </material>
@@ -314,20 +31,181 @@
   <material name="white">
     <color rgba="1.0 1.0 1.0 1.0"/>
   </material>
+  <gazebo>
+    <plugin filename="libgazebo_ros_p3d.so" name="p3d_base_controller">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>1000.0</updateRate>
+      <bodyName>base</bodyName>
+      <topicName>ground_truth/state</topicName>
+      <gaussianNoise>0</gaussianNoise>
+      <frameName>world</frameName>
+      <xyzOffsets>0 0 0</xyzOffsets>
+      <rpyOffsets>0 0 0</rpyOffsets>
+    </plugin>
+  </gazebo>
+  <gazebo reference="base_link">
+    <maxVel>100.</maxVel>
+    <kp>10000.</kp>
+    <kd>0.</kd>
+  </gazebo>
+  <gazebo reference="stick_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/White</material>
+  </gazebo>
+  <!-- LF leg -->
+  <gazebo reference="LF_hip">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="LF_thigh">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/Black</material>
+    <kp value="1000000.0"/>
+    <kd value="1.0"/>
+  </gazebo>
+  <gazebo reference="LF_calf">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="LF_FOOT">
+    <mu1>0.6</mu1>
+    <mu2>0.6</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/Black</material>
+    <kp value="1000000.0"/>
+    <kd value="1.0"/>
+  </gazebo>
+  <!-- RF leg -->
+  <gazebo reference="RF_hip">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="RF_thigh">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/Black</material>
+    <kp value="1000000.0"/>
+    <kd value="1.0"/>
+  </gazebo>
+  <gazebo reference="RF_calf">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="RF_FOOT">
+    <mu1>0.6</mu1>
+    <mu2>0.6</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/Black</material>
+    <kp value="1000000.0"/>
+    <kd value="1.0"/>
+  </gazebo>
+  <!-- LH leg -->
+  <gazebo reference="LH_hip">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="LH_thigh">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/Black</material>
+    <kp value="1000000.0"/>
+    <kd value="1.0"/>
+  </gazebo>
+  <gazebo reference="LH_calf">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="LH_FOOT">
+    <mu1>0.6</mu1>
+    <mu2>0.6</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/Black</material>
+    <kp value="1000000.0"/>
+    <kd value="1.0"/>
+  </gazebo>
+  <!-- RH leg -->
+  <gazebo reference="RH_hip">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="RH_thigh">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/Black</material>
+    <kp value="1000000.0"/>
+    <kd value="1.0"/>
+  </gazebo>
+  <gazebo reference="RH_calf">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="RH_FOOT">
+    <mu1>0.6</mu1>
+    <mu2>0.6</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/Black</material>
+    <kp value="1000000.0"/>
+    <kd value="1.0"/>
+  </gazebo>
+  <!-- Z1 arm -->
+  <gazebo reference="link00">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="link01">
+    <material>Gazebo/Grey</material>
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+  <gazebo reference="link02">
+    <material>Gazebo/Grey</material>
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+  <gazebo reference="link03">
+    <material>Gazebo/Grey</material>
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+  <gazebo reference="link04">
+    <self_collide>true</self_collide>
+    <material>Gazebo/Grey</material>
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+  <gazebo reference="link05">
+    <self_collide>true</self_collide>
+    <material>Gazebo/Grey</material>
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+  <gazebo reference="link06">
+    <self_collide>true</self_collide>
+    <material>Gazebo/Grey</material>
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+  <gazebo reference="gripperStator">
+    <self_collide>true</self_collide>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="gripperMover">
+    <self_collide>true</self_collide>
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <!-- Aliengo robot -->
   <link name="base">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <box size="0.001 0.001 0.001"/>
-      </geometry>
-    </visual>
-  </link>
-  <joint name="floating_base" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <parent link="base"/>
-    <child link="trunk"/>
-  </joint>
-  <link name="trunk">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -339,7 +217,6 @@
       <geometry>
         <box size="0.647 0.15 0.112"/>
       </geometry>
-      <material name="red"/>
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="0.008465 0.004045 -0.000763"/>
@@ -347,363 +224,35 @@
       <inertia ixx="0.050874" ixy="-0.000451628" ixz="0.000487603" iyy="0.64036" iyz="4.8356e-05" izz="0.65655"/>
     </inertial>
   </link>
-  <joint name="imu_joint" type="fixed">
-    <parent link="trunk"/>
-    <child link="imu_link"/>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
+  <!-- Imu is fixed to the base link -->
+  <joint name="unitree_imu_joint" type="fixed">
+    <origin rpy="0. 0. 0." xyz="0. 0. 0."/>
+    <parent link="base"/>
+    <child link="unitree_imu"/>
   </joint>
-  <link name="imu_link">
+  <!-- Imu link -->
+  <link name="unitree_imu">
     <inertial>
-      <mass value="0.001"/>
+      <mass value="0.01"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.0001"/>
+      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
     </inertial>
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.001 0.001 0.001"/>
+        <box size="0.015 0.015 0.004"/>
       </geometry>
-      <material name="red"/>
     </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <box size=".001 .001 .001"/>
-      </geometry>
-    </collision>
+    <material name="orange">
+      <color rgba="255 108 10 255"/>
+    </material>
   </link>
-  <joint name="trunk_arm_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0.2535 0 0.056"/>
-    <parent link="trunk"/>
-    <child link="link00"/>
-  </joint>
-  <link name="link00">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://qm_description/meshes/manipulator/z1_Link00.stl" scale="1 1 1"/>
-      </geometry>
-      <material name="silver"/>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.051" radius="0.0325"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0.0255"/>
-    </collision>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.00334984 -0.00013615 0.02495843"/>
-      <mass value="0.47247481"/>
-      <inertia ixx="0.00037937" ixy="-3.5e-07" ixz="-1.037e-05" iyy="0.00041521" iyz="-9.9e-07" izz="0.00053066"/>
-    </inertial>
-  </link>
-  <joint name="joint1" type="revolute">
-    <origin rpy="0 0 0" xyz="0 0 0.0585"/>
-    <parent link="link00"/>
-    <child link="link01"/>
-    <axis xyz="0 0 1"/>
-    <dynamics damping="1.0" friction="1.0"/>
-    <limit effort="30.0" lower="-2.6179938779914944" upper="2.6179938779914944" velocity="3.1415"/>
-  </joint>
-  <link name="link01">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://qm_description/meshes/manipulator/z1_Link01.stl" scale="1 1 1"/>
-      </geometry>
-      <material name="silver"/>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.102" radius="0.0325"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-    </collision>
-    <inertial>
-      <origin rpy="0 0 0" xyz="2.47e-06 -0.00025198 0.02317169"/>
-      <mass value="0.67332551"/>
-      <inertia ixx="0.00128328" ixy="-6e-08" ixz="-4e-07" iyy="0.00071931" iyz="5e-07" izz="0.00083936"/>
-    </inertial>
-  </link>
-  <joint name="joint2" type="revolute">
-    <origin rpy="0 0 0" xyz="0 0 0.045"/>
-    <parent link="link01"/>
-    <child link="link02"/>
-    <axis xyz="0 1 0"/>
-    <dynamics damping="2.0" friction="2.0"/>
-    <limit effort="60.0" lower="0.0" upper="2.9670597283903604" velocity="3.1415"/>
-  </joint>
-  <link name="link02">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://qm_description/meshes/manipulator/z1_Link02.stl" scale="1 1 1"/>
-      </geometry>
-      <material name="silver"/>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.102" radius="0.0325"/>
-      </geometry>
-      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>
-    </collision>
-    <collision>
-      <geometry>
-        <cylinder length="0.235" radius="0.0225"/>
-      </geometry>
-      <origin rpy="0 1.5707963267948966 0" xyz="-0.16249999999999998 0 0"/>
-    </collision>
-    <collision>
-      <geometry>
-        <cylinder length="0.051" radius="0.0325"/>
-      </geometry>
-      <origin rpy="1.5707963267948966 0 0" xyz="-0.35 0 0"/>
-    </collision>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.11012601 0.00240029 0.00158266"/>
-      <mass value="1.19132258"/>
-      <inertia ixx="0.00102138" ixy="0.00062358" ixz="5.13e-06" iyy="0.02429457" iyz="-2.1e-06" izz="0.02466114"/>
-    </inertial>
-  </link>
-  <joint name="joint3" type="revolute">
-    <origin rpy="0 0 0" xyz="-0.35 0 0"/>
-    <parent link="link02"/>
-    <child link="link03"/>
-    <axis xyz="0 1 0"/>
-    <dynamics damping="1.0" friction="1.0"/>
-    <limit effort="30.0" lower="-2.8797932657906435" upper="0.0" velocity="3.1415"/>
-  </joint>
-  <link name="link03">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://qm_description/meshes/manipulator/z1_Link03.stl" scale="1 1 1"/>
-      </geometry>
-      <material name="silver"/>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.116" radius="0.02"/>
-      </geometry>
-      <origin rpy="0 1.5707963267948966 0" xyz="0.128 0 0.055"/>
-    </collision>
-    <collision>
-      <geometry>
-        <cylinder length="0.059" radius="0.0325"/>
-      </geometry>
-      <origin rpy="0 1.5707963267948966 1.5707963267948966" xyz="0.2205 0 0.055"/>
-    </collision>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.10609208 -0.00541815 0.03476383"/>
-      <mass value="0.83940874"/>
-      <inertia ixx="0.00108061" ixy="-8.669e-05" ixz="-0.00208102" iyy="0.00954238" iyz="-1.332e-05" izz="0.00886621"/>
-    </inertial>
-  </link>
-  <joint name="joint4" type="revolute">
-    <origin rpy="0 0 0" xyz="0.218 0 0.057"/>
-    <parent link="link03"/>
-    <child link="link04"/>
-    <axis xyz="0 1 0"/>
-    <dynamics damping="1.0" friction="1.0"/>
-    <limit effort="30.0" lower="-1.5184364492350666" upper="1.5184364492350666" velocity="3.1415"/>
-  </joint>
-  <link name="link04">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://qm_description/meshes/manipulator/z1_Link04.stl" scale="1 1 1"/>
-      </geometry>
-      <material name="silver"/>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.067" radius="0.0325"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0.072 0 0"/>
-    </collision>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.04366681 0.00364738 -0.00170192"/>
-      <mass value="0.56404563"/>
-      <inertia ixx="0.00031576" ixy="8.13e-05" ixz="4.091e-05" iyy="0.00092996" iyz="-5.96e-06" izz="0.00097912"/>
-    </inertial>
-  </link>
-  <joint name="joint5" type="revolute">
-    <origin rpy="0 0 0" xyz="0.07 0.0 0.0"/>
-    <parent link="link04"/>
-    <child link="link05"/>
-    <axis xyz="0 0 1"/>
-    <dynamics damping="1.0" friction="1.0"/>
-    <limit effort="30.0" lower="-1.3439035240356338" upper="1.3439035240356338" velocity="3.1415"/>
-  </joint>
-  <link name="link05">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://qm_description/meshes/manipulator/z1_Link05.stl" scale="1 1 1"/>
-      </geometry>
-      <material name="silver"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.03121533 0.0 0.00646316"/>
-      <mass value="0.38938492"/>
-      <inertia ixx="0.00017605" ixy="4e-07" ixz="5.689e-05" iyy="0.00055896" iyz="-1.3e-07" izz="0.0005386"/>
-    </inertial>
-  </link>
-  <joint name="joint6" type="revolute">
-    <origin rpy="0 0 0" xyz="0.0492 0.0 0.0"/>
-    <parent link="link05"/>
-    <child link="link06"/>
-    <axis xyz="1 0 0"/>
-    <dynamics damping="1.0" friction="1.0"/>
-    <limit effort="30.0" lower="-2.792526803190927" upper="2.792526803190927" velocity="3.1415"/>
-  </joint>
-  <link name="link06">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="package://qm_description/meshes/manipulator/z1_Link06.stl" scale="1 1 1"/>
-      </geometry>
-      <material name="silver"/>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.051" radius="0.0325"/>
-      </geometry>
-      <origin rpy="0 1.5707963267948966 0" xyz="0.0255 0 0"/>
-    </collision>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0241569 -0.00017355 -0.00143876"/>
-      <mass value="0.28875807"/>
-      <inertia ixx="0.00018328" ixy="1.22e-06" ixz="5.4e-07" iyy="0.0001475" iyz="8e-08" izz="0.0001468"/>
-    </inertial>
-  </link>
-  <joint name="gripperStator" type="fixed">
-    <origin rpy="0 0 0" xyz="0.051 0.0 0.0"/>
-    <parent link="link06"/>
-    <child link="gripperStator"/>
-  </joint>
-  <link name="gripperStator">
-    <visual>
-      <geometry>
-        <mesh filename="package://qm_description/meshes/manipulator/z1_GripperStator.stl" scale="1 1 1"/>
-      </geometry>
-      <material name="black"/>
-    </visual>
-    <collision>
-      <geometry>
-        <mesh filename="package://qm_description/meshes/manipulator/z1_GripperStator.stl" scale="1 1 1"/>
-      </geometry>
-      <material name="green"/>
-    </collision>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.04764427 -0.00035819 -0.00249162"/>
-      <mass value="0.52603655"/>
-      <inertia ixx="0.00038683" ixy="-3.59e-06" ixz="7.662e-05" iyy="0.00068614" iyz="2.09e-06" izz="0.00066293"/>
-    </inertial>
-  </link>
-  <joint name="jointGripper" type="revolute">
-    <origin rpy="0 0 0" xyz="0.049 0.0 0"/>
-    <parent link="gripperStator"/>
-    <child link="gripperMover"/>
-    <axis xyz="0 1 0"/>
-    <dynamics damping="1.0" friction="1.0"/>
-    <limit effort="30.0" lower="-1.5707963267948966" upper="0.0" velocity="3.1415"/>
-  </joint>
-  <link name="gripperMover">
-    <visual>
-      <geometry>
-        <mesh filename="package://qm_description/meshes/manipulator/z1_GripperMover.stl" scale="1 1 1"/>
-      </geometry>
-      <material name="black"/>
-    </visual>
-    <collision>
-      <geometry>
-        <mesh filename="package://qm_description/meshes/manipulator/z1_GripperMover.stl" scale="1 1 1"/>
-      </geometry>
-      <material name="green"/>
-    </collision>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.01320633 0.00476708 0.00380534"/>
-      <mass value="0.27621302"/>
-      <inertia ixx="0.00017716" ixy="1.683e-05" ixz="-1.786e-05" iyy="0.00026787" iyz="2.62e-06" izz="0.00035728"/>
-    </inertial>
-  </link>
-  <transmission name="JointTransGripper">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="jointGripper">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="ActuatorGripper">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <gazebo reference="gripperStator">
-    <self_collide>true</self_collide>
+  <gazebo reference="unitree_imu">
+    <material>Gazebo/Orange</material>
   </gazebo>
-  <gazebo reference="gripperMover">
-    <self_collide>true</self_collide>
+  <gazebo reference="unitree_imu_joint">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
   </gazebo>
-  <transmission name="JointTrans1">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint1">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="Actuator1">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="JointTrans2">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint2">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="Actuator2">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="JointTrans3">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint3">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="Actuator3">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="JointTrans4">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint4">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="Actuator4">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="JointTrans5">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint5">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="Actuator5">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <transmission name="JointTrans6">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint6">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="Actuator6">
-      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
   <joint name="RF_HAA" type="revolute">
     <origin rpy="0 0 0" xyz="0.2407 -0.051 0"/>
     <parent link="base"/>
@@ -1292,4 +841,394 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
+  <!-- Z1 manipulator -->
+  <joint name="manipulator_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0.2535 0 0.056"/>
+    <parent link="base"/>
+    <child link="link00"/>
+  </joint>
+  <link name="link00">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/manipulator/z1_Link00.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.051" radius="0.0325"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.0255"/>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.00334984 -0.00013615 0.02495843"/>
+      <mass value="0.47247481"/>
+      <inertia ixx="0.00037937" ixy="-3.5e-07" ixz="-1.037e-05" iyy="0.00041521" iyz="-9.9e-07" izz="0.00053066"/>
+    </inertial>
+  </link>
+  <joint name="joint1" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 0.0585"/>
+    <parent link="link00"/>
+    <child link="link01"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="1.0" friction="1.0"/>
+    <limit effort="30.0" lower="-2.6179938779914944" upper="2.6179938779914944" velocity="3.1415"/>
+  </joint>
+  <transmission name="z1_joint_1_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="z1_joint_1_actuator">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <gazebo>
+    <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+      <updateRate>30.0</updateRate>
+      <topicName>joint1_ft_sensor_topic</topicName>
+      <jointName>joint1</jointName>
+    </plugin>
+  </gazebo>
+  <link name="link01">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/manipulator/z1_Link01.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.102" radius="0.0325"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="2.47e-06 -0.00025198 0.02317169"/>
+      <mass value="0.67332551"/>
+      <inertia ixx="0.00128328" ixy="-6e-08" ixz="-4e-07" iyy="0.00071931" iyz="5e-07" izz="0.00083936"/>
+    </inertial>
+  </link>
+  <joint name="joint2" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 0.045"/>
+    <parent link="link01"/>
+    <child link="link02"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="2.0" friction="2.0"/>
+    <limit effort="60.0" lower="0.0" upper="2.9670597283903604" velocity="3.1415"/>
+  </joint>
+  <transmission name="z1_joint_2_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="z1_joint_2_actuator">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <gazebo>
+    <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+      <updateRate>30.0</updateRate>
+      <topicName>joint2_ft_sensor_topic</topicName>
+      <jointName>joint2</jointName>
+    </plugin>
+  </gazebo>
+  <link name="link02">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/manipulator/z1_Link02.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.102" radius="0.0325"/>
+      </geometry>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>
+    </collision>
+    <collision>
+      <geometry>
+        <cylinder length="0.235" radius="0.0225"/>
+      </geometry>
+      <origin rpy="0 1.5707963267948966 0" xyz="-0.16249999999999998 0 0"/>
+    </collision>
+    <collision>
+      <geometry>
+        <cylinder length="0.051" radius="0.0325"/>
+      </geometry>
+      <origin rpy="1.5707963267948966 0 0" xyz="-0.35 0 0"/>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.11012601 0.00240029 0.00158266"/>
+      <mass value="1.19132258"/>
+      <inertia ixx="0.00102138" ixy="0.00062358" ixz="5.13e-06" iyy="0.02429457" iyz="-2.1e-06" izz="0.02466114"/>
+    </inertial>
+  </link>
+  <joint name="joint3" type="revolute">
+    <origin rpy="0 0 0" xyz="-0.35 0 0"/>
+    <parent link="link02"/>
+    <child link="link03"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="1.0" friction="1.0"/>
+    <limit effort="30.0" lower="-2.8797932657906435" upper="0.0" velocity="3.1415"/>
+  </joint>
+  <transmission name="z1_joint_3_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint3">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="z1_joint_3_actuator">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <gazebo>
+    <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+      <updateRate>30.0</updateRate>
+      <topicName>joint3_ft_sensor_topic</topicName>
+      <jointName>joint3</jointName>
+    </plugin>
+  </gazebo>
+  <link name="link03">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/manipulator/z1_Link03.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.116" radius="0.02"/>
+      </geometry>
+      <origin rpy="0 1.5707963267948966 0" xyz="0.128 0 0.055"/>
+    </collision>
+    <collision>
+      <geometry>
+        <cylinder length="0.059" radius="0.0325"/>
+      </geometry>
+      <origin rpy="0 1.5707963267948966 1.5707963267948966" xyz="0.2205 0 0.055"/>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.10609208 -0.00541815 0.03476383"/>
+      <mass value="0.83940874"/>
+      <inertia ixx="0.00108061" ixy="-8.669e-05" ixz="-0.00208102" iyy="0.00954238" iyz="-1.332e-05" izz="0.00886621"/>
+    </inertial>
+  </link>
+  <joint name="joint4" type="revolute">
+    <origin rpy="0 0 0" xyz="0.218 0 0.057"/>
+    <parent link="link03"/>
+    <child link="link04"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="1.0" friction="1.0"/>
+    <limit effort="30.0" lower="-1.5184364492350666" upper="1.5184364492350666" velocity="3.1415"/>
+  </joint>
+  <transmission name="z1_joint_4_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint4">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="z1_joint_4_actuator">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <gazebo>
+    <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+      <updateRate>30.0</updateRate>
+      <topicName>joint4_ft_sensor_topic</topicName>
+      <jointName>joint4</jointName>
+    </plugin>
+  </gazebo>
+  <link name="link04">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/manipulator/z1_Link04.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.067" radius="0.0325"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.072 0 0"/>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.04366681 0.00364738 -0.00170192"/>
+      <mass value="0.56404563"/>
+      <inertia ixx="0.00031576" ixy="8.13e-05" ixz="4.091e-05" iyy="0.00092996" iyz="-5.96e-06" izz="0.00097912"/>
+    </inertial>
+  </link>
+  <joint name="joint5" type="revolute">
+    <origin rpy="0 0 0" xyz="0.07 0.0 0.0"/>
+    <parent link="link04"/>
+    <child link="link05"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="1.0" friction="1.0"/>
+    <limit effort="30.0" lower="-1.3439035240356338" upper="1.3439035240356338" velocity="3.1415"/>
+  </joint>
+  <transmission name="z1_joint_5_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint5">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="z1_joint_5_actuator">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <gazebo>
+    <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+      <updateRate>30.0</updateRate>
+      <topicName>joint5_ft_sensor_topic</topicName>
+      <jointName>joint5</jointName>
+    </plugin>
+  </gazebo>
+  <link name="link05">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/manipulator/z1_Link05.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.03121533 0.0 0.00646316"/>
+      <mass value="0.38938492"/>
+      <inertia ixx="0.00017605" ixy="4e-07" ixz="5.689e-05" iyy="0.00055896" iyz="-1.3e-07" izz="0.0005386"/>
+    </inertial>
+  </link>
+  <joint name="joint6" type="revolute">
+    <origin rpy="0 0 0" xyz="0.0492 0.0 0.0"/>
+    <parent link="link05"/>
+    <child link="link06"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="1.0" friction="1.0"/>
+    <limit effort="30.0" lower="-2.792526803190927" upper="2.792526803190927" velocity="3.1415"/>
+  </joint>
+  <transmission name="z1_joint_6_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint6">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="z1_joint_6_actuator">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <gazebo>
+    <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+      <updateRate>30.0</updateRate>
+      <topicName>joint6_ft_sensor_topic</topicName>
+      <jointName>joint6</jointName>
+    </plugin>
+  </gazebo>
+  <link name="link06">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/manipulator/z1_Link06.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.051" radius="0.0325"/>
+      </geometry>
+      <origin rpy="0 1.5707963267948966 0" xyz="0.0255 0 0"/>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.0241569 -0.00017355 -0.00143876"/>
+      <mass value="0.28875807"/>
+      <inertia ixx="0.00018328" ixy="1.22e-06" ixz="5.4e-07" iyy="0.0001475" iyz="8e-08" izz="0.0001468"/>
+    </inertial>
+  </link>
+  <joint name="gripperStator" type="fixed">
+    <origin rpy="0 0 0" xyz="0.051 0.0 0.0"/>
+    <parent link="link06"/>
+    <child link="gripperStator"/>
+  </joint>
+  <link name="gripperStator">
+    <visual>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/manipulator/z1_GripperStator.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/manipulator/z1_GripperStator.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="green"/>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.04764427 -0.00035819 -0.00249162"/>
+      <mass value="0.52603655"/>
+      <inertia ixx="0.00038683" ixy="-3.59e-06" ixz="7.662e-05" iyy="0.00068614" iyz="2.09e-06" izz="0.00066293"/>
+    </inertial>
+  </link>
+  <joint name="jointGripper" type="revolute">
+    <origin rpy="0 0 0" xyz="0.049 0.0 0"/>
+    <parent link="gripperStator"/>
+    <child link="gripperMover"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="1.0" friction="1.0"/>
+    <limit effort="30.0" lower="-1.5707963267948966" upper="0.0" velocity="3.1415"/>
+  </joint>
+  <link name="gripperMover">
+    <visual>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/manipulator/z1_GripperMover.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/manipulator/z1_GripperMover.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="green"/>
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.01320633 0.00476708 0.00380534"/>
+      <mass value="0.27621302"/>
+      <inertia ixx="0.00017716" ixy="1.683e-05" ixz="-1.786e-05" iyy="0.00026787" iyz="2.62e-06" izz="0.00035728"/>
+    </inertial>
+  </link>
+  <transmission name="z1_joint_Gripper_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="jointGripper">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="z1_joint_Gripper_actuator">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <link name="z1_end_effector">
+    <visual>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+  <joint name="z1_joint_end_effector" type="fixed">
+    <origin rpy="0 0 0" xyz="0.135 0 0"/>
+    <parent link="gripperStator"/>
+    <child link="z1_end_effector"/>
+  </joint>
+  <!-- ros_control plugin -->
+  <gazebo>
+    <plugin filename="libqm_hw_sim.so" name="gazebo_ros_control">
+      <robotNamespace>/</robotNamespace>
+      <robotParam>qm_description</robotParam>
+      <robotSimType>qm_gazebo/QMHWSim</robotSimType>
+    </plugin>
+  </gazebo>
 </robot>

@@ -5,7 +5,7 @@
 
     <xacro:include filename="$(find qm_description)/urdf/quadruped/common/materials.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/quadruped/common/leg.xacro"/>
-    <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/gazebo_original.xacro"/>
+    <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/gazebo.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/quadruped/common/imu.xacro"/> 
     <xacro:include filename="$(find qm_description)/urdf/quadruped/aliengo/const.xacro"/>  
     <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/const.xacro"/>
@@ -14,36 +14,12 @@
 
     <xacro:arg name="UnitreeGripper" default="true"/>
 
-    <!-- Debug mode will hung up the robot, use "true" or "false" to switch it. -->
-    <xacro:if value="$(arg DEBUG)">
-        <link name="world"/>
-        <joint name="base_static_joint" type="fixed">
-            <origin rpy="0 0 0" xyz="0 0 0"/>
-            <parent link="world"/>
-            <child link="base"/>
-        </joint>
-    </xacro:if> 
-
-    <link name="base">
+     <!-- Aliengo robot -->
+     <link name="base">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <box size="0.001 0.001 0.001"/>
-            </geometry>
-        </visual>
-    </link>
-
-    <joint name="floating_base" type="fixed">
-        <origin rpy="0 0 0" xyz="0 0 0"/>
-        <parent link="base"/>
-        <child link="trunk"/>
-    </joint>
-
-    <link name="trunk">
-        <visual>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
-            <geometry>
-                 <mesh filename="package://qm_description/meshes/quadruped/$(arg robot_type)/trunk.dae" scale="1 1 1"/>
+                <mesh filename="package://qm_description/meshes/quadruped/$(arg robot_type)/trunk.dae" scale="1 1 1"/>
             </geometry>
         </visual>
         <collision>
@@ -51,52 +27,45 @@
             <geometry>
                 <box size="${trunk_length} ${trunk_width} ${trunk_height}"/>
             </geometry>
-            <material name="red"/>
         </collision>
         <inertial>
             <origin rpy="0 0 0" xyz="${trunk_com_x} ${trunk_com_y} ${trunk_com_z}"/>
             <mass value="${trunk_mass}"/>
             <inertia
-                ixx="${trunk_ixx}" ixy="${trunk_ixy}" ixz="${trunk_ixz}"
-                iyy="${trunk_iyy}" iyz="${trunk_iyz}"
-                izz="${trunk_izz}"/>  
+                    ixx="${trunk_ixx}" ixy="${trunk_ixy}" ixz="${trunk_ixz}"
+                    iyy="${trunk_iyy}" iyz="${trunk_iyz}"
+                    izz="${trunk_izz}"/>
         </inertial>
     </link>
 
-    <joint name="imu_joint" type="fixed">
-        <parent link="trunk"/>
-        <child link="imu_link"/>
-        <origin rpy="0 0 0" xyz="0 0 0"/>
-    </joint>
+    <!-- IMU -->
+    <xacro:IMU connected_to="base" imu_name="unitree_imu" xyz="0. 0. 0." rpy="0. 0. 0."/>
 
-    <link name="imu_link">
-        <inertial>
-            <mass value="0.001"/>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
-            <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.0001"/>
-        </inertial>
-        <visual>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
-            <geometry>
-                <box size="0.001 0.001 0.001"/>
-            </geometry>
-            <material name="red"/>
-        </visual>
-        <collision>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
-            <geometry>
-                <box size=".001 .001 .001"/>
-            </geometry>
-        </collision>
-    </link>
+    <!-- Aliengo legs -->
+    <xacro:leg prefix="RF" mirror="-1" mirror_dae="False" front_hind="1" front_hind_dae="True">
+        <origin rpy="0 0 0" xyz="${leg_offset_x} ${-leg_offset_y} 0"/>
+    </xacro:leg>
 
-    <joint name="trunk_arm_joint" type="fixed">
+    <xacro:leg prefix="LF" mirror="1" mirror_dae="True" front_hind="1" front_hind_dae="True">
+        <origin rpy="0 0 0" xyz="${leg_offset_x} ${leg_offset_y} 0"/>
+    </xacro:leg>
+
+    <xacro:leg prefix="RH" mirror="-1" mirror_dae="False" front_hind="-1" front_hind_dae="False">
+        <origin rpy="0 0 0" xyz="${-leg_offset_x} ${-leg_offset_y} 0"/>
+    </xacro:leg>
+
+    <xacro:leg prefix="LH" mirror="1" mirror_dae="True" front_hind="-1" front_hind_dae="False">
+        <origin rpy="0 0 0" xyz="${-leg_offset_x} ${leg_offset_y} 0"/>
+    </xacro:leg>
+
+    <!-- Z1 manipulator -->
+    <joint name="manipulator_joint" type="fixed">
         <origin rpy="${arm_offset_r} ${arm_offset_p} ${arm_offset_yaw}" xyz="${arm_offset_x} ${arm_offset_y} ${arm_offset_z}"/>
-        <parent link="trunk"/>
+        <parent link="base"/>
         <child link="link00"/>
     </joint> 
 
-     <link name="link00">
+    <link name="link00">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
@@ -118,7 +87,7 @@
                 iyy="${L00_Iyy}" iyz="${L00_Iyz}"
                 izz="${L00_Izz}"/>  
         </inertial>
-    </link>
+    </link> 
 
    <joint name="joint1" type="revolute">
         <origin rpy="0 0 0" xyz="0 0 0.0585"/>
@@ -128,6 +97,15 @@
         <dynamics damping="${jointDamping}" friction="${jointFriction}"/>
         <limit effort="${torqueMax}" velocity="${velocityMax}" lower="${joint1_PositionMin}" upper="${joint1_PositionMax}"/>
     </joint>
+
+    <xacro:motorTransmission name="1"/>
+    <gazebo>
+        <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+        <updateRate>30.0</updateRate>
+        <topicName>joint1_ft_sensor_topic</topicName>
+        <jointName>joint1</jointName>
+        </plugin>
+    </gazebo>
 
     <link name="link01">
         <visual>
@@ -161,6 +139,15 @@
         <dynamics damping="${2*jointDamping}" friction="${2*jointFriction}"/>
         <limit effort="${2*torqueMax}" velocity="${velocityMax}" lower="${joint2_PositionMin}" upper="${joint2_PositionMax}"/>
     </joint>
+    
+    <xacro:motorTransmission name="2"/>
+    <gazebo>
+        <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+        <updateRate>30.0</updateRate>
+        <topicName>joint2_ft_sensor_topic</topicName>
+        <jointName>joint2</jointName>
+        </plugin>
+    </gazebo>
 
     <link name="link02">
         <visual>
@@ -207,6 +194,15 @@
         <limit effort="${torqueMax}" velocity="${velocityMax}" lower="${joint3_PositionMin}" upper="${joint3_PositionMax}"/>
     </joint>
 
+    <xacro:motorTransmission name="3"/>
+    <gazebo>
+        <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+        <updateRate>30.0</updateRate>
+        <topicName>joint3_ft_sensor_topic</topicName>
+        <jointName>joint3</jointName>
+        </plugin>
+    </gazebo>
+
     <link name="link03">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -246,6 +242,15 @@
         <limit effort="${torqueMax}" velocity="${velocityMax}" lower="${joint4_PositionMin}" upper="${joint4_PositionMax}"/>
     </joint>
 
+    <xacro:motorTransmission name="4"/>
+    <gazebo>
+        <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+        <updateRate>30.0</updateRate>
+        <topicName>joint4_ft_sensor_topic</topicName>
+        <jointName>joint4</jointName>
+        </plugin>
+    </gazebo>
+
     <link name="link04">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -279,6 +284,15 @@
         <limit effort="${torqueMax}" velocity="${velocityMax}" lower="${joint5_PositionMin}" upper="${joint5_PositionMax}"/>
     </joint>
 
+    <xacro:motorTransmission name="5"/>
+    <gazebo>
+        <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+        <updateRate>30.0</updateRate>
+        <topicName>joint5_ft_sensor_topic</topicName>
+        <jointName>joint5</jointName>
+        </plugin>
+    </gazebo>
+
     <link name="link05">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -305,6 +319,15 @@
         <dynamics damping="${jointDamping}" friction="${jointFriction}"/>
         <limit effort="${torqueMax}" velocity="${velocityMax}" lower="${joint6_PositionMin}" upper="${joint6_PositionMax}"/>
     </joint>
+
+    <xacro:motorTransmission name="6"/>
+    <gazebo>
+        <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+        <updateRate>30.0</updateRate>
+        <topicName>joint6_ft_sensor_topic</topicName>
+        <jointName>joint6</jointName>
+        </plugin>
+    </gazebo>
 
     <link name="link06">
         <visual>
@@ -360,20 +383,6 @@
             </inertial>
         </link>
 
-        <link name="z1_end_effector">
-            <visual>
-                <geometry>
-                    <sphere radius="0.01"/>
-                </geometry>
-                <material name="red"/>
-            </visual>
-        </link>
-        <joint name="z1_joint_end_effector" type="fixed">
-            <origin xyz="0.135 0 0" rpy="0 0 0"/>
-            <parent link="gripperStator"/>
-            <child link="z1_end_effector"/>
-        </joint>
-
         <joint name="jointGripper" type="revolute">
             <origin rpy="0 0 0" xyz="0.049 0.0 0"/>
             <parent link="gripperStator"/>
@@ -408,38 +417,22 @@
 
         <xacro:motorTransmission name="Gripper"/>
 
-        <gazebo reference="gripperStator">
-            <self_collide>true</self_collide>
-        </gazebo>
+        <link name="z1_end_effector">
+            <visual>
+                <geometry>
+                    <sphere radius="0.01"/>
+                </geometry>
+                <material name="red"/>
+            </visual>
+        </link>
 
-        <gazebo reference="gripperMover">
-            <self_collide>true</self_collide>
-        </gazebo>
+        <joint name="z1_joint_end_effector" type="fixed">
+            <origin xyz="0.135 0 0" rpy="0 0 0"/>
+            <parent link="gripperStator"/>
+            <child link="z1_end_effector"/>
+        </joint>
+
     </xacro:if>
-
-    <xacro:motorTransmission name="1"/>
-    <xacro:motorTransmission name="2"/>
-    <xacro:motorTransmission name="3"/>
-    <xacro:motorTransmission name="4"/>
-    <xacro:motorTransmission name="5"/>
-    <xacro:motorTransmission name="6"/>
-
-    <xacro:leg prefix="RF" mirror="-1" mirror_dae="False" front_hind="1" front_hind_dae="True">
-        <origin rpy="0 0 0" xyz="${leg_offset_x} ${-leg_offset_y} 0"/>
-    </xacro:leg>
-
-    <xacro:leg prefix="LF" mirror="1" mirror_dae="True" front_hind="1" front_hind_dae="True">
-        <origin rpy="0 0 0" xyz="${leg_offset_x} ${leg_offset_y} 0"/>
-    </xacro:leg>
-
-    <xacro:leg prefix="RH" mirror="-1" mirror_dae="False" front_hind="-1" front_hind_dae="False">
-        <origin rpy="0 0 0" xyz="${-leg_offset_x} ${-leg_offset_y} 0"/>
-    </xacro:leg>
-
-    <xacro:leg prefix="LH" mirror="1" mirror_dae="True" front_hind="-1" front_hind_dae="False">
-        <origin rpy="0 0 0" xyz="${-leg_offset_x} ${leg_offset_y} 0"/>
-    </xacro:leg>
-
 
     <!-- ros_control plugin -->
     <gazebo>
@@ -449,4 +442,5 @@
             <robotSimType>qm_gazebo/QMHWSim</robotSimType>
         </plugin>
     </gazebo>
+
 </robot>

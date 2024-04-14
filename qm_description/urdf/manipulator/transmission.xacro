@@ -4,12 +4,12 @@
 
     <xacro:macro name="motorTransmission" params="name">
 
-        <transmission name="JointTrans${name}">
+        <transmission name="z1_joint_${name}_trans">
             <type>transmission_interface/SimpleTransmission</type>
             <joint name="joint${name}">
                 <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
             </joint>
-            <actuator name="Actuator${name}">
+            <actuator name="z1_joint_${name}_actuator">
                 <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
                 <mechanicalReduction>1</mechanicalReduction>
             </actuator>

@@ -1,14 +1,5 @@
 <?xml version="1.0"?>
 <robot>
-    <!-- ros_control plugin -->
-    <!-- <gazebo>
-        <plugin name="gazebo_ros_control" filename="liblegged_hw_sim.so">
-            <robotNamespace>/</robotNamespace>
-            <robotParam>legged_robot_description</robotParam>
-            <robotSimType>legged_gazebo/LeggedHWSim</robotSimType>
-        </plugin>
-    </gazebo> -->
-
     <gazebo>
         <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
             <alwaysOn>true</alwaysOn>
@@ -38,13 +29,13 @@
     <gazebo reference="LF_hip">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <material>Gazebo/DarkGrey</material>
+        <material>Gazebo/Black</material>
     </gazebo>
     <gazebo reference="LF_thigh">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
         <self_collide>0</self_collide>
-        <material>Gazebo/DarkGrey</material>
+        <material>Gazebo/Black</material>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
     </gazebo>
@@ -52,12 +43,13 @@
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
         <self_collide>1</self_collide>
+        <material>Gazebo/Black</material>
     </gazebo>
     <gazebo reference="LF_FOOT">
         <mu1>0.6</mu1>
         <mu2>0.6</mu2>
         <self_collide>1</self_collide>
-        <material>Gazebo/DarkGrey</material>
+        <material>Gazebo/Black</material>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
     </gazebo>
@@ -66,13 +58,13 @@
     <gazebo reference="RF_hip">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <material>Gazebo/DarkGrey</material>
+        <material>Gazebo/Black</material>
     </gazebo>
     <gazebo reference="RF_thigh">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
         <self_collide>0</self_collide>
-        <material>Gazebo/DarkGrey</material>
+        <material>Gazebo/Black</material>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
     </gazebo>
@@ -80,12 +72,13 @@
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
         <self_collide>1</self_collide>
+        <material>Gazebo/Black</material>
     </gazebo>
     <gazebo reference="RF_FOOT">
         <mu1>0.6</mu1>
         <mu2>0.6</mu2>
         <self_collide>1</self_collide>
-        <material>Gazebo/DarkGrey</material>
+        <material>Gazebo/Black</material>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
     </gazebo>
@@ -94,13 +87,13 @@
     <gazebo reference="LH_hip">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <material>Gazebo/DarkGrey</material>
+        <material>Gazebo/Black</material>
     </gazebo>
     <gazebo reference="LH_thigh">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
         <self_collide>0</self_collide>
-        <material>Gazebo/DarkGrey</material>
+        <material>Gazebo/Black</material>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
     </gazebo>
@@ -108,12 +101,13 @@
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
         <self_collide>1</self_collide>
+        <material>Gazebo/Black</material>
     </gazebo>
     <gazebo reference="LH_FOOT">
         <mu1>0.6</mu1>
         <mu2>0.6</mu2>
         <self_collide>1</self_collide>
-        <material>Gazebo/DarkGrey</material>
+        <material>Gazebo/Black</material>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
     </gazebo>
@@ -122,13 +116,13 @@
     <gazebo reference="RH_hip">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
-        <material>Gazebo/DarkGrey</material>
+        <material>Gazebo/Black</material>
     </gazebo>
     <gazebo reference="RH_thigh">
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
         <self_collide>0</self_collide>
-        <material>Gazebo/DarkGrey</material>
+        <material>Gazebo/Black</material>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
     </gazebo>
@@ -136,14 +130,64 @@
         <mu1>0.2</mu1>
         <mu2>0.2</mu2>
         <self_collide>1</self_collide>
+        <material>Gazebo/Black</material>
     </gazebo>
     <gazebo reference="RH_FOOT">
         <mu1>0.6</mu1>
         <mu2>0.6</mu2>
         <self_collide>1</self_collide>
-        <material>Gazebo/DarkGrey</material>
+        <material>Gazebo/Black</material>
         <kp value="1000000.0"/>
         <kd value="1.0"/>
+    </gazebo>
+
+    <!-- Z1 arm -->
+
+     <gazebo reference="link00">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+     <gazebo reference="link01">
+        <material>Gazebo/Grey</material>
+        <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+    <gazebo reference="link02">
+        <material>Gazebo/Grey</material>
+        <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+    <gazebo reference="link03">
+        <material>Gazebo/Grey</material>
+        <provideFeedback>true</provideFeedback>
+    </gazebo>
+    
+    <gazebo reference="link04">
+        <self_collide>true</self_collide>
+        <material>Gazebo/Grey</material>
+        <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+    <gazebo reference="link05">
+        <self_collide>true</self_collide>
+        <material>Gazebo/Grey</material>
+        <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+    <gazebo reference="link06">
+        <self_collide>true</self_collide>
+        <material>Gazebo/Grey</material>
+        <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+    <gazebo reference="gripperStator">
+        <self_collide>true</self_collide>
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="gripperMover">
+        <self_collide>true</self_collide>
+        <material>Gazebo/Black</material>   
     </gazebo>
 
 </robot>
