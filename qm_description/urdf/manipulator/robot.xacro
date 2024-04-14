@@ -305,6 +305,13 @@
             </inertial>
         </link>
 
+        <link name="z1_end_effector" />
+        <joint name="z1_joint_end_effector" type="fixed">
+            <origin xyz="0.135 0 0" rpy="0 0 0"/>
+            <parent link="gripperStator"/>
+            <child link="z1_end_effector"/>
+        </joint>
+
         <xacro:motorTransmission name="Gripper"/>
 
         <gazebo reference="gripperStator">

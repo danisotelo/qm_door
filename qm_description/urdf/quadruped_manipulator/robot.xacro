@@ -1,15 +1,16 @@
 <?xml version="1.0"?>
-
 <robot name="qm" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:arg name="robot_type" default="aliengo"/>
 
-    <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/gazebo.xacro"/>
-    <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/const.xacro"/>
-    <xacro:include filename="$(find qm_description)/urdf/quadruped/common/leg.xacro"/>
-    <xacro:include filename="$(find qm_description)/urdf/quadruped/aliengo/const.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/quadruped/common/materials.xacro"/>
-    <xacro:include filename="$(find qm_description)/urdf/quadruped/common/imu.xacro"/>
+    <xacro:include filename="$(find qm_description)/urdf/quadruped/common/leg.xacro"/>
+
+    <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/gazebo.xacro"/>
+   
+    <xacro:include filename="$(find qm_description)/urdf/quadruped/common/imu.xacro"/> 
+    <xacro:include filename="$(find qm_description)/urdf/quadruped/aliengo/const.xacro"/>  
+    <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/const.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/manipulator/const.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/manipulator/transmission.xacro"/>
 
@@ -360,6 +361,20 @@
                     izz="${GripperStator_Izz}"/> 
             </inertial>
         </link>
+
+        <link name="z1_end_effector">
+            <visual>
+                <geometry>
+                    <sphere radius="0.01"/>
+                </geometry>
+                <material name="red"/>
+            </visual>
+        </link>
+        <joint name="z1_joint_end_effector" type="fixed">
+            <origin xyz="0.135 0 0" rpy="0 0 0"/>
+            <parent link="gripperStator"/>
+            <child link="z1_end_effector"/>
+        </joint>
 
         <joint name="jointGripper" type="revolute">
             <origin rpy="0 0 0" xyz="0.049 0.0 0"/>

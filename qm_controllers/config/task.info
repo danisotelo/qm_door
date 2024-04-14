@@ -17,7 +17,7 @@ model_settings
   ; base frame of the robot (from URDF)
   baseFrame                       "base_link"
   ; end-effector frame of the robot (from URDF)
-  eeFrame                         "j2n6s300_end_effector"
+  eeFrame                         "z1_end_effector"
 }
 
 swing_trajectory_config
