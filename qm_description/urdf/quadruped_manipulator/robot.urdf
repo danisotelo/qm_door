@@ -36,7 +36,7 @@
     </gazebo> -->
   <gazebo>
     <plugin filename="libgazebo_ros_force.so" name="gazebo_ros_force">
-      <bodyName>trunk</bodyName>
+      <bodyName>base</bodyName>
       <topicName>/apply_force/trunk</topicName>
     </plugin>
   </gazebo>
@@ -60,73 +60,73 @@
     </sensor>
   </gazebo>
   <!-- Foot contacts. -->
-  <gazebo reference="FR_calf">
-    <sensor name="FR_foot_contact" type="contact">
+  <gazebo reference="RF_calf">
+    <sensor name="RF_foot_contact" type="contact">
       <update_rate>100</update_rate>
       <plugin filename="libunitreeFootContactPlugin.so" name="contactPlugin"/>
       <contact>
-        <collision>FR_calf_fixed_joint_lump__FR_foot_collision_1</collision>
+        <collision>RF_calf_fixed_joint_lump__RF_foot_collision_1</collision>
       </contact>
     </sensor>
   </gazebo>
-  <gazebo reference="FL_calf">
-    <sensor name="FL_foot_contact" type="contact">
+  <gazebo reference="LF_calf">
+    <sensor name="LF_foot_contact" type="contact">
       <update_rate>100</update_rate>
       <plugin filename="libunitreeFootContactPlugin.so" name="contactPlugin"/>
       <contact>
-        <collision>FL_calf_fixed_joint_lump__FL_foot_collision_1</collision>
+        <collision>LF_calf_fixed_joint_lump__LF_foot_collision_1</collision>
       </contact>
     </sensor>
   </gazebo>
-  <gazebo reference="RR_calf">
-    <sensor name="RR_foot_contact" type="contact">
+  <gazebo reference="RH_calf">
+    <sensor name="RH_foot_contact" type="contact">
       <update_rate>100</update_rate>
       <plugin filename="libunitreeFootContactPlugin.so" name="contactPlugin"/>
       <contact>
-        <collision>RR_calf_fixed_joint_lump__RR_foot_collision_1</collision>
+        <collision>RH_calf_fixed_joint_lump__RH_foot_collision_1</collision>
       </contact>
     </sensor>
   </gazebo>
-  <gazebo reference="RL_calf">
-    <sensor name="RL_foot_contact" type="contact">
+  <gazebo reference="LH_calf">
+    <sensor name="LH_foot_contact" type="contact">
       <update_rate>100</update_rate>
       <plugin filename="libunitreeFootContactPlugin.so" name="contactPlugin"/>
       <contact>
-        <collision>RL_calf_fixed_joint_lump__RL_foot_collision_1</collision>
+        <collision>LH_calf_fixed_joint_lump__LH_foot_collision_1</collision>
       </contact>
     </sensor>
   </gazebo>
   <!-- Visualization of Foot contacts. -->
-  <gazebo reference="FR_foot">
+  <gazebo reference="RF_foot">
     <visual>
       <plugin filename="libunitreeDrawForcePlugin.so" name="drawForcePlugin">
-        <topicName>FR_foot_contact</topicName>
+        <topicName>RF_foot_contact</topicName>
       </plugin>
     </visual>
   </gazebo>
-  <gazebo reference="FL_foot">
+  <gazebo reference="LF_foot">
     <visual>
       <plugin filename="libunitreeDrawForcePlugin.so" name="drawForcePlugin">
-        <topicName>FL_foot_contact</topicName>
+        <topicName>LF_foot_contact</topicName>
       </plugin>
     </visual>
   </gazebo>
-  <gazebo reference="RR_foot">
+  <gazebo reference="RH_foot">
     <visual>
       <plugin filename="libunitreeDrawForcePlugin.so" name="drawForcePlugin">
-        <topicName>RR_foot_contact</topicName>
+        <topicName>RH_foot_contact</topicName>
       </plugin>
     </visual>
   </gazebo>
-  <gazebo reference="RL_foot">
+  <gazebo reference="LH_foot">
     <visual>
       <plugin filename="libunitreeDrawForcePlugin.so" name="drawForcePlugin">
-        <topicName>RL_foot_contact</topicName>
+        <topicName>LH_foot_contact</topicName>
       </plugin>
     </visual>
   </gazebo>
   <gazebo reference="base">
-    <material>Gazebo/Green</material>
+    <material>Gazebo/Black</material>
     <turnGravityOff>false</turnGravityOff>
   </gazebo>
   <gazebo reference="trunk">
@@ -138,130 +138,154 @@
   <gazebo reference="stick_link">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/White</material>
   </gazebo>
   <gazebo reference="imu_link">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <material>Gazebo/Red</material>
   </gazebo>
-  <!-- FL leg -->
-  <gazebo reference="FL_hip">
+  <!-- LF leg -->
+  <gazebo reference="LF_hip">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <gazebo reference="FL_thigh">
+  <gazebo reference="LF_thigh">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <self_collide>1</self_collide>
-    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <gazebo reference="FL_calf">
+  <gazebo reference="LF_calf">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <self_collide>1</self_collide>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <gazebo reference="FL_foot">
+  <gazebo reference="LF_foot">
     <mu1>0.6</mu1>
     <mu2>0.6</mu2>
     <self_collide>1</self_collide>
-    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <!-- FR leg -->
-  <gazebo reference="FR_hip">
+  <!-- RF leg -->
+  <gazebo reference="RF_hip">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <gazebo reference="FR_thigh">
+  <gazebo reference="RF_thigh">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <self_collide>1</self_collide>
-    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <gazebo reference="FR_calf">
+  <gazebo reference="RF_calf">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <self_collide>1</self_collide>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <gazebo reference="FR_foot">
+  <gazebo reference="RF_foot">
     <mu1>0.6</mu1>
     <mu2>0.6</mu2>
     <self_collide>1</self_collide>
-    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <!-- RL leg -->
-  <gazebo reference="RL_hip">
+  <!-- LH leg -->
+  <gazebo reference="LH_hip">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <gazebo reference="RL_thigh">
+  <gazebo reference="LH_thigh">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <self_collide>1</self_collide>
-    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <gazebo reference="RL_calf">
+  <gazebo reference="LH_calf">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <self_collide>1</self_collide>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <gazebo reference="RL_foot">
+  <gazebo reference="LH_foot">
     <mu1>0.6</mu1>
     <mu2>0.6</mu2>
     <self_collide>1</self_collide>
-    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <!-- RR leg -->
-  <gazebo reference="RR_hip">
+  <!-- RH leg -->
+  <gazebo reference="RH_hip">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/DarkGrey</material>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <gazebo reference="RR_thigh">
+  <gazebo reference="RH_thigh">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <self_collide>1</self_collide>
-    <material>Gazebo/DarkGrey</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <gazebo reference="RR_calf">
+  <gazebo reference="RH_calf">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <self_collide>1</self_collide>
+    <material>Gazebo/Black</material>
   </gazebo>
-  <gazebo reference="RR_foot">
+  <gazebo reference="RH_foot">
     <mu1>0.6</mu1>
     <mu2>0.6</mu2>
     <self_collide>1</self_collide>
-    <material>Gazebo/DarkGrey</material>
+    <material>Gazebo/Black</material>
     <kp value="1000000.0"/>
     <kd value="1.0"/>
   </gazebo>
   <!-- ros_control plugin -->
+  <gazebo reference="link00">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="link01">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="link02">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="link03">
+    <material>Gazebo/Grey</material>
+  </gazebo>
   <gazebo reference="link04">
+    <material>Gazebo/Grey</material>
     <self_collide>true</self_collide>
   </gazebo>
   <gazebo reference="link05">
+    <material>Gazebo/Grey</material>
     <self_collide>true</self_collide>
   </gazebo>
   <gazebo reference="link06">
+    <material>Gazebo/Grey</material>
     <self_collide>true</self_collide>
+  </gazebo>
+  <gazebo reference="gripperStator">
+    <material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="gripperMover">
+    <material>Gazebo/Black</material>
   </gazebo>
   <material name="black">
     <color rgba="0.0 0.0 0.0 1.0"/>
@@ -290,13 +314,20 @@
   <material name="white">
     <color rgba="1.0 1.0 1.0 1.0"/>
   </material>
-  <link name="world"/>
-  <joint name="base_static_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <parent link="world"/>
-    <child link="base"/>
-  </joint>
   <link name="base">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="floating_base" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="base"/>
+    <child link="trunk"/>
+  </joint>
+  <link name="trunk">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -308,6 +339,7 @@
       <geometry>
         <box size="0.647 0.15 0.112"/>
       </geometry>
+      <material name="red"/>
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="0.008465 0.004045 -0.000763"/>
@@ -315,38 +347,34 @@
       <inertia ixx="0.050874" ixy="-0.000451628" ixz="0.000487603" iyy="0.64036" iyz="4.8356e-05" izz="0.65655"/>
     </inertial>
   </link>
-  <!-- Imu is fixed to the base link -->
-  <joint name="unitree_imu_joint" type="fixed">
-    <origin rpy="0. 0. 0." xyz="0. 0. 0."/>
-    <parent link="base"/>
-    <child link="unitree_imu"/>
+  <joint name="imu_joint" type="fixed">
+    <parent link="trunk"/>
+    <child link="imu_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
   </joint>
-  <!-- Imu link -->
-  <link name="unitree_imu">
+  <link name="imu_link">
     <inertial>
-      <mass value="0.01"/>
+      <mass value="0.001"/>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.0001"/>
     </inertial>
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <box size="0.015 0.015 0.004"/>
+        <box size="0.001 0.001 0.001"/>
       </geometry>
+      <material name="red"/>
     </visual>
-    <material name="orange">
-      <color rgba="255 108 10 255"/>
-    </material>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size=".001 .001 .001"/>
+      </geometry>
+    </collision>
   </link>
-  <gazebo reference="unitree_imu">
-    <material>Gazebo/Orange</material>
-  </gazebo>
-  <gazebo reference="unitree_imu_joint">
-    <disableFixedJointLumping>true</disableFixedJointLumping>
-  </gazebo>
   <joint name="trunk_arm_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0.2535 0 0.056"/>
-    <parent link="base"/>
+    <parent link="trunk"/>
     <child link="link00"/>
   </joint>
   <link name="link00">
@@ -559,12 +587,13 @@
       <geometry>
         <mesh filename="package://qm_description/meshes/manipulator/z1_GripperStator.stl" scale="1 1 1"/>
       </geometry>
-      <material name="grey"/>
+      <material name="black"/>
     </visual>
     <collision>
       <geometry>
         <mesh filename="package://qm_description/meshes/manipulator/z1_GripperStator.stl" scale="1 1 1"/>
       </geometry>
+      <material name="green"/>
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="0.04764427 -0.00035819 -0.00249162"/>
@@ -585,12 +614,13 @@
       <geometry>
         <mesh filename="package://qm_description/meshes/manipulator/z1_GripperMover.stl" scale="1 1 1"/>
       </geometry>
-      <material name="grey"/>
+      <material name="black"/>
     </visual>
     <collision>
       <geometry>
         <mesh filename="package://qm_description/meshes/manipulator/z1_GripperMover.stl" scale="1 1 1"/>
       </geometry>
+      <material name="green"/>
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="0.01320633 0.00476708 0.00380534"/>
@@ -1263,4 +1293,3 @@
     </actuator>
   </transmission>
 </robot>
-
