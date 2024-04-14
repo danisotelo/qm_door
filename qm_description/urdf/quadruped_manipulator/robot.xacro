@@ -5,7 +5,7 @@
 
     <xacro:include filename="$(find qm_description)/urdf/quadruped/common/materials.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/quadruped/common/leg.xacro"/>
-    <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/gazebo.xacro"/>
+    <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/gazebo_original.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/quadruped/common/imu.xacro"/> 
     <xacro:include filename="$(find qm_description)/urdf/quadruped/aliengo/const.xacro"/>  
     <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/const.xacro"/>
