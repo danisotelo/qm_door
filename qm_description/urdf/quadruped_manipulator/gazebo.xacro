@@ -66,7 +66,7 @@
         <update_rate>100</update_rate>
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
         <contact>
-            <collision>FR_calf_fixed_joint_lump__FR_foot_collision_1</collision>
+            <collision>RF_calf_fixed_joint_lump__RF_foot_collision_1</collision>
         </contact>
         </sensor>
     </gazebo>
@@ -75,7 +75,7 @@
         <update_rate>100</update_rate>
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
         <contact>
-            <collision>FL_calf_fixed_joint_lump__FL_foot_collision_1</collision>
+            <collision>LF_calf_fixed_joint_lump__LF_foot_collision_1</collision>
         </contact>
         </sensor>
     </gazebo>
@@ -84,7 +84,7 @@
         <update_rate>100</update_rate>
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
         <contact>
-            <collision>RR_calf_fixed_joint_lump__RR_foot_collision_1</collision>
+            <collision>RH_calf_fixed_joint_lump__RH_foot_collision_1</collision>
         </contact>
         </sensor>
     </gazebo>
@@ -93,7 +93,7 @@
         <update_rate>100</update_rate>
         <plugin name="contactPlugin" filename="libunitreeFootContactPlugin.so"/>
         <contact>
-            <collision>RL_calf_fixed_joint_lump__RL_foot_collision_1</collision>
+            <collision>LH_calf_fixed_joint_lump__LH_foot_collision_1</collision>
         </contact>
         </sensor>
     </gazebo>
@@ -102,28 +102,28 @@
     <gazebo reference="RF_foot">
         <visual>
             <plugin name="drawForcePlugin" filename="libunitreeDrawForcePlugin.so">
-                <topicName>FR_foot_contact</topicName>
+                <topicName>RF_foot_contact</topicName>
             </plugin>
         </visual>
     </gazebo>
     <gazebo reference="LF_foot">
         <visual>
             <plugin name="drawForcePlugin" filename="libunitreeDrawForcePlugin.so">
-                <topicName>FL_foot_contact</topicName>
+                <topicName>LF_foot_contact</topicName>
             </plugin>
         </visual>
     </gazebo>
     <gazebo reference="RH_foot">
         <visual>
             <plugin name="drawForcePlugin" filename="libunitreeDrawForcePlugin.so">
-                <topicName>RR_foot_contact</topicName>
+                <topicName>RH_foot_contact</topicName>
             </plugin>
         </visual>
     </gazebo>
     <gazebo reference="LH_foot">
         <visual>
             <plugin name="drawForcePlugin" filename="libunitreeDrawForcePlugin.so">
-                <topicName>RL_foot_contact</topicName>
+                <topicName>LH_foot_contact</topicName>
             </plugin>
         </visual>
     </gazebo>

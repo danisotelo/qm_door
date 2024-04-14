@@ -3,6 +3,8 @@ project(qm_description)
 
 
 find_package(catkin REQUIRED COMPONENTS
+    roscpp
+    rospy
     urdf
     xacro
 )

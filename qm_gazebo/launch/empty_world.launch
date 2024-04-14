@@ -18,19 +18,12 @@
         <arg name="gui" value="true"/>
     </include>
 
-      <!-- Spawn robot in Gazebo -->
-    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+    <!-- Spawn robot in Gazebo -->
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false"
           output="screen"
           args="-param qm_description -urdf -model qm
                 -z 0.55
                 -x -2
-                -J joint1 0.32
-                -J joint2 0.6
-                -J joint3 -0.61
-                -J joint4 -1.16
-                -J joint5 -0.17
-                -J joint6 -0.08
-                -J jointGripper -0.30
                 "
     />
 
