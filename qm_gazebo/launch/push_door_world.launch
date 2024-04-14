@@ -1,7 +1,7 @@
 <launch>
       <arg name="user_debug" default="false"/>
 
-      <rosparam file="$(find qm_gazebo)/config/position_control.yaml" command="load"/>
+      <rosparam file="$(find qm_gazebo)/config/default.yaml" command="load"/>
 
       <!-- Load descriptions -->
       <param name="qm_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
