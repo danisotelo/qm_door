@@ -166,32 +166,32 @@
     <kd value="1.0"/>
   </gazebo>
   <!-- Z1 arm -->
-  <gazebo reference="link00">
+  <gazebo reference="z1_link_0">
     <material>Gazebo/Grey</material>
   </gazebo>
-  <gazebo reference="link01">
-    <material>Gazebo/Grey</material>
-    <provideFeedback>true</provideFeedback>
-  </gazebo>
-  <gazebo reference="link02">
+  <gazebo reference="z1_link_1">
     <material>Gazebo/Grey</material>
     <provideFeedback>true</provideFeedback>
   </gazebo>
-  <gazebo reference="link03">
+  <gazebo reference="z1_link_2">
     <material>Gazebo/Grey</material>
     <provideFeedback>true</provideFeedback>
   </gazebo>
-  <gazebo reference="link04">
+  <gazebo reference="z1_link_3">
+    <material>Gazebo/Grey</material>
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+  <gazebo reference="z1_link_4">
     <self_collide>true</self_collide>
     <material>Gazebo/Grey</material>
     <provideFeedback>true</provideFeedback>
   </gazebo>
-  <gazebo reference="link05">
+  <gazebo reference="z1_link_5">
     <self_collide>true</self_collide>
     <material>Gazebo/Grey</material>
     <provideFeedback>true</provideFeedback>
   </gazebo>
-  <gazebo reference="link06">
+  <gazebo reference="z1_link_6">
     <self_collide>true</self_collide>
     <material>Gazebo/Grey</material>
     <provideFeedback>true</provideFeedback>
@@ -845,9 +845,9 @@
   <joint name="manipulator_joint" type="fixed">
     <origin rpy="0 0 0" xyz="0.2535 0 0.056"/>
     <parent link="base"/>
-    <child link="link00"/>
+    <child link="z1_link_0"/>
   </joint>
-  <link name="link00">
+  <link name="z1_link_0">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -867,17 +867,17 @@
       <inertia ixx="0.00037937" ixy="-3.5e-07" ixz="-1.037e-05" iyy="0.00041521" iyz="-9.9e-07" izz="0.00053066"/>
     </inertial>
   </link>
-  <joint name="joint1" type="revolute">
+  <joint name="z1_joint_1" type="revolute">
     <origin rpy="0 0 0" xyz="0 0 0.0585"/>
-    <parent link="link00"/>
-    <child link="link01"/>
+    <parent link="z1_link_0"/>
+    <child link="z1_link_1"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="1.0" friction="1.0"/>
     <limit effort="30.0" lower="-2.6179938779914944" upper="2.6179938779914944" velocity="3.1415"/>
   </joint>
   <transmission name="z1_joint_1_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint1">
+    <joint name="z1_joint_1">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="z1_joint_1_actuator">
@@ -888,11 +888,11 @@
   <gazebo>
     <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
       <updateRate>30.0</updateRate>
-      <topicName>joint1_ft_sensor_topic</topicName>
-      <jointName>joint1</jointName>
+      <topicName>z1_joint_1_ft_sensor_topic</topicName>
+      <jointName>z1_joint_1</jointName>
     </plugin>
   </gazebo>
-  <link name="link01">
+  <link name="z1_link_1">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -912,17 +912,17 @@
       <inertia ixx="0.00128328" ixy="-6e-08" ixz="-4e-07" iyy="0.00071931" iyz="5e-07" izz="0.00083936"/>
     </inertial>
   </link>
-  <joint name="joint2" type="revolute">
+  <joint name="z1_joint_2" type="revolute">
     <origin rpy="0 0 0" xyz="0 0 0.045"/>
-    <parent link="link01"/>
-    <child link="link02"/>
+    <parent link="z1_link_1"/>
+    <child link="z1_link_2"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="2.0" friction="2.0"/>
     <limit effort="60.0" lower="0.0" upper="2.9670597283903604" velocity="3.1415"/>
   </joint>
   <transmission name="z1_joint_2_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint2">
+    <joint name="z1_joint_2">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="z1_joint_2_actuator">
@@ -933,11 +933,11 @@
   <gazebo>
     <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
       <updateRate>30.0</updateRate>
-      <topicName>joint2_ft_sensor_topic</topicName>
-      <jointName>joint2</jointName>
+      <topicName>z1_joint_2_ft_sensor_topic</topicName>
+      <jointName>z1_joint_2</jointName>
     </plugin>
   </gazebo>
-  <link name="link02">
+  <link name="z1_link_2">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -969,17 +969,17 @@
       <inertia ixx="0.00102138" ixy="0.00062358" ixz="5.13e-06" iyy="0.02429457" iyz="-2.1e-06" izz="0.02466114"/>
     </inertial>
   </link>
-  <joint name="joint3" type="revolute">
+  <joint name="z1_joint_3" type="revolute">
     <origin rpy="0 0 0" xyz="-0.35 0 0"/>
-    <parent link="link02"/>
-    <child link="link03"/>
+    <parent link="z1_link_2"/>
+    <child link="z1_link_3"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="1.0" friction="1.0"/>
     <limit effort="30.0" lower="-2.8797932657906435" upper="0.0" velocity="3.1415"/>
   </joint>
   <transmission name="z1_joint_3_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint3">
+    <joint name="z1_joint_3">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="z1_joint_3_actuator">
@@ -990,11 +990,11 @@
   <gazebo>
     <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
       <updateRate>30.0</updateRate>
-      <topicName>joint3_ft_sensor_topic</topicName>
-      <jointName>joint3</jointName>
+      <topicName>z1_joint_3_ft_sensor_topic</topicName>
+      <jointName>z1_joint_3</jointName>
     </plugin>
   </gazebo>
-  <link name="link03">
+  <link name="z1_link_3">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -1020,17 +1020,17 @@
       <inertia ixx="0.00108061" ixy="-8.669e-05" ixz="-0.00208102" iyy="0.00954238" iyz="-1.332e-05" izz="0.00886621"/>
     </inertial>
   </link>
-  <joint name="joint4" type="revolute">
+  <joint name="z1_joint_4" type="revolute">
     <origin rpy="0 0 0" xyz="0.218 0 0.057"/>
-    <parent link="link03"/>
-    <child link="link04"/>
+    <parent link="z1_link_3"/>
+    <child link="z1_link_4"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="1.0" friction="1.0"/>
     <limit effort="30.0" lower="-1.5184364492350666" upper="1.5184364492350666" velocity="3.1415"/>
   </joint>
   <transmission name="z1_joint_4_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint4">
+    <joint name="z1_joint_4">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="z1_joint_4_actuator">
@@ -1041,11 +1041,11 @@
   <gazebo>
     <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
       <updateRate>30.0</updateRate>
-      <topicName>joint4_ft_sensor_topic</topicName>
-      <jointName>joint4</jointName>
+      <topicName>z1_joint_4_ft_sensor_topic</topicName>
+      <jointName>z1_joint_4</jointName>
     </plugin>
   </gazebo>
-  <link name="link04">
+  <link name="z1_link_4">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -1065,17 +1065,17 @@
       <inertia ixx="0.00031576" ixy="8.13e-05" ixz="4.091e-05" iyy="0.00092996" iyz="-5.96e-06" izz="0.00097912"/>
     </inertial>
   </link>
-  <joint name="joint5" type="revolute">
+  <joint name="z1_joint_5" type="revolute">
     <origin rpy="0 0 0" xyz="0.07 0.0 0.0"/>
-    <parent link="link04"/>
-    <child link="link05"/>
+    <parent link="z1_link_4"/>
+    <child link="z1_link_5"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="1.0" friction="1.0"/>
     <limit effort="30.0" lower="-1.3439035240356338" upper="1.3439035240356338" velocity="3.1415"/>
   </joint>
   <transmission name="z1_joint_5_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint5">
+    <joint name="z1_joint_5">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="z1_joint_5_actuator">
@@ -1086,11 +1086,11 @@
   <gazebo>
     <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
       <updateRate>30.0</updateRate>
-      <topicName>joint5_ft_sensor_topic</topicName>
-      <jointName>joint5</jointName>
+      <topicName>z1_joint_5_ft_sensor_topic</topicName>
+      <jointName>z1_joint_5</jointName>
     </plugin>
   </gazebo>
-  <link name="link05">
+  <link name="z1_link_5">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -1104,17 +1104,17 @@
       <inertia ixx="0.00017605" ixy="4e-07" ixz="5.689e-05" iyy="0.00055896" iyz="-1.3e-07" izz="0.0005386"/>
     </inertial>
   </link>
-  <joint name="joint6" type="revolute">
+  <joint name="z1_joint_6" type="revolute">
     <origin rpy="0 0 0" xyz="0.0492 0.0 0.0"/>
-    <parent link="link05"/>
-    <child link="link06"/>
+    <parent link="z1_link_5"/>
+    <child link="z1_link_6"/>
     <axis xyz="1 0 0"/>
     <dynamics damping="1.0" friction="1.0"/>
     <limit effort="30.0" lower="-2.792526803190927" upper="2.792526803190927" velocity="3.1415"/>
   </joint>
   <transmission name="z1_joint_6_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint6">
+    <joint name="z1_joint_6">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="z1_joint_6_actuator">
@@ -1125,11 +1125,11 @@
   <gazebo>
     <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
       <updateRate>30.0</updateRate>
-      <topicName>joint6_ft_sensor_topic</topicName>
-      <jointName>joint6</jointName>
+      <topicName>z1_joint_6_ft_sensor_topic</topicName>
+      <jointName>z1_joint_6</jointName>
     </plugin>
   </gazebo>
-  <link name="link06">
+  <link name="z1_link_6">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
@@ -1151,7 +1151,7 @@
   </link>
   <joint name="gripperStator" type="fixed">
     <origin rpy="0 0 0" xyz="0.051 0.0 0.0"/>
-    <parent link="link06"/>
+    <parent link="z1_link_6"/>
     <child link="gripperStator"/>
   </joint>
   <link name="gripperStator">
@@ -1173,7 +1173,7 @@
       <inertia ixx="0.00038683" ixy="-3.59e-06" ixz="7.662e-05" iyy="0.00068614" iyz="2.09e-06" izz="0.00066293"/>
     </inertial>
   </link>
-  <joint name="jointGripper" type="revolute">
+  <joint name="z1_joint_Gripper" type="revolute">
     <origin rpy="0 0 0" xyz="0.049 0.0 0"/>
     <parent link="gripperStator"/>
     <child link="gripperMover"/>
@@ -1202,7 +1202,7 @@
   </link>
   <transmission name="z1_joint_Gripper_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="jointGripper">
+    <joint name="z1_joint_Gripper">
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="z1_joint_Gripper_actuator">

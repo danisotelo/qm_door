@@ -14,10 +14,10 @@
     <joint name="base_static_joint" type="fixed">
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <parent link="world"/>
-        <child link="link00"/>
+        <child link="z1_link_0"/>
     </joint>
 
-    <link name="link00">
+    <link name="z1_link_0">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
@@ -41,16 +41,16 @@
         </inertial>
     </link>
 
-    <joint name="joint1" type="revolute">
+    <joint name="z1_joint_1" type="revolute">
         <origin rpy="0 0 0" xyz="0 0 0.0585"/>
-        <parent link="link00"/>
-        <child link="link01"/>
+        <parent link="z1_link_0"/>
+        <child link="z1_link_1"/>
         <axis xyz="0 0 1"/>
         <dynamics damping="${jointDamping}" friction="${jointFriction}"/>
         <limit effort="${torqueMax}" velocity="${velocityMax}" lower="${joint1_PositionMin}" upper="${joint1_PositionMax}"/>
     </joint>
 
-    <link name="link01">
+    <link name="z1_link_1">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
@@ -68,16 +68,16 @@
         </inertial>
     </link>
 
-    <joint name="joint2" type="revolute">
+    <joint name="z1_joint_2" type="revolute">
         <origin rpy="0 0 0" xyz="0 0 0.045"/>
-        <parent link="link01"/>
-        <child link="link02"/>
+        <parent link="z1_link_1"/>
+        <child link="z1_link_2"/>
         <axis xyz="0 1 0"/>
         <dynamics damping="${2*jointDamping}" friction="${2*jointFriction}"/>
         <limit effort="${2*torqueMax}" velocity="${velocityMax}" lower="${joint2_PositionMin}" upper="${joint2_PositionMax}"/>
     </joint>
 
-    <link name="link02">
+    <link name="z1_link_2">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
@@ -113,16 +113,16 @@
         </inertial>
     </link>
 
-    <joint name="joint3" type="revolute">
+    <joint name="z1_joint_3" type="revolute">
         <origin rpy="0 0 0" xyz="-0.35 0 0"/>
-        <parent link="link02"/>
-        <child link="link03"/>
+        <parent link="z1_link_2"/>
+        <child link="z1_link_3"/>
         <axis xyz="0 1 0"/>
         <dynamics damping="${jointDamping}" friction="${jointFriction}"/>
         <limit effort="${torqueMax}" velocity="${velocityMax}" lower="${joint3_PositionMin}" upper="${joint3_PositionMax}"/>
     </joint>
 
-    <link name="link03">
+    <link name="z1_link_3">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
@@ -152,16 +152,16 @@
         </inertial>
     </link>
 
-    <joint name="joint4" type="revolute">
+    <joint name="z1_joint_4" type="revolute">
         <origin rpy="0 0 0" xyz="0.218 0 0.057"/>
-        <parent link="link03"/>
-        <child link="link04"/>
+        <parent link="z1_link_3"/>
+        <child link="z1_link_4"/>
         <axis xyz="0 1 0"/>
         <dynamics damping="${jointDamping}" friction="${jointFriction}"/>
         <limit effort="${torqueMax}" velocity="${velocityMax}" lower="${joint4_PositionMin}" upper="${joint4_PositionMax}"/>
     </joint>
 
-    <link name="link04">
+    <link name="z1_link_4">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
@@ -185,16 +185,16 @@
         </inertial>
     </link>
 
-    <joint name="joint5" type="revolute">
+    <joint name="z1_joint_5" type="revolute">
         <origin rpy="0 0 0" xyz="0.07 0.0 0.0"/>
-        <parent link="link04"/>
-        <child link="link05"/>
+        <parent link="z1_link_4"/>
+        <child link="z1_link_5"/>
         <axis xyz="0 0 1"/>
         <dynamics damping="${jointDamping}" friction="${jointFriction}"/>
         <limit effort="${torqueMax}" velocity="${velocityMax}" lower="${joint5_PositionMin}" upper="${joint5_PositionMax}"/>
     </joint>
 
-    <link name="link05">
+    <link name="z1_link_5">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
@@ -212,16 +212,16 @@
         </inertial>
     </link>
 
-    <joint name="joint6" type="revolute">
+    <joint name="z1_joint_6" type="revolute">
         <origin rpy="0 0 0" xyz="0.0492 0.0 0.0"/>
-        <parent link="link05"/>
-        <child link="link06"/>
+        <parent link="z1_link_5"/>
+        <child link="z1_link_6"/>
         <axis xyz="1 0 0"/>
         <dynamics damping="${jointDamping}" friction="${jointFriction}"/>
         <limit effort="${torqueMax}" velocity="${velocityMax}" lower="${joint6_PositionMin}" upper="${joint6_PositionMax}"/>
     </joint>
 
-    <link name="link06">
+    <link name="z1_link_6">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
@@ -248,7 +248,7 @@
     <xacro:if value="$(arg UnitreeGripper)">
         <joint name="gripperStator" type="fixed">
             <origin rpy="0 0 0" xyz="0.051 0.0 0.0"/>
-            <parent link="link06"/>
+            <parent link="z1_link_6"/>
             <child link="gripperStator"/>
         </joint>
 
@@ -274,7 +274,7 @@
             </inertial>
         </link>
 
-        <joint name="jointGripper" type="revolute">
+        <joint name="z1_joint_Gripper" type="revolute">
             <origin rpy="0 0 0" xyz="0.049 0.0 0"/>
             <parent link="gripperStator"/>
             <child link="gripperMover"/>

@@ -143,38 +143,38 @@
 
     <!-- Z1 arm -->
 
-     <gazebo reference="link00">
+     <gazebo reference="z1_link_0">
         <material>Gazebo/Grey</material>
     </gazebo>
 
-     <gazebo reference="link01">
-        <material>Gazebo/Grey</material>
-        <provideFeedback>true</provideFeedback>
-    </gazebo>
-
-    <gazebo reference="link02">
+     <gazebo reference="z1_link_1">
         <material>Gazebo/Grey</material>
         <provideFeedback>true</provideFeedback>
     </gazebo>
 
-    <gazebo reference="link03">
+    <gazebo reference="z1_link_2">
+        <material>Gazebo/Grey</material>
+        <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+    <gazebo reference="z1_link_3">
         <material>Gazebo/Grey</material>
         <provideFeedback>true</provideFeedback>
     </gazebo>
     
-    <gazebo reference="link04">
+    <gazebo reference="z1_link_4">
         <self_collide>true</self_collide>
         <material>Gazebo/Grey</material>
         <provideFeedback>true</provideFeedback>
     </gazebo>
 
-    <gazebo reference="link05">
+    <gazebo reference="z1_link_5">
         <self_collide>true</self_collide>
         <material>Gazebo/Grey</material>
         <provideFeedback>true</provideFeedback>
     </gazebo>
 
-    <gazebo reference="link06">
+    <gazebo reference="z1_link_6">
         <self_collide>true</self_collide>
         <material>Gazebo/Grey</material>
         <provideFeedback>true</provideFeedback>

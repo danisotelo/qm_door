@@ -261,8 +261,8 @@ void QMController::setHybridJointHardware(hardware_interface::RobotHW *robot_hw,
     
     std::vector<std::string> joint_names{"LF_HAA", "LF_HFE", "LF_KFE", "LH_HAA", "LH_HFE", "LH_KFE",
                                          "RF_HAA", "RF_HFE", "RF_KFE", "RH_HAA", "RH_HFE", "RH_KFE",
-                                         "j2n6s300_joint_1", "j2n6s300_joint_2", "j2n6s300_joint_3",
-                                         "j2n6s300_joint_4", "j2n6s300_joint_5", "j2n6s300_joint_6"};
+                                         "z1_joint_1", "z1_joint_2", "z1_joint_3",
+                                         "z1_joint_4", "z1_joint_5", "z1_joint_6"};
 
     for (const auto& joint_name : joint_names) {
         hybridJointHandles_.push_back(hybridJointInterface->getHandle(joint_name));

@@ -335,9 +335,9 @@ void QmVisualizer::publishJointTransforms(ros::Time timeStamp, const ocs2::vecto
                                                        {"LH_HAA", jointAngles[3]}, {"LH_HFE", jointAngles[4]},  {"LH_KFE", jointAngles[5]},
                                                        {"RF_HAA", jointAngles[6]}, {"RF_HFE", jointAngles[7]},  {"RF_KFE", jointAngles[8]},
                                                        {"RH_HAA", jointAngles[9]}, {"RH_HFE", jointAngles[10]}, {"RH_KFE", jointAngles[11]},
-                                                       {"j2n6s300_joint_1", jointAngles[12]}, {"j2n6s300_joint_2", jointAngles[13]},
-                                                       {"j2n6s300_joint_3", jointAngles[14]}, {"j2n6s300_joint_4", jointAngles[15]},
-                                                       {"j2n6s300_joint_5", jointAngles[16]}, {"j2n6s300_joint_6", jointAngles[17]}
+                                                       {"z1_joint_1", jointAngles[12]}, {"z1_joint_2", jointAngles[13]},
+                                                       {"z1_joint_3", jointAngles[14]}, {"z1_joint_4", jointAngles[15]},
+                                                       {"z1_joint_5", jointAngles[16]}, {"z1_joint_6", jointAngles[17]}
         };
         robotStatePublisherPtr_->publishTransforms(jointPositions, timeStamp);
     }

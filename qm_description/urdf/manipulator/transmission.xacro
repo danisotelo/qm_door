@@ -6,7 +6,7 @@
 
         <transmission name="z1_joint_${name}_trans">
             <type>transmission_interface/SimpleTransmission</type>
-            <joint name="joint${name}">
+            <joint name="z1_joint_${name}">
                 <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
             </joint>
             <actuator name="z1_joint_${name}_actuator">
