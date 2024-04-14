@@ -5,9 +5,7 @@
 
     <xacro:include filename="$(find qm_description)/urdf/quadruped/common/materials.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/quadruped/common/leg.xacro"/>
-
     <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/gazebo.xacro"/>
-   
     <xacro:include filename="$(find qm_description)/urdf/quadruped/common/imu.xacro"/> 
     <xacro:include filename="$(find qm_description)/urdf/quadruped/aliengo/const.xacro"/>  
     <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/const.xacro"/>
@@ -441,4 +439,14 @@
     <xacro:leg prefix="LH" mirror="1" mirror_dae="True" front_hind="-1" front_hind_dae="False">
         <origin rpy="0 0 0" xyz="${-leg_offset_x} ${leg_offset_y} 0"/>
     </xacro:leg>
+
+
+    <!-- ros_control plugin -->
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libqm_hw_sim.so">
+            <robotNamespace>/</robotNamespace>
+            <robotParam>qm_description</robotParam>
+            <robotSimType>qm_gazebo/QMHWSim</robotSimType>
+        </plugin>
+    </gazebo>
 </robot>

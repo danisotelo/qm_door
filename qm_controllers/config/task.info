@@ -185,7 +185,7 @@ initialState
    (26,0)  0.86   ; joint3
    (27,0)  2.7    ; joint4
    (28,0)  1.37   ; joint5
-   (29,0) -0.4    ; joint5
+   (29,0) -0.4    ; joint6
 }
 
 ; standard state weight matrix
