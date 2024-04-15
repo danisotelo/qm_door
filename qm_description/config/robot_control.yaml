@@ -71,35 +71,35 @@
     # Z1 Controllers ---------------------------------------
     Joint01_controller:
         type: unitree_legged_control/UnitreeJointController
-        joint: joint1
+        joint: z1_joint_1
         pid: {p: 300.0, i: 0.0, d: 5.0}
 
     Joint02_controller:
         type: unitree_legged_control/UnitreeJointController
-        joint: joint2
+        joint: z1_joint_2
         pid: {p: 300.0, i: 0.0, d: 5.0}
 
     Joint03_controller:
         type: unitree_legged_control/UnitreeJointController
-        joint: joint3
+        joint: z1_joint_3
         pid: {p: 300.0, i: 0.0, d: 5.0}
 
     Joint04_controller:
         type: unitree_legged_control/UnitreeJointController
-        joint: joint4
+        joint: z1_joint_4
         pid: {p: 300.0, i: 0.0, d: 5.0}
 
     Joint05_controller:
         type: unitree_legged_control/UnitreeJointController
-        joint: joint5
+        joint: z1_joint_5
         pid: {p: 300.0, i: 0.0, d: 5.0}
 
     Joint06_controller:
         type: unitree_legged_control/UnitreeJointController
-        joint: joint6
+        joint: z1_joint_6
         pid: {p: 300.0, i: 0.0, d: 5.0}
 
     gripper_controller:
         type: unitree_legged_control/UnitreeJointController
-        joint: jointGripper
+        joint: z1_joint_Gripper
         pid: {p: 300.0, i: 0.0, d: 5.0}

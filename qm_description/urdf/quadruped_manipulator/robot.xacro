@@ -402,6 +402,8 @@
             <limit effort="${torqueMax}" velocity="${velocityMax}" lower="${Gripper_PositionMin}" upper="${Gripper_PositionMax}"/>
         </joint>
 
+        <xacro:motorTransmission name="Gripper"/>
+
         <link name="gripperMover">
             <visual>
                 <geometry>
@@ -424,8 +426,6 @@
                     izz="${GripperMover_Izz}"/> 
             </inertial>
         </link>
-
-        <xacro:motorTransmission name="Gripper"/>
 
         <link name="z1_end_effector">
             <visual>

@@ -104,8 +104,8 @@ void QMController::starting(const ros::Time &time) {
 
     // Initial target
     vector_t EeInitTarget(7), initTarget(qmInterface_->getInitialState().size() + 7);
-    EeInitTarget.head(3) << -1.48, 0.09, 0.38 + measuredRbdState_[5]; // + 0.056 = 0.436
-    EeInitTarget.tail(4) << Eigen::Quaternion<scalar_t>(-0.5, 0.5, -0.5, 0.5).coeffs();
+    EeInitTarget.head(3) << -1.4, 0.0, 0.4 + measuredRbdState_[5]; // + 0.056 = 0.436
+    EeInitTarget.tail(4) << Eigen::Quaternion<scalar_t>(1.0, 0.0, 0.0, 0.0).coeffs();
     vector_t initState = qmInterface_->getInitialState();
     vector_t armInitState = initState.tail(6);
     initTarget << currentObservation_.state.head(24), armInitState, EeInitTarget;
