@@ -142,22 +142,24 @@
     </gazebo>
 
     <!-- Z1 arm -->
-
      <gazebo reference="z1_link_0">
         <material>Gazebo/Grey</material>
     </gazebo>
 
      <gazebo reference="z1_link_1">
+        <self_collide>true</self_collide>
         <material>Gazebo/Grey</material>
         <provideFeedback>true</provideFeedback>
     </gazebo>
 
     <gazebo reference="z1_link_2">
+        <self_collide>true</self_collide>
         <material>Gazebo/Grey</material>
         <provideFeedback>true</provideFeedback>
     </gazebo>
 
     <gazebo reference="z1_link_3">
+        <self_collide>true</self_collide>
         <material>Gazebo/Grey</material>
         <provideFeedback>true</provideFeedback>
     </gazebo>
