@@ -362,8 +362,86 @@
                 izz="${L06_Izz}"/> 
         </inertial>
     </link>
+
+    <joint name="z1_camera_1" type="fixed">
+        <origin rpy="${PI/2.0} ${PI/2.0} 0" xyz="0.015 0.0 0.0"/>
+        <parent link="z1_link_6"/>
+        <child link="camera_support_1"/>
+    </joint>
+
+    <link name="camera_support_1">
+        <visual>
+            <geometry>
+                <mesh filename="package://qm_description/meshes/camera/support_1.stl" scale="1 1 1"/>
+            </geometry>
+            <material name="orange"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://qm_description/meshes/camera/support_1.stl" scale="1 1 1"/>
+            </geometry>
+            <material name="orange"/>
+        </collision>
+        <inertial>
+            <origin xyz="0.01228796808 0.01249999995 0.00005455685"/>
+            <mass value="0.00312302"/>
+            <inertia ixx="0.00000189979018" ixy="0.00000000" ixz="0.00000000188660" iyy="0.00000204231304" iyz="0.00000000" izz="0.00000045513762"/> 
+        </inertial>
+    </link>
+
+    <joint name="z1_camera_2" type="fixed">
+        <origin rpy="0 ${PI} 0" xyz="0.0 0.0 0.0"/>
+        <parent link="camera_support_1"/>
+        <child link="camera_support_2"/>
+    </joint>
+
+    <link name="camera_support_2">
+        <visual>
+            <geometry>
+                <mesh filename="package://qm_description/meshes/camera/support_2.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="orange"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://qm_description/meshes/camera/support_2.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="orange"/>
+        </collision>
+        <inertial>
+            <origin xyz="0.02606678445 0.01310900418 0.00003986439"/>
+            <mass value="0.00582375"/>
+            <inertia ixx="0.00000336210388" ixy="-0.00000006511344" ixz="0.00000000535896" iyy="0.00000529075409" iyz="-0.00000000000178" izz="0.00000244065878"/>
+        </inertial>
+    </link>
+
+    <joint name="z1_camera_3" type="fixed">
+        <origin rpy="${80*PI/180} ${PI/2.0} 0" xyz="0.0825 0.0246 0.04"/>
+        <parent link="camera_support_2"/>
+        <child link="camera_support_3"/>
+    </joint>
+
+    <link name="camera_support_3">
+        <visual>
+            <geometry>
+                <mesh filename="package://qm_description/meshes/camera/support_3.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="orange"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://qm_description/meshes/camera/support_3.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="orange"/>
+        </collision>
+        <inertial>
+            <origin xyz="0.04000010933 -0.00463324120 0.00719944346"/>
+            <mass value="0.00438996"/>
+            <inertia ixx="0.00000100637191" ixy="0.00000000" ixz="0.00000000" iyy="0.00000178536815" iyz="0.00000006806630" izz="0.00000264518318"/>
+        </inertial>
+    </link>
  
-    <xacro:if value="$(arg UnitreeGripper)">
+    <xacro:if value="$(arg UnitreeGripper)" >
         <joint name="gripperStator" type="fixed">
             <origin rpy="0 0 0" xyz="0.051 0.0 0.0"/>
             <parent link="z1_link_6"/>
