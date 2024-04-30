@@ -374,7 +374,7 @@
             <geometry>
                 <mesh filename="package://qm_description/meshes/camera/support_1.stl" scale="1 1 1"/>
             </geometry>
-            <material name="orange"/>
+            <material name="black"/>
         </visual>
         <collision>
             <geometry>
@@ -400,7 +400,7 @@
             <geometry>
                 <mesh filename="package://qm_description/meshes/camera/support_2.stl" scale="0.001 0.001 0.001"/>
             </geometry>
-            <material name="orange"/>
+            <material name="black"/>
         </visual>
         <collision>
             <geometry>
@@ -426,7 +426,7 @@
             <geometry>
                 <mesh filename="package://qm_description/meshes/camera/support_3.stl" scale="0.001 0.001 0.001"/>
             </geometry>
-            <material name="orange"/>
+            <material name="black"/>
         </visual>
         <collision>
             <geometry>
@@ -438,6 +438,58 @@
             <origin xyz="0.04000010933 -0.00463324120 0.00719944346"/>
             <mass value="0.00438996"/>
             <inertia ixx="0.00000100637191" ixy="0.00000000" ixz="0.00000000" iyy="0.00000178536815" iyz="0.00000006806630" izz="0.00000264518318"/>
+        </inertial>
+    </link>
+
+    <joint name="z1_camera_4" type="fixed">
+        <origin rpy="0 ${PI} 0" xyz="0.04 0.013 -0.012"/>
+        <parent link="camera_support_3"/>
+        <child link="camera"/>
+    </joint>
+
+    <link name="camera">
+        <visual>
+            <geometry>
+                <mesh filename="package://qm_description/meshes/camera/camera.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://qm_description/meshes/camera/camera.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="orange"/>
+        </collision>
+        <inertial>
+            <origin xyz="-0.03237073405 -0.00068389542 -0.00575253731"/>
+            <mass value="0.07000000"/>
+            <inertia ixx="0.00000497837376" ixy="-0.00000003261441" ixz="-0.00000000155222" iyy="0.00010466042609" iyz="-0.00000046967192" izz="0.00010658952406"/>
+        </inertial>
+    </link>
+
+    <joint name="z1_camera_5" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <parent link="camera"/>
+        <child link="camera_cover"/>
+    </joint>
+
+    <link name="camera_cover">
+        <visual>
+            <geometry>
+                <mesh filename="package://qm_description/meshes/camera/camera_cover.stl" scale="1 1 1"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://qm_description/meshes/camera/camera_cover.stl" scale="1 1 1"/>
+            </geometry>
+            <material name="orange"/>
+        </collision>
+        <inertial>
+            <origin xyz="-0.01251900 -0.00004375 -0.00505609"/>
+            <mass value="0.00500000"/>
+            <inertia ixx="0.00000048" ixy="0.00000000" ixz="-0.00000000" iyy="0.00000921" iyz="-0.00000000" izz="0.00000945"/>
         </inertial>
     </link>
  
