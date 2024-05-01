@@ -11,6 +11,7 @@
     <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/const.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/manipulator/const.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/manipulator/transmission.xacro"/>
+    <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/camera.xacro"/>
 
     <xacro:arg name="UnitreeGripper" default="true"/>
 

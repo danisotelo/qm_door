@@ -192,4 +192,29 @@
         <material>Gazebo/Black</material>   
     </gazebo>
 
+    <gazebo reference="camera_support_1">
+        <self_collide>false</self_collide>
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="camera_support_2">
+        <self_collide>false</self_collide>
+        <material>Gazebo/Black</material>   
+    </gazebo>
+
+    <gazebo reference="camera_support_3">
+        <self_collide>false</self_collide>
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="camera">
+        <self_collide>false</self_collide>
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="camera_cover">
+        <self_collide>false</self_collide>
+        <material>Gazebo/DarkGrey</material>   
+    </gazebo>
+
 </robot>
