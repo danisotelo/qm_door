@@ -58,13 +58,8 @@
       <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
                   output="screen">
             <remap from="robot_description" to="door_description" />
+            <remap from="/joint_states" to="/door/joint_states" />
             <param name="publish_frequency" value="50.0"/>
-      </node>
-
-      <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"
-            output="screen">
-            <remap from="robot_description" to="door_description" />
-            <param name="use_gui" value="true"/>
       </node>
 
 </launch>

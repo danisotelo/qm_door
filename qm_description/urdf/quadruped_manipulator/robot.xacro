@@ -582,6 +582,7 @@
             <robotParam>qm_description</robotParam>
             <robotSimType>qm_gazebo/QMHWSim</robotSimType>
         </plugin>
+
     </gazebo>
 
 </robot>

@@ -145,8 +145,9 @@
     <self_collide>1</self_collide>
   </gazebo>
   <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
+    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <robotNamespace>/door</robotNamespace>
+      <jointName>joint_frame_door, joint_door_lever</jointName>
     </plugin>
   </gazebo>
 
