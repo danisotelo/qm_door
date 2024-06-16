@@ -98,7 +98,7 @@ class YoloDetector:
         self.cx = data.K[2]
         self.cy = data.K[5]
         self.camera_info_received = True
-        rospy.loginfo(f"Camera info received: fx={self.fx}, fy={self.fy}, cx={self.cx}, cy={self.cy}")
+        #rospy.loginfo(f"Camera info received: fx={self.fx}, fy={self.fy}, cx={self.cx}, cy={self.cy}")
 
     def depth_callback(self, data):
         try:
@@ -116,7 +116,7 @@ class YoloDetector:
         depth_image = self.current_depth
 
         if mask is not None and depth_image is not None:
-            rospy.loginfo("Processing masked depth image.")
+            #rospy.loginfo("Processing masked depth image.")
             # Apply the mask to the depth image
             masked_depth = np.where(mask > 0, depth_image, 0)
 
@@ -146,7 +146,7 @@ class YoloDetector:
         header.frame_id = "camera_link_optical"  # Adjust this to your frame
         filtered_pc = point_cloud2.create_cloud_xyz32(header, points)
         self.pc_pub.publish(filtered_pc)
-        rospy.loginfo(f"Published filtered point cloud with {len(points)} points.")
+        #rospy.loginfo(f"Published filtered point cloud with {len(points)} points.")
 
 if __name__ == "__main__":
     rospy.init_node("handle_pc", anonymous=True)

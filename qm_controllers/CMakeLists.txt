@@ -6,6 +6,7 @@ find_package(catkin REQUIRED
         COMPONENTS
         roscpp
         qm_common
+        std_msgs
         qm_interface
         qm_estimation
         qm_wbc
@@ -84,25 +85,19 @@ add_executable(qm_target_trajectories_publisher
      src/QmTargetTrajectoriesPublisher.cpp
      src/GaitJoyPublisher.cpp
      )
+add_executable(gait_topic_publisher
+        src/GaitTopicPublisher.cpp)
 add_dependencies(qm_target_trajectories_publisher
+     ${catkin_EXPORTED_TARGETS}
+     )
+add_dependencies(gait_topic_publisher
      ${catkin_EXPORTED_TARGETS}
      )
 target_link_libraries(qm_target_trajectories_publisher
      ${catkin_LIBRARIES}
      )
-target_compile_options(qm_target_trajectories_publisher PRIVATE ${OCS2_CXX_FLAGS})
-
-# Add the gait_command_simulator node
-add_executable(gait_command_simulator
-     src/GaitCommandSimulator.cpp
-     )
-add_dependencies(gait_command_simulator
-     ${catkin_EXPORTED_TARGETS}
-     )
-target_link_libraries(gait_command_simulator
+target_link_libraries(gait_topic_publisher
      ${catkin_LIBRARIES}
      )
-
-
-
-
+target_compile_options(qm_target_trajectories_publisher PRIVATE ${OCS2_CXX_FLAGS})
+target_compile_options(gait_topic_publisher PRIVATE ${OCS2_CXX_FLAGS})

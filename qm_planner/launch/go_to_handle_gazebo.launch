@@ -1,4 +1,5 @@
 <launch>
+    <!-- LAUNCH THE CAMERA NODES -->
     <!-- Detection configuration -->
     <arg name="weights" default="$(find qm_vision)/models/yolov8_handle.pt"/>
     <arg name="confidence_threshold" default="0.75"/>
@@ -8,9 +9,9 @@
     <arg name="threshold_u"      default="255"/>
 
     <!-- Visualize using OpenCV window -->
-    <arg name="view_image" default="true"/>
+    <arg name="view_image" default="false"/>
     <!-- Publish images to ros topic -->
-    <arg name="publish_image" default="true"/>
+    <arg name="publish_image" default="false"/>
     
     <!-- Input data topics -->
     <arg name="input_image_topic" default="/camera/color/image_raw"/>
@@ -49,5 +50,8 @@
         <param name="output_centroid_topic" value="$(arg output_centroid_topic)"/>
         <param name="output_orientation_topic" value="$(arg output_orientation_topic)"/>
     </node>
+
+    <!-- LAUNCH THE PLANNER NODES -->
+    <node name="go_to_handle" pkg="qm_planner" type="go_to_handle" output="screen"/>
 
 </launch>

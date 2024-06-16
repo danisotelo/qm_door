@@ -135,7 +135,7 @@ class PointCloudOrientation:
         # Publish the marker
         self.marker_pub.publish(marker)
 
-        rospy.loginfo("Centroid: x=%f, y=%f, z=%f" % (centroid[0], centroid[1], centroid[2]))
+        #rospy.loginfo("Centroid: x=%f, y=%f, z=%f" % (centroid[0], centroid[1], centroid[2]))
 
     def ensure_consistent_sign(self, new_axis, previous_axis):
         """ Ensure the sign of the new axis is consistent with the previous axis. """

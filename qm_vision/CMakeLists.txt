@@ -165,6 +165,7 @@ catkin_install_python(PROGRAMS
    scripts/handle_centroid.py
    scripts/door_param.py
    scripts/detect_gazebo.py
+   scripts/plane_extractor.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

@@ -15,9 +15,9 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(TestCircle src/TestCircle.cpp)
-target_link_libraries(TestCircle ${catkin_LIBRARIES})
+add_executable(test_circle src/TestCircle.cpp)
+target_link_libraries(test_circle ${catkin_LIBRARIES})
 
-add_executable(GoToHandle src/GoToHandle.cpp)
-target_link_libraries(GoToHandle ${catkin_LIBRARIES})
+add_executable(go_to_handle src/GoToHandle.cpp)
+target_link_libraries(go_to_handle ${catkin_LIBRARIES})
 
