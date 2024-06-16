@@ -207,6 +207,22 @@ TargetTrajectories EEgoalPoseToTargetTrajectories(const Eigen::Vector3d& positio
     return targetPoseToTargetTrajectories(EeTargetPose, BaseTargetPose, observation, eeState, targetReachingTime);
 }
 
+void QmTargetTrajectoriesInteractiveMarker::positionCommandCallback(const geometry_msgs::PoseStamped::ConstPtr& msg) {
+    const Eigen::Vector3d EePosition(msg->pose.position.x, msg->pose.position.y, msg->pose.position.z);
+    const Eigen::Quaterniond EeOrientation(msg->pose.orientation.w, msg->pose.orientation.x,
+                                           msg->pose.orientation.y, msg->pose.orientation.z);
+
+    // get TargetTrajectories
+    const auto targetTrajectories = EEgoalPoseToTargetTrajectories(EePosition, EeOrientation,
+                                                                   latestObservation_, latestObservationEe_);
+
+    // publish TargetTrajectories
+    targetTrajectoriesPublisher_->publishTargetTrajectories(targetTrajectories);
+
+    // update last ee target
+    lastEeTarget_ << EePosition, EeOrientation.coeffs();
+}
+
 int main(int argc, char* argv[]) {
     const std::string robotName = "qm";
     const std::string gaitName = "legged_robot";
@@ -234,6 +250,10 @@ int main(int argc, char* argv[]) {
 
     GaitJoyPublisher gaitCommand(nodeHandle, gaitCommandFile, gaitName, false);
 
+    // Add a subscriber for position commands
+    ros::Subscriber positionCommandSubscriber = nodeHandle.subscribe(
+        "planner/cmd", 10, &QmTargetTrajectoriesInteractiveMarker::positionCommandCallback, &targetPoseCommand);
+        
     ros::spin();
     // Successful exit
     return 0;

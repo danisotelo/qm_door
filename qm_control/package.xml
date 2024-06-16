@@ -15,6 +15,8 @@
   <exec_depend>qm_gazebo</exec_depend>
   <exec_depend>qm_interface</exec_depend>
   <exec_depend>qm_msgs</exec_depend>
+  <exec_depend>qm_planner</exec_depend>
+  <exec_depend>qm_vision</exec_depend>
   <exec_depend>qm_wbc</exec_depend>
   <exec_depend>qpoases_catkin</exec_depend>
 

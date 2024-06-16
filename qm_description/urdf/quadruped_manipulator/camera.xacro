@@ -54,7 +54,7 @@
                 <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
                 <pointCloudTopicName>depth/color/points</pointCloudTopicName>
                 <frameName>camera_link_optical</frameName>
-                <pointCloudCutoff>0.2</pointCloudCutoff>
+                <pointCloudCutoff>0.02</pointCloudCutoff>
                 <pointCloudCutoffMax>4.0</pointCloudCutoffMax>
             </plugin>
 

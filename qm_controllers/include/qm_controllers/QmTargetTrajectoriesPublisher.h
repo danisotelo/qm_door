@@ -16,6 +16,7 @@
 #include <ocs2_ros_interfaces/command/TargetTrajectoriesRosPublisher.h>
 #include <qm_msgs/ee_state.h>
 #include <geometry_msgs/Twist.h>
+#include <geometry_msgs/PoseStamped.h>
 
 namespace qm{
 using namespace ocs2;
@@ -111,6 +112,8 @@ public:
         server_.applyChanges();
     }
 
+    void positionCommandCallback(const geometry_msgs::PoseStamped::ConstPtr &msg);
+
 private:
     visualization_msgs::InteractiveMarker createInteractiveMarker() const;
     void processFeedback(const visualization_msgs::InteractiveMarkerFeedbackConstPtr& feedback);
@@ -128,6 +131,7 @@ private:
     CmdToTargetTrajectories cmdVelToTargetTrajectories_;
     CmdToTargetTrajectories eeCmdVelToTargetTrajectories_;
     vector_t lastEeTarget_;
+
 };
 }
 

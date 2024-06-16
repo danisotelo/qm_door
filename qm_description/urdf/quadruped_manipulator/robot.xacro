@@ -565,6 +565,20 @@
                 </geometry>
                 <material name="red"/>
             </visual>
+            <inertial>
+                <mass value="0.0"/>
+                <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+            </inertial>
+            <collision>
+                <geometry>
+                    <sphere radius="0.01"/>
+                </geometry>
+                <surface>
+                    <contact>
+                        <collide_bitmask>0</collide_bitmask>
+                    </contact>
+                </surface>
+            </collision>
         </link>
 
         <joint name="z1_joint_end_effector" type="fixed">
@@ -582,7 +596,6 @@
             <robotParam>qm_description</robotParam>
             <robotSimType>qm_gazebo/QMHWSim</robotSimType>
         </plugin>
-
     </gazebo>
 
 </robot>

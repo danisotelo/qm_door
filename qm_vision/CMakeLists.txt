@@ -163,6 +163,8 @@ catkin_install_python(PROGRAMS
    scripts/masked_depth.py
    scripts/detect.py
    scripts/handle_centroid.py
+   scripts/door_param.py
+   scripts/detect_gazebo.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

@@ -1,6 +1,6 @@
 <launch>
     <!-- Detection configuration -->
-    <arg name="weights" default="$(find qm_vision)/models/handle_detection.pt"/>
+    <arg name="weights" default="$(find qm_vision)/models/yolov8_handle.pt"/>
     <arg name="confidence_threshold" default="0.75"/>
     <arg name="iou_threshold" default="0.45"/>
     <arg name="maximum_detections" default="1"/>
@@ -42,6 +42,10 @@
     <arg name="fisheye_width"       default="-1"/>
     <arg name="fisheye_height"      default="-1"/>
     <arg name="enable_fisheye"      default="false"/>
+
+    <arg name="depth_width"         default="-1"/>
+    <arg name="depth_height"        default="-1"/>
+    <arg name="enable_depth"        default="true"/>
 
     <arg name="infra_width"         default="-1"/>
     <arg name="infra_height"        default="-1"/>

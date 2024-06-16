@@ -92,7 +92,16 @@ target_link_libraries(qm_target_trajectories_publisher
      )
 target_compile_options(qm_target_trajectories_publisher PRIVATE ${OCS2_CXX_FLAGS})
 
-
+# Add the gait_command_simulator node
+add_executable(gait_command_simulator
+     src/GaitCommandSimulator.cpp
+     )
+add_dependencies(gait_command_simulator
+     ${catkin_EXPORTED_TARGETS}
+     )
+target_link_libraries(gait_command_simulator
+     ${catkin_LIBRARIES}
+     )
 
 
 

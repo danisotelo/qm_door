@@ -67,7 +67,9 @@ class YoloDetector:
             masked_rgb = np.zeros_like(im_c)
             masked_rgb[mask > 0.5] = im_c[mask > 0.5]
 
-            self.mask_pub.publish(self.bridge.cv2_to_imgmsg(mask, "32FC1"))
+            mask_msg = self.bridge.cv2_to_imgmsg(mask, "32FC1")
+            mask_msg.header.stamp = data.header.stamp # Ensure timestamps match
+            self.mask_pub.publish(mask_msg)
             self.image_pub.publish(self.bridge.cv2_to_imgmsg(masked_rgb, "bgr8"))
 
         if self.view_image:

@@ -50,12 +50,13 @@
             args="0 -1.952 1.05 0 0 0 world wall_2_link"
       />
 
+
       <!-- Spawn door in Gazebo -->
       <node name="spawn_door" pkg="gazebo_ros" type="spawn_model" clear_params="true"
             output="screen"
             args="-param door_description -urdf -model door" />
 
-      <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+      <node name="door_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
                   output="screen">
             <remap from="robot_description" to="door_description" />
             <remap from="/joint_states" to="/door/joint_states" />
