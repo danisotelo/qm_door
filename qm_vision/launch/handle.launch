@@ -50,4 +50,8 @@
         <param name="output_orientation_topic" value="$(arg output_orientation_topic)"/>
     </node>
 
+    <node pkg="qm_vision" name="plane_extractor_node" type="plane_extractor.py" output="screen">
+        <param name="input_pc_topic" value="$(arg input_pc_topic)"/>
+    </node>
+
 </launch>

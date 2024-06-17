@@ -52,6 +52,7 @@ TargetTrajectories targetPoseToTargetTrajectories(const vector_t& EeTargetPose,
     // desired state trajectory
     const vector_t EeCurrentPose = eeState.state;
     vector_t BaseCurrenPose = observation.state.segment<6>(6);
+    BaseCurrenPose(1) = 0; // ADD
     BaseCurrenPose(2) = COM_HEIGHT;
     BaseCurrenPose(4) = 0;
     BaseCurrenPose(5) = 0;
@@ -83,7 +84,7 @@ TargetTrajectories cmdVelToTargetTrajectories(const vector_t& cmdVel,
     const vector_t BaseTargetPose = [&]() {
         vector_t target(6);
         target(0) = BaseCurrenPose(0) + cmdVelRot(0) * timeToTarget;
-        target(1) = BaseCurrenPose(1) + cmdVelRot(1) * timeToTarget;
+        target(1) = 0; //BaseCurrenPose(1) + cmdVelRot(1) * timeToTarget; // ADD
         target(2) = COM_HEIGHT;
         target(3) = BaseCurrenPose(3) + cmdVel(3) * timeToTarget;
         target(4) = 0;
@@ -150,7 +151,7 @@ TargetTrajectories EeCmdVelToTargetTrajectories(const vector_t& cmdVel,
         vector_t target(6);
         target = BaseCurrenPose;
         target(0) = EeTargetPose(0) - 0.6;
-        target(1) = EeTargetPose(1);
+        target(1) = 0; // EeTargetPose(1); //ADD
         target(2) = COM_HEIGHT;
         target(4) = 0;
         target(5) = 0;
@@ -182,7 +183,7 @@ TargetTrajectories EEgoalPoseToTargetTrajectories(const Eigen::Vector3d& positio
         target.setZero();
         target = BaseCurrenPose;
         target(0) = position(0) - 0.6;
-        target(1) = position(1);
+        target(1) = 0; //position(1); //ADD 
         target(2) = COM_HEIGHT;
         target(4) = 0.0;
         target(5) = 0;
