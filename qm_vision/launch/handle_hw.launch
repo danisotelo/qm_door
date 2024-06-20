@@ -211,20 +211,20 @@
 
     <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" />
 
-    <node pkg="nodelet" type="nodelet" name="nodelet1"
+    <!-- <node pkg="nodelet" type="nodelet" name="nodelet1"
         args="load depth_image_proc/point_cloud_xyz nodelet_manager">
         <remap from="camera_info" to="$(arg camera_info_topic)"/>
         <remap from="image_rect" to="$(arg output_masked_depth_nr_topic)"/>
         <remap from="points" to="$(arg output_pc_topic)"/>
-    </node>
+    </node> -->
 
     <!-- <node pkg="qm_vision" name="handle_centroid" type="handle_centroid.py" output="screen">
         <param name="output_pc_topic" value="$(arg output_pc_topic)"/>
         <param name="output_centroid_topic" value="$(arg output_centroid_topic)"/>
         <param name="output_orientation_topic" value="$(arg output_orientation_topic)"/>
-    </node>
+    </node> -->
 
     <!-- Load Rviz configuration -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qm_vision)/rviz/handle_detection.rviz" required="true" /> -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qm_vision)/rviz/handle_detection.rviz" required="true" />
 
 </launch>
