@@ -50,8 +50,14 @@
         <param name="output_orientation_topic" value="$(arg output_orientation_topic)"/>
     </node>
 
-    <node pkg="qm_vision" name="plane_extractor_node" type="plane_extractor.py" output="screen">
+    <node pkg="qm_vision" name="door_params" type="door_params.py" output="screen">
+        <param name="view_image" value="$(arg view_image)"/>
+        <param name="publish_image" value="$(arg publish_image)"/>
+        <param name="output_mask_topic" value="$(arg output_mask_topic)"/>
+        <param name="input_image_topic" value="$(arg input_image_topic)"/>
+        <param name="camera_info_topic" value="$(arg camera_info_topic)"/>
         <param name="input_pc_topic" value="$(arg input_pc_topic)"/>
+        <param name="output_centroid_topic" value="$(arg output_centroid_topic)"/>
     </node>
 
 </launch>

@@ -31,10 +31,11 @@
     <arg name="tf_prefix"           default="$(arg camera)"/>
     <arg name="external_manager"    default="false"/>
     <arg name="manager"             default="realsense2_camera_manager"/>
+    <arg name="initial_reset"       default="false"/>
 
     <!-- Camera device specific arguments -->
 
-    <arg name="serial_no"           default=""/>
+    <arg name="serial_no"           default="637202001197"/>
     <arg name="usb_port_id"         default=""/>
     <arg name="device_type"         default=""/>
     <arg name="json_file_path"      default=""/>
@@ -217,13 +218,13 @@
         <remap from="points" to="$(arg output_pc_topic)"/>
     </node>
 
-    <node pkg="qm_vision" name="handle_centroid" type="handle_centroid.py" output="screen">
+    <!-- <node pkg="qm_vision" name="handle_centroid" type="handle_centroid.py" output="screen">
         <param name="output_pc_topic" value="$(arg output_pc_topic)"/>
         <param name="output_centroid_topic" value="$(arg output_centroid_topic)"/>
         <param name="output_orientation_topic" value="$(arg output_orientation_topic)"/>
     </node>
 
     <!-- Load Rviz configuration -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qm_vision)/rviz/handle_detection.rviz" required="true" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qm_vision)/rviz/handle_detection.rviz" required="true" /> -->
 
 </launch>

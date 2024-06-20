@@ -68,6 +68,10 @@ class YoloDetector:
         im_c = im.copy()
 
         results = self.model.predict(im, max_det=self.max_det)
+        if results[0].masks is None:
+            rospy.logwarn("No handle detected.")
+            return
+        
         mask = results[0].masks.data.cpu().numpy().squeeze()
         mask = cv2.resize(mask, (im_c.shape[1], im_c.shape[0]))
         im0 = results[0].plot()
