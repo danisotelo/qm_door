@@ -22,8 +22,8 @@
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false"
           output="screen"
           args="-param qm_description -urdf -model qm
-                -z 0.5
-                -x -2
+            -x -2
+            -z 0.51
                 "
     />
 

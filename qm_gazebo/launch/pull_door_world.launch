@@ -26,7 +26,7 @@
             output="screen"
             args="-param qm_description -urdf -model qm
             -x -2
-            -z 0.5
+            -z 0.51
             "
       />
 
