@@ -55,7 +55,7 @@ void centroidCallback(const geometry_msgs::PointStamped::ConstPtr& msg) {
         try {
             // Transform centroid coordinates from camera frame to world frame
             tf_listener->transformPoint("world", *msg, centroid_in_world);
-            target_pose.position.x = centroid_in_world.point.x - 0.08;
+            target_pose.position.x = centroid_in_world.point.x - 0.2; //0.08
             target_pose.position.y = centroid_in_world.point.y;
             target_pose.position.z = centroid_in_world.point.z + 0.05;
             target_pose.orientation = tf::createQuaternionMsgFromYaw(0);
@@ -133,7 +133,7 @@ int main(int argc, char** argv) {
                 publishGaitCommand("trot");
 
                 // Wait for 2 seconds
-                ros::Duration(2.0).sleep();
+                ros::Duration(5.0).sleep();
            
             } else if (new_centroid_received) {
                 position_reached = false; // Start moving to the new centroid

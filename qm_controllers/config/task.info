@@ -289,7 +289,7 @@ R
 
 frictionConeSoftConstraint
 {
-  frictionCoefficient    0.3
+  frictionCoefficient    0.7
 
   ; relaxed log barrier parameters
   mu                     0.1
@@ -345,5 +345,5 @@ jointVelocityLimits
 ; Whole body control
 frictionConeTask
 {
-  frictionCoefficient    0.3
+  frictionCoefficient    0.7
 }

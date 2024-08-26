@@ -1,0 +1,46 @@
+<launch>
+      <arg name="user_debug" default="false"/>
+
+      <rosparam file="$(find qm_gazebo)/config/default.yaml" command="load"/>
+
+      <!-- Load descriptions -->
+      <param name="qm_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                  DEBUG:=$(arg user_debug)"/>
+      <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                  DEBUG:=$(arg user_debug)"/>
+      <param name="legged_robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                  DEBUG:=$(arg user_debug)"/>
+      <param name="vchimney_description" command="$(find xacro)/xacro $(find qm_description)/urdf/vchimney/vchimney.xacro"/>
+
+
+      <!-- Include empty Gazebo world -->
+      <include file="$(find gazebo_ros)/launch/empty_world.launch">
+            <arg name="paused" value="true"/>
+            <arg name="gui" value="true"/>
+      </include>
+
+      <!-- Start RViz -->
+      <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qm_controllers)/config/vchimney.rviz"/>
+
+      <!-- Spawn robot in Gazebo -->
+      <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+            output="screen"
+            args="-param qm_description -urdf -model qm
+            -x -2
+            -z 0.5
+            "
+      />
+
+      <!-- Spawn vchimney in Gazebo -->
+      <node name="spawn_vchimney" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+            output="screen"
+            args="-param vchimney_description -urdf -model vchimney
+            -x 6 -y 0 -z 0.001 -R 1.570796 -P 0 -Y -1.570796"
+      />
+
+      <!-- Publish static transforms for the vchimney -->
+      <node pkg="tf2_ros" type="static_transform_publisher" name="vchimney_tf_publisher"
+            args="6 0 0.001 -1.570796 0 1.570796 world vchimney_link"
+      />
+
+</launch>

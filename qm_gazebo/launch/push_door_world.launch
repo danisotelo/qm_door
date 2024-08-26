@@ -21,6 +21,9 @@
             <arg name="gui" value="true"/>
       </include>
 
+      <!-- Start RViz -->
+      <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qm_controllers)/config/door_opening.rviz"/>
+
       <!-- Spawn robot in Gazebo -->
       <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" clear_params="true"
             output="screen"

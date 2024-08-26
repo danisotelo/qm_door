@@ -1,0 +1,59 @@
+<launch>
+      <arg name="user_debug" default="false"/>
+
+      <rosparam file="$(find qm_gazebo)/config/default.yaml" command="load"/>
+
+      <!-- Load descriptions -->
+      <param name="qm_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                  DEBUG:=$(arg user_debug)"/>
+      <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                  DEBUG:=$(arg user_debug)"/>
+      <param name="legged_robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                  DEBUG:=$(arg user_debug)"/>
+      <param name="terrain_description" command="$(find xacro)/xacro $(find qm_description)/urdf/tunnel/terrain.xacro"/>
+      <param name="tunnel1_description" command="$(find xacro)/xacro $(find qm_description)/urdf/tunnel/tunnel1.xacro"/>
+      <param name="tunnel2_description" command="$(find xacro)/xacro $(find qm_description)/urdf/tunnel/tunnel2.xacro"/>
+      <param name="tunnel3_description" command="$(find xacro)/xacro $(find qm_description)/urdf/tunnel/tunnel3.xacro"/>
+      <param name="tunnel4_description" command="$(find xacro)/xacro $(find qm_description)/urdf/tunnel/tunnel4.xacro"/>
+
+      <!-- Include empty Gazebo world -->
+      <include file="$(find gazebo_ros)/launch/empty_world.launch">
+            <arg name="paused" value="true"/>
+            <arg name="gui" value="true"/>
+      </include>
+
+      <!-- Start RViz -->
+      <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qm_controllers)/config/tunnel.rviz"/>
+
+      <!-- Spawn robot in Gazebo -->
+      <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+            output="screen"
+            args="-param qm_description -urdf -model qm
+            -x -2
+            -z 0.5
+            "
+      />
+
+      <!-- Spawn pallet1 in Gazebo -->
+      <node name="spawn_terrain" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+            output="screen"
+            args="-param terrain_description -urdf -model terrain
+            -x 1 -y 0 -z 0 -R 1.570796 -P 0 -Y 1.570796"
+      />
+      <!-- Publish static transforms for the pallet1 -->
+      <node pkg="tf2_ros" type="static_transform_publisher" name="terrain_tf_publisher"
+            args="1 0 0 -1.570796 0 1.570796 world terrain_link"
+      />
+
+      <!-- Spawn pallet1 in Gazebo -->
+      <node name="spawn_tunnel3" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+            output="screen"
+            args="-param tunnel3_description -urdf -model tunnel3
+            -x 0.5 -y 0 -z 0 -R 1.570796 -P 0 -Y 1.570796"
+      />
+      <!-- Publish static transforms for the pallet1 -->
+      <node pkg="tf2_ros" type="static_transform_publisher" name="tunnel3_tf_publisher"
+            args="2 0 0 -1.570796 0 1.570796 world tunnel3_link"
+      />
+
+</launch>

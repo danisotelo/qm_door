@@ -5,9 +5,9 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /TF1/Frames1
-        - /PointCloud21/Autocompute Value Bounds1
+        - /RobotModel2
       Splitter Ratio: 0.5080000162124634
-    Tree Height: 233
+    Tree Height: 865
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -25,13 +25,12 @@ Panels:
   - Class: rviz/Time
     Name: Time
     SyncMode: 0
-    SyncSource: Image
+    SyncSource: ""
   - Class: rviz/Displays
     Help Height: 138
     Name: Displays
     Property Tree Widget:
-      Expanded:
-        - /PointCloud21/Autocompute Value Bounds1
+      Expanded: ~
       Splitter Ratio: 0.8294117450714111
     Tree Height: 303
 Preferences:
@@ -56,7 +55,7 @@ Visualization Manager:
         Y: 0
         Z: 0
       Plane: XY
-      Plane Cell Count: 10
+      Plane Cell Count: 20
       Reference Frame: world
       Value: true
     - Alpha: 1
@@ -273,7 +272,6 @@ Visualization Manager:
         CoM Trajectory: true
         EE Trajectory: true
         Feet Trajectories: true
-        Future footholds: true
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -296,7 +294,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/LF
               Name: Marker
               Namespaces:
-                "": true
+                {}
               Queue Size: 100
               Value: true
             - Class: rviz/Marker
@@ -304,7 +302,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/LH
               Name: Marker
               Namespaces:
-                "": true
+                {}
               Queue Size: 100
               Value: true
             - Class: rviz/Marker
@@ -312,7 +310,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/RF
               Name: Marker
               Namespaces:
-                "": true
+                {}
               Queue Size: 100
               Value: true
             - Class: rviz/Marker
@@ -320,7 +318,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/RH
               Name: Marker
               Namespaces:
-                "": true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -330,7 +328,7 @@ Visualization Manager:
           Marker Topic: /qm/desiredBaseTrajectory
           Name: Target Base Trajectory
           Namespaces:
-            "": true
+            {}
           Queue Size: 100
           Value: true
       Enabled: true
@@ -354,17 +352,7 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        door:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        lever:
+        vchimney_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -374,164 +362,11 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
       Name: RobotModel
-      Robot Description: door_description
+      Robot Description: vchimney_description
       TF Prefix: ""
       Update Interval: 0
       Value: true
       Visual Enabled: true
-    - Alpha: 1
-      Class: rviz/RobotModel
-      Collision Enabled: false
-      Enabled: true
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-        wall_1_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        world:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-      Name: RobotModel
-      Robot Description: wall_1_description
-      TF Prefix: ""
-      Update Interval: 0
-      Value: true
-      Visual Enabled: true
-    - Alpha: 1
-      Class: rviz/RobotModel
-      Collision Enabled: false
-      Enabled: true
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-        wall_2_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        world:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-      Name: RobotModel
-      Robot Description: wall_2_description
-      TF Prefix: ""
-      Update Interval: 0
-      Value: true
-      Visual Enabled: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 1.0194292068481445
-        Min Value: 0.9841234087944031
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/PointCloud2
-      Color: 252; 233; 79
-      Color Transformer: FlatColor
-      Decay Time: 0
-      Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Min Color: 0; 0; 0
-      Name: PointCloud2
-      Position Transformer: XYZ
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.009999999776482582
-      Style: Spheres
-      Topic: /handle/points
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: true
-    - Class: rviz/Image
-      Enabled: true
-      Image Topic: /door/edge_detection
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Image
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: true
-    - Class: rviz/Image
-      Enabled: true
-      Image Topic: /camera/depth/image_rect_raw
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Image
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: true
-    - Class: rviz/Image
-      Enabled: true
-      Image Topic: /camera/color/image_raw
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Image
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: true
-    - Class: rviz/Image
-      Enabled: true
-      Image Topic: /door/rotation_axis
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Image
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Unreliable: false
-      Value: true
-    - Alpha: 1
-      Class: rviz/PointStamped
-      Color: 204; 41; 204
-      Enabled: true
-      History Length: 1
-      Name: PointStamped
-      Queue Size: 10
-      Radius: 0.009999999776482582
-      Topic: /handle/centroid
-      Unreliable: false
-      Value: true
-    - Class: rviz/Marker
-      Enabled: true
-      Marker Topic: /handle/orientation
-      Name: Marker
-      Namespaces:
-        axes: true
-      Queue Size: 100
-      Value: true
-    - Class: rviz/Marker
-      Enabled: true
-      Marker Topic: /door/normal_vector_marker
-      Name: Marker
-      Namespaces:
-        normal_vector: true
-      Queue Size: 100
-      Value: true
   Enabled: true
   Global Options:
     Background Color: 238; 238; 238
@@ -558,7 +393,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.331033706665039
+      Distance: 7.1392741203308105
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -566,17 +401,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.6449466943740845
-        Y: 0.047996021807193756
-        Z: 0.12855654954910278
-      Focal Shape Fixed Size: true
+        X: 0.6092137098312378
+        Y: 0.7185327410697937
+        Z: -0.20213443040847778
+      Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.40479639172554016
+      Pitch: 0.35539814829826355
       Target Frame: <Fixed Frame>
-      Yaw: 3.981780529022217
+      Yaw: 3.835397243499756
     Saved: ~
 Window Geometry:
   Displays:
@@ -584,9 +419,7 @@ Window Geometry:
   Height: 1016
   Hide Left Dock: false
   Hide Right Dock: true
-  Image:
-    collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000001f60000039efc020000000ffb0000001200530065006c0065006300740069006f006e000000006e000000b00000005c00fffffffb0000001e0054006f006f006c002000500072006f0070006500720074006900650073000000006e000004770000005c00fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d00000126000000c900fffffffc0000016900000110000000330100001cfa000000000100000002fb0000000a0049006d0061006700650100000000ffffffff0000007600fffffffb0000000a0049006d0061006700650100000000000001f60000007600fffffffc0000027f0000015c000000330100001cfa000000000100000002fb0000000a0049006d0061006700650100000000000001f60000007600fffffffb0000000a0049006d0061006700650100000000ffffffff0000007600fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d00650072006101000001be000001900000000000000000fb000000100044006900730070006c006100790073000000006e00000247000000c900fffffffb0000000c00430061006d0065007200610000000310000000cb0000000000000000fb0000000a0049006d0061006700650000000226000001b50000000000000000fb0000000a0049006d0061006700650100000302000000d90000000000000000000000010000010f0000039efc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d0000039e000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000006400000003efc0100000002fb0000000800540069006d00650000000000000006400000041800fffffffb0000000800540069006d006501000000000000045000000000000000000000053c0000039e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001f60000039efc020000000ffb0000001200530065006c0065006300740069006f006e000000006e000000b00000005c00fffffffb0000001e0054006f006f006c002000500072006f0070006500720074006900650073000000006e000004770000005c00fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d0000039e000000c900fffffffc00000169000001100000000000fffffffa000000000100000002fb0000000a0049006d0061006700650000000000ffffffff0000000000000000fb0000000a0049006d0061006700650000000000000001f60000000000000000fc0000027f0000015c0000000000fffffffa000000000100000002fb0000000a0049006d0061006700650000000000000001f60000000000000000fb0000000a0049006d0061006700650000000000ffffffff0000000000000000fb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d00650072006101000001be000001900000000000000000fb000000100044006900730070006c006100790073000000006e00000247000000c900fffffffb0000000c00430061006d0065007200610000000310000000cb0000000000000000fb0000000a0049006d0061006700650000000226000001b50000000000000000fb0000000a0049006d0061006700650100000302000000d90000000000000000000000010000010f0000039efc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d0000039e000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000006400000003efc0100000002fb0000000800540069006d00650000000000000006400000041800fffffffb0000000800540069006d006501000000000000045000000000000000000000053c0000039e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:

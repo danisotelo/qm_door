@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot name="ball05" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <link name="ball05_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/sar/Sphere5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="ocher">
+          <color rgba="0.949 0.890 0.722 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/sar/Sphere5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <gazebo reference="ball05_link">
+    <material>Gazebo/Black</material>
+  </gazebo>
+ 
+  <!-- Wall fixed to the world-->
+  <link name="world"/>
+  
+  <joint name="base_link_fixed" type="fixed">
+    <parent link="world"/>
+    <child link="ball05_link"/>
+  </joint>
+
+</robot>
+

@@ -99,7 +99,7 @@ class DoorParametersEstimator:
 
                     # Check if the line is vertical
                     if abs(x1 - x2) < 200:
-                        distance_to_opposite = abs(x1 - (image.shape[1] - handle_x))
+                        distance_to_opposite = abs(x0 - (image.shape[1] - handle_x))
                         if distance_to_opposite < min_distance:
                             min_distance = distance_to_opposite
                             axis_line = (x1, y1, x2, y2)
@@ -110,7 +110,7 @@ class DoorParametersEstimator:
                     if self.publish_image:
                         cv2.line(image, (x1, y1), (x2, y2), (0, 0, 255), 2)
                         #rospy.loginfo("Axis of rotation plotted on image")
-                        self.axis_of_rotation = ((x1 + x2) // 2, (y1 + y2) // 2)
+                        self.axis_of_rotation = (x0, y0)
 
                     # Compute the intersection of the horizontal line through centroid with axis of rotation
                     if x1 != x2: 

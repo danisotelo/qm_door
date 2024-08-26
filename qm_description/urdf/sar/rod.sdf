@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="rod">
+    <static>false</static>
+    <link name="rod_link">
+      <inertial>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <iyy>0.01</iyy>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <visual name="rod_visual">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>
+            <length>1.0</length>
+          </cylinder>
+        </geometry>
+        <material>
+            <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/WoodPallet</name>
+            </script>
+        </material>
+      </visual>
+      <collision name="rod_collision">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>
+            <length>1.0</length>
+          </cylinder>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>
