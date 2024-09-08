@@ -1,5 +1,10 @@
 # Quadruped Manipulator NMPC for SAR and Doors
-![](https://github.com/danisotelo/qm_door/blob/main/docs/tunnel.gif)
+<p align="center">
+  <img src="https://github.com/danisotelo/qm_door/blob/main/docs/tunnel.gif" height="300px" />
+  <img src="https://github.com/danisotelo/qm_door/blob/main/docs/door.gif" height="300px" />
+</p>
+
+![])
 ## Overview
 
 This project develops a <strong>NMPC-WBC</strong> (Nonlinear Model Predictive Control and Whole-Body Control) framework for a quadruped manipulator. Based on [OCS2](https://github.com/leggedrobotics/ocs2) and [ros-control](http://wiki.ros.org/ros_control), it facilitates tasks such as whole-body planning, end-effector motion tracking, and maintaining stability under force disturbances. The project builds upon the remarkable open-source contributions by [SkyWoodz](https://github.com/skywoodsz/qm_control) and [QiayuanL](https://github.com/qiayuanl/legged_control). The present project adapted this previous work for the <strong>Unitree AlienGo</strong> quadruped together with the <strong>Unitree Z1</strong> arm manipulator, and is built in <strong>ROS Noetic</strong>.
