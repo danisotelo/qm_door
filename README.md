@@ -1,8 +1,8 @@
 # Quadruped Manipulator NMPC for SAR and Doors
 
 <p align="center">
-  <img src="https://github.com/danisotelo/qm_door/blob/main/docs/tunnel.gif" height="270px" />
-  <img src="https://github.com/danisotelo/qm_door/blob/main/docs/door.gif" height="270px" />
+  <img src="https://github.com/danisotelo/qm_door/blob/main/docs/tunnel.gif" height="280px" />
+  <img src="https://github.com/danisotelo/qm_door/blob/main/docs/door.gif" height="280px" />
 </p>
 
 ## Overview
