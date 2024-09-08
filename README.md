@@ -1,5 +1,5 @@
 # Quadruped Manipulator NMPC for SAR and Doors
-
+![](https://github.com/danisotelo/qm_door/blob/main/docs/tunnel.gif)
 ## Overview
 
 This project develops a <strong>NMPC-WBC</strong> (Nonlinear Model Predictive Control and Whole-Body Control) framework for a quadruped manipulator. Based on [OCS2](https://github.com/leggedrobotics/ocs2) and [ros-control](http://wiki.ros.org/ros_control), it facilitates tasks such as whole-body planning, end-effector motion tracking, and maintaining stability under force disturbances. The project builds upon the remarkable open-source contributions by [SkyWoodz](https://github.com/skywoodsz/qm_control) and [QiayuanL](https://github.com/qiayuanl/legged_control). The present project adapted this previous work for the <strong>Unitree AlienGo</strong> quadruped together with the <strong>Unitree Z1</strong> arm manipulator, and is built in <strong>ROS Noetic</strong>.
@@ -65,6 +65,6 @@ The project is still in the early stages of development and we welcome feedback.
 
 This project is built on top of the following repositories:
 
-- **QM Control by Skywoodsz**: A quantum mechanics control library that influenced our approach to problem-solving. Check it out [here](https://github.com/skywoodsz/qm_control).
+- **QM Control by Skywoodsz**: NMPC + WBC for legged manipulators. Check it out [here](https://github.com/skywoodsz/qm_control).
 
-- **Legged Control by QiayuanL**: This repository provides advanced algorithms for legged robot control which were instrumental for our developments. Visit their project [here](https://github.com/qiayuanl/legged_control).
+- **Legged Control by QiayuanL**: NMPC + WBC for quadruped robots. Visit their project [here](https://github.com/qiayuanl/legged_control).
