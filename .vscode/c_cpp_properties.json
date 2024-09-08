@@ -1,0 +1,49 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/dani/catkin_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_sqp/hpipm_catkin/include/**",
+        "/home/dani/catkin_ws/src/hpp-fcl/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_pinocchio/ocs2_centroidal_model/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_core/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_ddp/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_ipm/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_robotic_examples/ocs2_legged_robot/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_robotic_examples/ocs2_legged_robot_ros/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_mpc/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_oc/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_pinocchio/ocs2_pinocchio_interface/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_test_tools/ocs2_qp_solver/include/**",
+        "/home/dani/catkin_ws/src/ocs2_robotic_assets/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_robotic_tools/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_ros_interfaces/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_pinocchio/ocs2_self_collision/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_sqp/ocs2_sqp/include/**",
+        "/home/dani/catkin_ws/src/ocs2/ocs2_thirdparty/include/**",
+        "/home/dani/catkin_ws/src/qm_door/qm_common/include/**",
+        "/home/dani/catkin_ws/src/qm_door/qm_controllers/include/**",
+        "/home/dani/catkin_ws/src/qm_door/qm_estimation/include/**",
+        "/home/dani/catkin_ws/src/qm_door/qm_gazebo/include/**",
+        "/home/dani/catkin_ws/src/qm_door/qm_interface/include/**",
+        "/home/dani/catkin_ws/src/qm_door/qm_wbc/include/**",
+        "/home/dani/catkin_ws/src/realsense-ros/realsense2_camera/include/**",
+        "/home/dani/catkin_ws/src/geometry2-throttle-tf-repeated-data-error/tf2/include/**",
+        "/home/dani/catkin_ws/src/geometry2-throttle-tf-repeated-data-error/tf2_msgs/include/**",
+        "/home/dani/catkin_ws/src/geometry2-throttle-tf-repeated-data-error/tf2_ros/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

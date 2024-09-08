@@ -1,0 +1,4 @@
+# ComputeRadius.srv
+---
+float32 radius
+int8 typedoor
