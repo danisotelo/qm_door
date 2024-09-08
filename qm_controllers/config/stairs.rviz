@@ -5,12 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /TF1/Frames1
-        - /Optimized State Trajectory1
         - /Optimized State Trajectory1/Namespaces1
-        - /Target Trajectories1
-        - /Target Trajectories1/Target Feet Trajectories1
-        - /Target Trajectories1/Target Base Trajectory1
-        - /RobotModel2
       Splitter Ratio: 0.5
     Tree Height: 727
   - Class: rviz/Selection
@@ -60,7 +55,7 @@ Visualization Manager:
         Y: 0
         Z: 0
       Plane: XY
-      Plane Cell Count: 10
+      Plane Cell Count: 20
       Reference Frame: world
       Value: true
     - Alpha: 1
@@ -158,6 +153,39 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_cover:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_link_optical:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_support_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_support_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_support_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         gripperMover:
           Alpha: 1
           Show Axes: false
@@ -177,7 +205,6 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
         z1_link_0:
           Alpha: 1
           Show Axes: false
@@ -266,7 +293,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/LF
               Name: Marker
               Namespaces:
-                {}
+                "": true
               Queue Size: 100
               Value: true
             - Class: rviz/Marker
@@ -274,7 +301,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/LH
               Name: Marker
               Namespaces:
-                {}
+                "": true
               Queue Size: 100
               Value: true
             - Class: rviz/Marker
@@ -282,7 +309,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/RF
               Name: Marker
               Namespaces:
-                {}
+                "": true
               Queue Size: 100
               Value: true
             - Class: rviz/Marker
@@ -290,7 +317,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/RH
               Name: Marker
               Namespaces:
-                {}
+                "": true
               Queue Size: 100
               Value: true
           Enabled: true
@@ -300,7 +327,7 @@ Visualization Manager:
           Marker Topic: /qm/desiredBaseTrajectory
           Name: Target Base Trajectory
           Namespaces:
-            {}
+            "": true
           Queue Size: 100
           Value: true
       Enabled: true

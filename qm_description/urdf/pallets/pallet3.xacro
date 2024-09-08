@@ -14,6 +14,14 @@
       <geometry>
         <mesh filename="package://qm_description/meshes/pallets/Pallet18cm.stl" scale="0.001 0.001 0.001"/>
       </geometry>
+      <surface>
+        <friction>
+            <ode>
+                <mu>0.7</mu>        <!-- Primary friction coefficient -->
+                <mu2>0.7</mu2>      <!-- Secondary friction coefficient -->
+            </ode>
+        </friction>
+      </surface>
     </collision>
     <inertial>
       <mass value="1.0"/>

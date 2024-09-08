@@ -28,6 +28,7 @@
 #include <angles/angles.h>
 #include <pluginlib/class_list_macros.hpp>
 
+#include "qm_controllers/StartingPosition.h"
 namespace qm {
 using namespace ocs2;
 using namespace legged_robot;
@@ -104,8 +105,8 @@ void QMController::starting(const ros::Time &time) {
 
     // Initial target
     vector_t EeInitTarget(7), initTarget(qmInterface_->getInitialState().size() + 7);
-    EeInitTarget.head(3) << -1.4, 0.0, 0.4 + measuredRbdState_[5]; // + 0.056 = 0.436
-    EeInitTarget.tail(4) << Eigen::Quaternion<scalar_t>(1.0, 0.0, 0.0, 0.0).coeffs();
+    EeInitTarget.head(3) << X + ARM_DIST * std::cos(PSI), Y + ARM_DIST * std::sin(PSI), HEIGHT + measuredRbdState_[5]; // + 0.056 = 0.436
+    EeInitTarget.tail(4) << Eigen::Quaternion<scalar_t>(std::cos(PSI/2), 0.0, 0.0, std::sin(PSI/2)).coeffs();
     vector_t initState = qmInterface_->getInitialState();
     vector_t armInitState = initState.tail(6);
     initTarget << currentObservation_.state.head(24), armInitState, EeInitTarget;

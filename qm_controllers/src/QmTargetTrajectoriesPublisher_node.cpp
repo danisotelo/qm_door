@@ -4,9 +4,13 @@
 
 #include "qm_controllers/QmTargetTrajectoriesPublisher.h"
 #include "qm_controllers/GaitJoyPublisher.h"
+#include "qm_controllers/StartingPosition.h"
 
 #include <ocs2_core/misc/LoadData.h>
 #include <ocs2_robotic_tools/common/RotationTransforms.h>
+
+#include <std_msgs/Float64MultiArray.h>
+#include <numeric>
 
 using namespace ocs2;
 using namespace qm;
@@ -17,7 +21,18 @@ namespace {
     scalar_t COM_HEIGHT;
     vector_t DEFAULT_JOINT_STATE(18); //18
     scalar_t TIME_TO_TARGET;
+    float_t FEET_HEIGHT;
 }  // namespace
+
+void feetHeightCallback(const std_msgs::Float64MultiArray::ConstPtr& msg){
+    const auto& data = msg->data;
+
+    if (!data.empty()){
+        // Initialize sum to COM_HEIGHT
+        double sum = std::accumulate(data.begin(), data.end(), 0.0);
+        FEET_HEIGHT = sum / data.size();
+    }
+}
 
 /**
  * calculate arrive time
@@ -34,8 +49,8 @@ scalar_t estimateTimeToTarget(const vector_t& desiredBaseDisplacement) {
     const scalar_t& dyaw = desiredBaseDisplacement(3);
     const scalar_t& droll = desiredBaseDisplacement(4);
     const scalar_t& dpitch = desiredBaseDisplacement(5);
-    const scalar_t ratation = std::sqrt(dyaw * dyaw + droll * droll + dpitch * dpitch);
-    const scalar_t rotationTime = ratation / TARGET_ROTATION_VELOCITY;
+    const scalar_t rotation = std::sqrt(dyaw * dyaw + droll * droll + dpitch * dpitch);
+    const scalar_t rotationTime = rotation / TARGET_ROTATION_VELOCITY;
 
     return std::max(rotationTime, displacementTime);
 }
@@ -52,8 +67,8 @@ TargetTrajectories targetPoseToTargetTrajectories(const vector_t& EeTargetPose,
     // desired state trajectory
     const vector_t EeCurrentPose = eeState.state;
     vector_t BaseCurrenPose = observation.state.segment<6>(6);
-    BaseCurrenPose(1) = 0; // ADD
-    BaseCurrenPose(2) = COM_HEIGHT;
+    //BaseCurrenPose(1) = 0; // ADD
+    BaseCurrenPose(2) = COM_HEIGHT + FEET_HEIGHT;
     BaseCurrenPose(4) = 0;
     BaseCurrenPose(5) = 0;
 
@@ -84,8 +99,8 @@ TargetTrajectories cmdVelToTargetTrajectories(const vector_t& cmdVel,
     const vector_t BaseTargetPose = [&]() {
         vector_t target(6);
         target(0) = BaseCurrenPose(0) + cmdVelRot(0) * timeToTarget;
-        target(1) = 0; //BaseCurrenPose(1) + cmdVelRot(1) * timeToTarget; // ADD
-        target(2) = COM_HEIGHT;
+        target(1) = BaseCurrenPose(1) + cmdVelRot(1) * timeToTarget; // ADD
+        target(2) = COM_HEIGHT + FEET_HEIGHT;
         target(3) = BaseCurrenPose(3) + cmdVel(3) * timeToTarget;
         target(4) = 0;
         target(5) = 0;
@@ -123,7 +138,7 @@ TargetTrajectories EeCmdVelToTargetTrajectories(const vector_t& cmdVel,
     // current pose
     const vector_t EeCurrentPose = eeState.state;
     const vector_t BaseCurrenPose = observation.state.segment<6>(6);
-    const Eigen::Quaterniond quat_init(1.0, 0.0, 0.0, 0.0);
+    const Eigen::Quaterniond quat_init(std::cos(BaseCurrenPose(3)/2), 0, 0, std::sin(BaseCurrenPose(3)/2));
     const Eigen::Quaterniond quat(EeCurrentPose(6), EeCurrentPose(3), EeCurrentPose(4), EeCurrentPose(5));
     vector_t cmdVelRot = quat.toRotationMatrix() * quat_init.toRotationMatrix().transpose() * cmdVel.head(3); // world frame
 
@@ -137,8 +152,10 @@ TargetTrajectories EeCmdVelToTargetTrajectories(const vector_t& cmdVel,
         target(2) = lastEeTarget(2);
         target(3) = lastEeTarget(3);
         target(4) = lastEeTarget(4);
-        target(5) = lastEeTarget(5);
-        target(6) = lastEeTarget(6);
+        target(5) = EeCurrentPose(5) + std::sin(cmdVelRot(2) * timeToTarget / 2);
+        //lastEeTarget(5);
+        target(6) = EeCurrentPose(6) + std::cos(cmdVelRot(2) * timeToTarget / 2);
+        //lastEeTarget(6);
 
         // Heigh limit
         // if(target(2) - COM_HEIGHT > 0.52)
@@ -147,12 +164,18 @@ TargetTrajectories EeCmdVelToTargetTrajectories(const vector_t& cmdVel,
         return target;
     }();
 
+    // Calculate the yaw from the quaternion
+    double siny_cosp = 2.0 * (EeTargetPose(6) * EeTargetPose(5) + EeTargetPose(3) * EeTargetPose(4));
+    double cosy_cosp = 1.0 - 2.0 * (EeTargetPose(4) * EeTargetPose(4) + EeTargetPose(5) * EeTargetPose(5));
+    double yaw = std::atan2(siny_cosp, cosy_cosp);
+
     const vector_t BaseTargetPose = [&](){
         vector_t target(6);
         target = BaseCurrenPose;
-        target(0) = EeTargetPose(0) - 0.6;
-        target(1) = 0; // EeTargetPose(1); //ADD
-        target(2) = COM_HEIGHT;
+        target(0) = EeTargetPose(0) - ARM_DIST * std::cos(BaseCurrenPose(3));
+        target(1) = EeTargetPose(1) - ARM_DIST * std::sin(BaseCurrenPose(3)); //ADD
+        target(2) = COM_HEIGHT + FEET_HEIGHT;
+        target(3) = yaw;
         target(4) = 0;
         target(5) = 0;
         return target;
@@ -178,14 +201,20 @@ TargetTrajectories EEgoalPoseToTargetTrajectories(const Eigen::Vector3d& positio
     // target pose
     const vector_t EeTargetPose = (vector_t(7) << position, orientation.coeffs()).finished();
 
+    // Calculate the yaw from the quaternion
+    double siny_cosp = 2.0 * (orientation.w() * orientation.z() + orientation.x() * orientation.y());
+    double cosy_cosp = 1.0 - 2.0 * (orientation.y() * orientation.y() + orientation.z() * orientation.z());
+    double yaw = std::atan2(siny_cosp, cosy_cosp);
+
     const vector_t BaseTargetPose = [&](){
         vector_t target(6);
         target.setZero();
         target = BaseCurrenPose;
-        target(0) = position(0) - 0.6;
-        target(1) = 0; //position(1); //ADD 
-        target(2) = COM_HEIGHT;
-        target(4) = 0.0;
+        target(0) = position(0) - ARM_DIST * std::cos(yaw);
+        target(1) = position(1) - ARM_DIST * std::sin(yaw); //ADD 
+        target(2) = COM_HEIGHT + FEET_HEIGHT;
+        target(3) = yaw;
+        target(4) = 0;
         target(5) = 0;
         return target;
     }();
@@ -254,7 +283,11 @@ int main(int argc, char* argv[]) {
     // Add a subscriber for position commands
     ros::Subscriber positionCommandSubscriber = nodeHandle.subscribe(
         "planner/cmd", 10, &QmTargetTrajectoriesInteractiveMarker::positionCommandCallback, &targetPoseCommand);
-        
+    
+    // Add the subscriber for the feet heights
+    ros::Subscriber feetHeightSubscriber = nodeHandle.subscribe(
+        "/controllers/qm_controller_arm/contact_feet_z_coordinates", 10, feetHeightCallback);
+    
     ros::spin();
     // Successful exit
     return 0;

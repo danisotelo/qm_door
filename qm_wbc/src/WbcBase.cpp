@@ -10,6 +10,7 @@
 #include <utility>
 
 #include "qm_wbc/WbcBase.h"
+#include "std_msgs/Float64MultiArray.h"
 
 #include <ocs2_mpc/SystemObservation.h>
 #include <ocs2_ros_interfaces/common/RosMsgConversions.h>
@@ -64,6 +65,10 @@ WbcBase::WbcBase(const ocs2::PinocchioInterface &pinocchioInterface, ocs2::Centr
         dynamicCallback(std::forward<decltype(PH1)>(PH1), std::forward<decltype(PH2)>(PH2));
     };
     dynamic_srv_->setCallback(cb);
+
+    // Initialize the publisher
+    z_feet_pub_ = controller_nh.advertise<std_msgs::Float64MultiArray>("contact_feet_z_coordinates", 10);
+    z_feet_nc_pub_ = controller_nh.advertise<std_msgs::Float64MultiArray>("contact_feet_nc_z_coordinates", 10);
 }
 
 void WbcBase::dynamicCallback(qm_wbc::WbcWeightConfig &config, uint32_t) {
@@ -128,6 +133,13 @@ vector_t WbcBase::update(const ocs2::vector_t &stateDesired, const ocs2::vector_
     updateMeasured(rbdStateMeasured);
     updateDesired(stateDesired, inputDesired, period);
 
+    // Get positions of end effectors
+    eeKinematics_->setPinocchioInterface(pinocchioInterfaceMeasured_);
+    std::vector<Eigen::Vector3d> posMeasured = eeKinematics_->getPosition(vector_t());
+    
+    // Publish the z-coordinates of the feet in contact
+    publishFeetCoordinates(posMeasured);
+    
     return {};
 }
 
@@ -331,6 +343,26 @@ Task WbcBase::formulateSwingLegTask() {
     }
 
     return {a, b, matrix_t(), vector_t()};
+}
+
+// Method to publish z coordinates of contact feet
+void WbcBase::publishFeetCoordinates(const std::vector<Eigen::Vector3d>&  posMeasured) {
+    std_msgs::Float64MultiArray z_coordinates_msg;
+    std_msgs::Float64MultiArray z_coordinates_nc_msg;
+
+    // Iterate over the positions and add the z coordinate of feet in contact
+    for (size_t i = 0; i < info_.numThreeDofContacts; ++i) {
+        z_coordinates_nc_msg.data.push_back(posMeasured[i].x());
+        z_coordinates_nc_msg.data.push_back(posMeasured[i].y());
+        z_coordinates_nc_msg.data.push_back(posMeasured[i].z());
+        if (contactFlag_[i]) {
+            z_coordinates_msg.data.push_back(posMeasured[i].z());
+        } 
+    }
+
+    // Publish the z coordinates
+    z_feet_pub_.publish(z_coordinates_msg);
+    z_feet_nc_pub_.publish(z_coordinates_nc_msg);
 }
 
 // EoM

@@ -12,6 +12,8 @@
     <xacro:include filename="$(find qm_description)/urdf/manipulator/const.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/manipulator/transmission.xacro"/>
     <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/camera.xacro"/>
+    <xacro:include filename="$(find qm_description)/urdf/quadruped_manipulator/camera2.xacro"/>
+
 
     <xacro:arg name="UnitreeGripper" default="true"/>
 
@@ -48,6 +50,11 @@
                     izz="${trunk_izz}"/>
         </inertial>
     </link>
+
+    <!-- D435 IntelRealSense Camera -->
+    <xacro:sensor_d435 parent="base" name="camera2" use_nominal_extrinsics="true">
+        <origin xyz="0.32 0.01 -0.035" rpy="0 0 0"/>
+    </xacro:sensor_d435>
 
     <!-- IMU -->
     <xacro:IMU connected_to="base" imu_name="unitree_imu" xyz="0. 0. 0." rpy="0. 0. 0."/>
@@ -524,7 +531,8 @@
             </inertial>
         </link>
 
-        <joint name="z1_joint_Gripper" type="revolute">
+        <!-- TODO Change to revolute once controller is programmed -->
+        <joint name="z1_joint_Gripper" type="revolute"> 
             <origin rpy="0 0 0" xyz="0.049 0.0 0"/>
             <parent link="gripperStator"/>
             <child link="gripperMover"/>
@@ -574,7 +582,7 @@
         </link>
 
         <link name="z1_end_effector">
-            <visual>
+            <!-- <visual>
                 <geometry>
                     <sphere radius="0.01"/>
                 </geometry>
@@ -593,7 +601,7 @@
                         <collide_bitmask>0</collide_bitmask>
                     </contact>
                 </surface>
-            </collision>
+            </collision> -->
         </link>
 
         <joint name="z1_joint_end_effector" type="fixed">

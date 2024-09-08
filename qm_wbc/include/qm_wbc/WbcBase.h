@@ -56,6 +56,9 @@ protected:
     Task formulateEeAngularMotionTrackingTask();
 
     Task formulateContactForceTask(const vector_t& inputDesired) const;
+
+    void publishFeetCoordinates(const std::vector<Eigen::Vector3d>& posMeasured);
+
 private:
     void dynamicCallback(qm_wbc::WbcWeightConfig& config, uint32_t /*level*/);
 
@@ -78,6 +81,9 @@ private:
     matrix_t arm_j_, arm_dj_;
     matrix_t base_j_, base_dj_;
 
+    ::ros::Publisher z_feet_pub_;
+    ::ros::Publisher z_feet_nc_pub_;
+
     // Task Parameters:
     vector_t legTorqueLimits_, armTorqueLimits_;
     scalar_t frictionCoeff_{}, swingKp_{}, swingKd_{};
@@ -88,6 +94,7 @@ private:
     matrix_t jointKp_, jointKd_;
     matrix_t armEeLinearKp_{}, armEeLinearKd_{};
     matrix_t armEeAngularKp_{}, armEeAngularKd_{};
+
 };
 
 }

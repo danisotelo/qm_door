@@ -128,6 +128,14 @@
                 <geometry>
                     <box size="${calf_length} ${calf_width} ${calf_height}"/>
                 </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>1</mu>        <!-- Primary friction coefficient -->
+                            <mu2>1</mu2>      <!-- Secondary friction coefficient -->
+                        </ode>
+                    </friction>
+                </surface>
             </collision>
             <inertial>
                 <origin rpy="0 0 0" xyz="${calf_com_x} ${calf_com_y} ${calf_com_z}"/>
@@ -161,8 +169,8 @@
                 <surface>
                     <friction>
                         <ode>
-                            <mu>0.7</mu>        <!-- Primary friction coefficient -->
-                            <mu2>0.7</mu2>      <!-- Secondary friction coefficient -->
+                            <mu>1</mu>        <!-- Primary friction coefficient -->
+                            <mu2>1</mu2>      <!-- Secondary friction coefficient -->
                         </ode>
                     </friction>
                 </surface>

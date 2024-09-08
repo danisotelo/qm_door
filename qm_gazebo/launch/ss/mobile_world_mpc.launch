@@ -1,0 +1,78 @@
+<launch>
+      <arg name="user_debug" default="false"/>
+
+      <rosparam file="$(find qm_gazebo)/config/default.yaml" command="load"/>
+
+      <!-- Load descriptions -->
+      <param name="qm_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                  DEBUG:=$(arg user_debug)"/>
+      <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                  DEBUG:=$(arg user_debug)"/>
+      <param name="legged_robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                  DEBUG:=$(arg user_debug)"/>
+
+      <param name="terrain_description" command="$(find xacro)/xacro $(find qm_description)/urdf/sar/terrain.xacro"/>
+
+      <param name="plate1_description" command="$(find xacro)/xacro $(find qm_description)/urdf/sar/plate.xacro"/>
+
+      <param name="sphere1_description" command="$(find xacro)/xacro $(find qm_description)/urdf/sar/ball10.xacro"/>
+      <param name="sphere2_description" command="$(find xacro)/xacro $(find qm_description)/urdf/sar/ball10.xacro"/>
+
+      <!-- Include empty Gazebo world -->
+      <include file="$(find gazebo_ros)/launch/empty_world.launch">
+            <arg name="world_name" value="$(find qm_gazebo)/worlds/custom_world.world"/>
+            <arg name="paused" value="true"/>
+            <arg name="gui" value="true"/>
+      </include>
+
+      <!-- Start RViz -->
+      <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qm_controllers)/config/mobile.rviz"/>
+
+      <!-- Spawn robot in Gazebo -->
+      <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+            output="screen"
+            args="-param qm_description -urdf -model qm
+            -x -2
+            -z 0.5
+            "
+      />
+      
+      <!-- Spawn plates in Gazebo -->
+      <node name="spawn_plate1" pkg="gazebo_ros" type="spawn_model" clear_params="true" output="screen" 
+            args="-param plate1_description -urdf -model plate1 -x 0.5 -y 0.5 -z 0.5 -R -1.570796 -P -0 -Y 0" />
+      <node name="plate1_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+            <remap from="robot_description" to="plate1_description" />
+            <remap from="/joint_states" to="/plate1/joint_states" />
+            <param name="publish_frequency" value="50.0"/>
+      </node>
+      
+      <!-- Spawn rocks in Gazebo -->
+      <node name="spawn_sphere1" pkg="gazebo_ros" type="spawn_model" clear_params="true" output="screen" 
+            args="-param sphere1_description -urdf -model sphere1 -x 0 -y 0.25 -z 0.3 -R 0 -P 0 -Y 0" />
+      <node name="sphere1_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+            <remap from="robot_description" to="sphere1_description" />
+            <remap from="/joint_states" to="/sphere1/joint_states" />
+            <param name="publish_frequency" value="50.0"/>
+      </node>
+      <node name="spawn_sphere2" pkg="gazebo_ros" type="spawn_model" clear_params="true" output="screen" 
+            args="-param sphere2_description -urdf -model sphere2 -x 0.2 -y -0.25 -z 0.3 -R 0 -P 0 -Y 0" />
+      <node name="sphere2_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
+            <remap from="robot_description" to="sphere2_description" />
+            <remap from="/joint_states" to="/sphere2/joint_states" />
+            <param name="publish_frequency" value="50.0"/>
+      </node>
+
+      <rosparam file="$(find qm_gazebo)/config/position_control.yaml" command="load"/>
+      <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+            output="screen"
+            args="
+                  Joint01_controller Joint02_controller Joint03_controller
+                  Joint04_controller Joint05_controller Joint06_controller
+                  joint_state_controller
+      "/>
+
+      <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"
+            respawn="false" output="screen">
+      </node>
+
+</launch>

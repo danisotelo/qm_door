@@ -4,6 +4,7 @@ project(qm_wbc)
 find_package(catkin REQUIRED
         COMPONENTS
         roscpp
+        std_msgs
         ocs2_legged_robot
         dynamic_reconfigure
         qm_common
@@ -28,6 +29,7 @@ catkin_package(
         ${PROJECT_NAME}
         CATKIN_DEPENDS
         roscpp
+        std_msgs
         ocs2_legged_robot
         qm_common
         qm_msgs

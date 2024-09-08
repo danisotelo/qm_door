@@ -3,6 +3,7 @@
 //
 
 #include "qm_controllers/QmTargetTrajectoriesPublisher.h"
+#include "qm_controllers/StartingPosition.h"
 
 #include <ocs2_core/Types.h>
 #include <ocs2_core/misc/LoadData.h>
@@ -19,13 +20,13 @@ visualization_msgs::InteractiveMarker QmTargetTrajectoriesInteractiveMarker::cre
     interactiveMarker.name = "Goal";
     interactiveMarker.scale = 0.2;
     interactiveMarker.description = "Right click to send command";
-    interactiveMarker.pose.position.x = -1.4; // 0.52 for origin
-    interactiveMarker.pose.position.y = 0;
-    interactiveMarker.pose.position.z = 0.436;
+    interactiveMarker.pose.position.x = X + ARM_DIST * std::cos(PSI); // 0.52 for origin
+    interactiveMarker.pose.position.y = Y + ARM_DIST * std::sin(PSI);
+    interactiveMarker.pose.position.z = HEIGHT + ARM_HEIGHT;
     interactiveMarker.pose.orientation.x = 0.0;
     interactiveMarker.pose.orientation.y = 0.0;
-    interactiveMarker.pose.orientation.z = 0.0;
-    interactiveMarker.pose.orientation.w = 1.0;
+    interactiveMarker.pose.orientation.z = std::sin(PSI/2);
+    interactiveMarker.pose.orientation.w = std::cos(PSI/2);
 
     // create a grey box marker
     const auto boxMarker = []() {

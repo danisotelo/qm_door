@@ -158,6 +158,47 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera2_bottom_screw_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera2_color_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera2_color_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera2_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera2_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera2_infra1_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera2_infra1_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera2_infra2_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera2_infra2_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         camera_cover:
           Alpha: 1
           Show Axes: false
@@ -205,7 +246,6 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
         z1_link_0:
           Alpha: 1
           Show Axes: false
@@ -269,7 +309,10 @@ Visualization Manager:
       Marker Topic: /qm/optimizedStateTrajectory
       Name: Optimized State Trajectory
       Namespaces:
-        {}
+        CoM Trajectory: true
+        EE Trajectory: true
+        Feet Trajectories: true
+        Future footholds: true
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -277,7 +320,10 @@ Visualization Manager:
       Marker Topic: /qm/currentState
       Name: Current State
       Namespaces:
-        {}
+        Center of Pressure: true
+        EE Forces: true
+        EE Positions: true
+        Support Polygon: true
       Queue Size: 100
       Value: true
     - Class: rviz/Group
@@ -289,7 +335,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/LF
               Name: Marker
               Namespaces:
-                {}
+                "": true
               Queue Size: 100
               Value: true
             - Class: rviz/Marker
@@ -297,7 +343,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/LH
               Name: Marker
               Namespaces:
-                {}
+                "": true
               Queue Size: 100
               Value: true
             - Class: rviz/Marker
@@ -305,7 +351,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/RF
               Name: Marker
               Namespaces:
-                {}
+                "": true
               Queue Size: 100
               Value: true
             - Class: rviz/Marker
@@ -313,7 +359,7 @@ Visualization Manager:
               Marker Topic: /qm/desiredFeetTrajectory/RH
               Name: Marker
               Namespaces:
-                {}
+                "": true
               Queue Size: 100
               Value: true
           Enabled: true
@@ -323,7 +369,7 @@ Visualization Manager:
           Marker Topic: /qm/desiredBaseTrajectory
           Name: Target Base Trajectory
           Namespaces:
-            {}
+            "": true
           Queue Size: 100
           Value: true
       Enabled: true
@@ -362,7 +408,7 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
-    - Alpha: 1
+    - Alpha: 0.5
       Class: rviz/RobotModel
       Collision Enabled: false
       Enabled: true
@@ -372,7 +418,7 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        tunnel3_link:
+        tunnel4_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -382,7 +428,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
       Name: RobotModel
-      Robot Description: tunnel3_description
+      Robot Description: tunnel_description
       TF Prefix: ""
       Update Interval: 0
       Value: true
@@ -413,7 +459,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.587363243103027
+      Distance: 5.226993083953857
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -421,17 +467,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 1.4756009578704834
-        Y: -0.6120834946632385
-        Z: 0.27245214581489563
+        X: 0.6705467104911804
+        Y: 0.05986333638429642
+        Z: -0.1426667869091034
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.21479660272598267
+      Pitch: 0.1897965520620346
       Target Frame: <Fixed Frame>
-      Yaw: 3.9303970336914062
+      Yaw: 4.650397777557373
     Saved: ~
 Window Geometry:
   Displays:

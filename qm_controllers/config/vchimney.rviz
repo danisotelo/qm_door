@@ -205,7 +205,6 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
         z1_link_0:
           Alpha: 1
           Show Axes: false
@@ -409,9 +408,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.35539814829826355
+      Pitch: 0.4903980791568756
       Target Frame: <Fixed Frame>
-      Yaw: 3.835397243499756
+      Yaw: 3.840397834777832
     Saved: ~
 Window Geometry:
   Displays:

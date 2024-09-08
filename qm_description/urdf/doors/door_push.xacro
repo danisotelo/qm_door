@@ -44,10 +44,10 @@
    <link name="door">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="0.1"/>
-      <inertia ixx="0.030386862790" 	ixy="0.000000000330"	ixz="-0.000000216760" 
-					iyy="0.035534743650" 	iyz="-0.000000000060" 
-								izz="0.005184277950"/>
+      <mass value="20"/>
+      <inertia ixx="6.67" 	ixy="0"	ixz="0" 
+					      iyy="2.69" 	iyz="0" 
+								izz="6.4"/>
     </inertial>
 
     <visual>
@@ -77,7 +77,7 @@
   <joint name="joint_frame_door" type="revolute">
     <parent link="frame"/>
     <child link="door"/>
-    <dynamics damping="0.2" friction="0.000001"/>
+    <dynamics damping="0.01" friction="0.0001"/>
     <origin xyz="0 0 0"/>
     <axis xyz="0 0 1"/>
     <limit effort="1000.0" lower="-2.0" upper="0.0" velocity="0.5"/>
@@ -87,8 +87,8 @@
   <link name="lever">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
-      <mass value="5.0"/>
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+      <mass value="0.3"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
     </inertial>
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -124,9 +124,9 @@
   <gazebo reference="joint_door_lever">
     
     <implicitSpringDamper>true</implicitSpringDamper>
-    <spring_stiffness>10000</spring_stiffness>
+    <spring_stiffness>500</spring_stiffness>
     <spring_reference>0.0</spring_reference>
-    <damping>10.0</damping>
+    <damping>0.1</damping>
   </gazebo>
   </joint>
 

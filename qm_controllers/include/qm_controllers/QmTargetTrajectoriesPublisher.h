@@ -8,6 +8,7 @@
 #include <functional>
 #include <memory>
 #include <mutex>
+#include <cmath> 
 
 #include <interactive_markers/interactive_marker_server.h>
 #include <interactive_markers/menu_handler.h>
@@ -17,6 +18,8 @@
 #include <qm_msgs/ee_state.h>
 #include <geometry_msgs/Twist.h>
 #include <geometry_msgs/PoseStamped.h>
+
+#include "qm_controllers/StartingPosition.h"
 
 namespace qm{
 using namespace ocs2;
@@ -51,8 +54,8 @@ public:
         observationSub_ = nh.subscribe<ocs2_msgs::mpc_observation>(topicPrefix + "_mpc_observation", 1, observationCallback);
 
         lastEeTarget_ = vector_t::Zero(7);
-        lastEeTarget_.head(3) << -1.4, 0.436, 0.0;
-        lastEeTarget_.tail(4) << Eigen::Quaternion<scalar_t>(1.0, 0.0, 0.0, 0.0).coeffs();
+        lastEeTarget_.head(3) << X + ARM_DIST * std::cos(PSI), HEIGHT + ARM_HEIGHT, Y + ARM_DIST * std::sin(PSI);
+        lastEeTarget_.tail(4) << Eigen::Quaternion<scalar_t>(std::cos(PSI/2), 0.0, 0.0, std::sin(PSI/2)).coeffs();
 
         // current ee pose
         auto eePoseCallback = [this](const qm_msgs::ee_state::ConstPtr& msg){

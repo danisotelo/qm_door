@@ -1,4 +1,4 @@
-centroidalModelType             1      // 0: FullCentroidalDynamics, 1: Single Rigid Body Dynamics
+centroidalModelType             0      // 0: FullCentroidalDynamics, 1: Single Rigid Body Dynamics
 
 qm_interface
 {
@@ -20,6 +20,7 @@ model_settings
   eeFrame                         "z1_end_effector"
 }
 
+; 0.26 0.15
 swing_trajectory_config
 {
   liftOffVelocity               0.05
@@ -345,5 +346,5 @@ jointVelocityLimits
 ; Whole body control
 frictionConeTask
 {
-  frictionCoefficient    0.7
+  frictionCoefficient    0.3
 }
