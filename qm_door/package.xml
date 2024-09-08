@@ -19,6 +19,7 @@
   <exec_depend>qm_vision</exec_depend>
   <exec_depend>qm_wbc</exec_depend>
   <exec_depend>qpoases_catkin</exec_depend>
+  <exec_depend>realsense2_gazebo_plugin</exec_depend>
 
    <export>
    	  <metapackage />
