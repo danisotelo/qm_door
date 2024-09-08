@@ -65,6 +65,6 @@ The project is still in the early stages of development and we welcome feedback.
 
 This project is built on top of the following repositories:
 
-- **QM Control by Skywoodsz**: A quantum mechanics control library that influenced our approach to problem-solving. Check it out [here](https://github.com/skywoodsz/qm_control).
+- **QM Control by Skywoodsz**: NMPC + WBC for legged manipulators. Check it out [here](https://github.com/skywoodsz/qm_control).
 
-- **Legged Control by QiayuanL**: This repository provides advanced algorithms for legged robot control which were instrumental for our developments. Visit their project [here](https://github.com/qiayuanl/legged_control).
+- **Legged Control by QiayuanL**: NMPC + WBC for quadruped robots. Visit their project [here](https://github.com/qiayuanl/legged_control).
