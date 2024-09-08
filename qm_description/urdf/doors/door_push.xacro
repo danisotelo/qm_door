@@ -1,0 +1,150 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="door">
+
+ <link name="world"/>
+  <joint name="fixed" type="fixed">
+    <parent link="world"/>
+    <child link="frame"/>
+    <origin rpy= "0 0 -1.5708" xyz="0.075 -0.425 0"/>
+  </joint>
+
+<link name="frame">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="100.0"/>
+      <inertia ixx="0.013102127690" 	ixy="-0.000000514790"	ixz="0.000000965200" 
+					iyy="0.017339000240" 	iyz="-0.000017996010" 
+								izz="0.004334337460"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/doors/frame.stl"/>
+      </geometry>
+	    <material name="ocher">
+        <color rgba="0.949 0.890 0.722 1" />
+      </material>
+
+	  </visual>
+     <collision>
+       <origin rpy="0 0 0" xyz="0 0 0"/>
+       <geometry>
+         <mesh filename="package://qm_description/meshes/doors/frame.stl"/>
+       </geometry>
+     </collision>
+
+   </link>
+
+
+  <gazebo reference="frame">
+    <material>Gazebo/WoodPallet</material>
+  </gazebo>
+   
+
+   <link name="door">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.030386862790" 	ixy="0.000000000330"	ixz="-0.000000216760" 
+					iyy="0.035534743650" 	iyz="-0.000000000060" 
+								izz="0.005184277950"/>
+    </inertial>
+
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://qm_description/meshes/doors/door.stl"/>
+        </geometry>
+        <material name="brown">
+          <color rgba="0.29 0.184 0.07 1"/>
+        </material>
+	  </visual>
+
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/doors/door.stl"/>
+      </geometry>
+    </collision>
+
+   </link>
+
+  <gazebo reference="door">
+    <material>Gazebo/Wood</material>
+  </gazebo>
+
+   
+  <joint name="joint_frame_door" type="revolute">
+    <parent link="frame"/>
+    <child link="door"/>
+    <dynamics damping="0.2" friction="0.000001"/>
+    <origin xyz="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="-2.0" upper="0.0" velocity="0.5"/>
+
+  </joint>
+
+  <link name="lever">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="5.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://qm_description/meshes/doors/lever.stl"/>
+      </geometry>
+	    <material name="gold">
+        <color rgba="0.769 0.604 0.153 1" />
+      </material>
+	  </visual>
+     <collision>
+       <origin rpy="0 0 0" xyz="0 0 0"/>
+       <geometry>
+         <mesh filename="package://qm_description/meshes/doors/lever.stl"/>
+       </geometry>
+     </collision>
+
+   </link>
+  <gazebo reference="lever">
+    <material>Gazebo/Gold</material>
+  </gazebo>
+   
+   <joint name="joint_door_lever" type="revolute">
+    <parent link="door"/>
+    <child link="lever"/>
+	<!--dynamics damping="0.5" friction="0.000001"/-->
+    <origin rpy="1.5708 0 0" xyz="-0.79604 -0.06 1.0"/>
+		<axis xyz="0 0 1"/>
+  
+   <limit effort="1000.0" lower="-0.5236" upper="0.0" velocity="0.5"/>
+
+
+  <gazebo reference="joint_door_lever">
+    
+    <implicitSpringDamper>true</implicitSpringDamper>
+    <spring_stiffness>10000</spring_stiffness>
+    <spring_reference>0.0</spring_reference>
+    <damping>10.0</damping>
+  </gazebo>
+  </joint>
+
+  <gazebo reference="lever">
+    <self_collide>1</self_collide>
+  </gazebo>
+
+  <gazebo reference="frame">
+    <self_collide>1</self_collide>
+  </gazebo>
+ <gazebo reference="door">
+    <self_collide>1</self_collide>
+  </gazebo>
+  <gazebo>
+    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <robotNamespace>/door</robotNamespace>
+      <jointName>joint_frame_door, joint_door_lever</jointName>
+    </plugin>
+  </gazebo>
+
+</robot>
