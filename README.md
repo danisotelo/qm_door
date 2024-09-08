@@ -23,7 +23,7 @@ git clone https://github.com/pal-robotics/realsense_gazebo_plugin.git
 The project is still in the early stages of development and we welcome feedback. Please report bugs and request features using the [Issue Tracker](https://github.com/danisotelo/qm_door/issues).
 
 ## To Do
-- [] Implement perception-NMPC for foot step optimization.
-- [] Improve push door opening performance.
-- [] Improve YOLO model for push/pull door classification.
-- [] Support pull door and knob opening maneuvers.
+- [ ] Implement perception-NMPC for foot step optimization.
+- [ ] Improve push door opening performance.
+- [ ] Improve YOLO model for push/pull door classification.
+- [ ] Support pull door and knob opening maneuvers.
