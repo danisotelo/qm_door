@@ -1,0 +1,81 @@
+<launch>
+      <arg name="user_debug" default="false"/>
+
+      <rosparam file="$(find qm_gazebo)/config/default.yaml" command="load"/>
+
+      <!-- Load descriptions -->
+      <param name="qm_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                  DEBUG:=$(arg user_debug)"/>
+      <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                  DEBUG:=$(arg user_debug)"/>
+      <param name="legged_robot_description" command="$(find xacro)/xacro --inorder '$(find qm_description)/urdf/quadruped_manipulator/robot.xacro'
+                  DEBUG:=$(arg user_debug)"/>
+      <param name="pallet1_description" command="$(find xacro)/xacro $(find qm_description)/urdf/pallets/pallet1.xacro"/>
+      <param name="pallet2_description" command="$(find xacro)/xacro $(find qm_description)/urdf/pallets/pallet2.xacro"/>
+      <param name="pallet3_description" command="$(find xacro)/xacro $(find qm_description)/urdf/pallets/pallet3.xacro"/>
+      <param name="pallet4_description" command="$(find xacro)/xacro $(find qm_description)/urdf/pallets/pallet4.xacro"/>
+
+
+      <!-- Include empty Gazebo world -->
+      <include file="$(find gazebo_ros)/launch/empty_world.launch">
+            <arg name="world_name" value="$(find qm_gazebo)/worlds/custom_world.world"/>
+            <arg name="paused" value="true"/>
+            <arg name="gui" value="true"/>
+      </include>
+
+      <!-- Start RViz -->
+      <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qm_controllers)/config/pallets.rviz"/>
+
+      <!-- Spawn robot in Gazebo -->
+      <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+            output="screen"
+            args="-param qm_description -urdf -model qm
+            -x -2 -y 0 -z 0.51 -Y 0
+            "
+      />
+
+      <!-- Spawn pallet1 in Gazebo -->
+      <node name="spawn_pallet2" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+            output="screen"
+            args="-param pallet2_description -urdf -model pallet2
+            -x 0 -y -1 -z 0 -R 1.570796 -P 0 -Y 0"
+      />
+      <!-- Publish static transforms for the pallet1 -->
+      <node pkg="tf2_ros" type="static_transform_publisher" name="pallet2_tf_publisher"
+            args="0 1 0.15 0 0 -1.570796 world pallet2_link"
+      />
+
+      <!-- Spawn pallet1 in Gazebo -->
+      <node name="spawn_pallet1" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+            output="screen"
+            args="-param pallet1_description -urdf -model pallet1
+            -x 1.7 -y -1 -z 0 -R 1.570796 -P 0 -Y 0"
+      />
+      <!-- Publish static transforms for the pallet1 -->
+      <node pkg="tf2_ros" type="static_transform_publisher" name="pallet1_tf_publisher"
+            args="1.7 1 0.13 0 0 -1.570796 world pallet1_link"
+      />
+
+      <!-- Spawn pallet4 in Gazebo -->
+      <node name="spawn_pallet4" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+            output="screen"
+            args="-param pallet4_description -urdf -model pallet4
+            -x 3.1 -y -1 -z 0 -R 1.570796 -P 0 -Y 0"
+      />
+      <!-- Publish static transforms for the pallet4 -->
+      <node pkg="tf2_ros" type="static_transform_publisher" name="pallet4_tf_publisher"
+            args="3.1 1 0.2 0 0 -1.570796 world pallet4_link"
+      />
+
+      <!-- Spawn pallet4 in Gazebo -->
+      <node name="spawn_pallet3" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+            output="screen"
+            args="-param pallet3_description -urdf -model pallet3
+            -x 4.3 -y -1 -z 0 -R 1.570796 -P 0 -Y 0"
+      />
+      <!-- Publish static transforms for the pallet3 -->
+      <node pkg="tf2_ros" type="static_transform_publisher" name="pallet3_tf_publisher"
+            args="4.3 1 0.18 0 0 -1.570796 world pallet3_link"
+      />
+
+</launch>

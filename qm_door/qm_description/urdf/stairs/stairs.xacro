@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<robot name="stairs" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <material name="ocher">
+        <color rgba="0.949 0.890 0.722 1"/>
+    </material>
+
+    <xacro:property name="s1_quantity" value="10"/>
+    <xacro:property name="s1_height" value="0.05"/>
+    <xacro:property name="s1_depth" value="0.15"/>
+    <xacro:property name="s1_width" value="1.5"/>
+    <xacro:property name="s1_offset_x" value="0.0"/>
+    <xacro:property name="s1_offset_z" value="0.0"/>
+
+    <xacro:property name="s2_angle" value="10"/>
+    <xacro:property name="s2_length" value="2"/>
+    <xacro:property name="s2_width" value="1.5"/>
+    <xacro:property name="s2_offset_x" value="${s1_offset_x + s1_depth * s1_quantity}"/>
+    <xacro:property name="s2_offset_z" value="${s1_offset_z + s1_height * s1_quantity}"/>
+
+    <xacro:property name="s3_quantity" value="10"/>
+    <xacro:property name="s3_height" value="-0.08"/>
+    <xacro:property name="s3_depth" value="0.15"/>
+    <xacro:property name="s3_width" value="1.5"/>
+    <xacro:property name="s3_offset_x" value="${s2_offset_x + s2_length*cos(s2_angle*pi/180)}"/>
+    <xacro:property name="s3_offset_z" value="${s2_offset_z + s2_length*sin(s2_angle*pi/180)}"/>
+
+
+
+    <xacro:macro name="staircase_segment" params="postfix quantity height depth width offset_x offset_z">
+        <link name="staircase_${postfix}_${quantity-1}">
+            <visual>
+                <geometry>
+                    <box size="${depth} ${width} ${height}"/>
+                </geometry>
+                <material name="ocher"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${depth} ${width} ${height}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="100"/>
+                <inertia ixx="${0.0833333 * 100 * (depth * depth + height * height )}" ixy="0.0" ixz="0.0"
+                    iyy="${0.0833333 * 100 * ( width * width + height * height)}" iyz="0.0"
+                    izz="${0.0833333 * 100 * ( width * width + depth * depth)}"/>
+            </inertial>
+        </link>
+
+        <gazebo reference="staircase_${postfix}_${quantity-1}">
+            <material>Gazebo/DarkGrey</material>
+        </gazebo>
+
+        <joint name="staircase_joint_${postfix}_${quantity-1}" type="fixed">
+            <parent link="world"/>
+            <child link="staircase_${postfix}_${quantity-1}"/>
+            <origin xyz="${offset_x + depth/2} 0 ${offset_z + height/2}" rpy="0 0 0"/>
+        </joint>
+
+        <!-- Create staircases recursively, use quantity-1 because recursion stops at zero-->
+        <xacro:if value="${quantity-1 > 0}">
+            <xacro:staircase_segment postfix="${postfix}" quantity="${quantity-1}" height="${height}" depth="${depth}" width="${width}" offset_x="${offset_x + depth}" offset_z="${offset_z + height}"/>
+        </xacro:if>
+    </xacro:macro>
+
+    <xacro:macro name="ramp_segment" params="postfix angle length width offset_x offset_z">
+
+        <xacro:property name="thickness" value="0.02"/>
+        <xacro:property name="theta" value="${-angle*pi/180}"/>
+        <link name="ramp_${postfix}">
+            <visual>
+                <geometry>
+                    <box size="${length} ${width} ${thickness}"/>
+                </geometry>
+                <material name="ocher"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${length} ${width} ${thickness}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="100"/>
+                <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+            </inertial>
+        </link>
+
+        <gazebo reference="ramp_${postfix}">
+            <material>Gazebo/DarkGrey</material>
+        </gazebo>
+
+        <joint name="ramp_joint_${postfix}" type="fixed">
+            <parent link="world"/>
+            <child link="ramp_${postfix}"/>
+            <origin xyz="${offset_x + length*cos(theta)/2} 0 ${offset_z - length*sin(theta)/2 - thickness*cos(theta)/2}" rpy="0 ${theta} 0"/>
+        </joint>
+
+    </xacro:macro>
+
+    <link name="world"/>
+
+    <xacro:staircase_segment postfix="s1" quantity="${s1_quantity}" height="${s1_height}" depth="${s1_depth}" width="${s1_width}" offset_x="${s1_offset_x}" offset_z="${s1_offset_z}"/>
+    <xacro:ramp_segment postfix="s2" angle="${s2_angle}" length="${s2_length}" width="${s2_width}" offset_x="${s2_offset_x}" offset_z="${s2_offset_z}"/>
+    <xacro:staircase_segment postfix="s3" quantity="${s3_quantity}" height="${s3_height}" depth="${s3_depth}" width="${s3_width}" offset_x="${s3_offset_x}" offset_z="${s3_offset_z}"/>
+
+</robot>
