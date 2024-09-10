@@ -13,7 +13,7 @@ namespace qm {
     constexpr double ARM_DIST = 0.6; // Base CoM to End-effector distance in the XY plane
     constexpr double HEIGHT = 0.4; // Base CoM height (should be the same as comHeight in reference.info)
     constexpr double ARM_HEIGHT = 0.036; // Height difference between end-effector and base CoM
-    // constexpr double THRESHOLD = 0.1;
+    constexpr double THRESHOLD = 0.1; // Distance threshold to check if the robot has reached its target
 
 } // namespace qm
 
